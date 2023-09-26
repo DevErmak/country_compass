@@ -15,8 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": ["custom.d.ts", "node_modules/@types"]
+    "typeRoots": ["custom.d.ts", "node_modules/@types"],
+    "strictPropertyInitialization": false
   },
   "files": ["custom.d.ts"],
-  "include": ["src/", "custom.d.ts"]
+  "include": ["src/", "custom.d.ts", "src/layout/.tsx"]
 }
