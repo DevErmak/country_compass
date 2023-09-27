@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getFullInfoCountryFetch } from '../store/country/fullInfoCountrySlice';
-import { getFullInfoCountry } from '../store/country/fullInfoCountrySelectors';
+import { useDispatch } from 'react-redux';
+import { getListCountryFetch } from '../store/country/infoCountrySlice';
+// import { getFullInfoCountry } from '../store/country/countriesSelectors';
 
 type Props = {};
 
 export default function HomeContainer({}: Props) {
-  const fullInfoCountry = useSelector(getFullInfoCountry);
+  // const fullInfoCountry = useSelector(getFullInfoCountry);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFullInfoCountryFetch());
+    dispatch(getListCountryFetch());
   }, []);
 
-  console.log(fullInfoCountry);
+  // console.log(fullInfoCountry);
 
   return <div></div>;
 }

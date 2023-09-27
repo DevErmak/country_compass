@@ -1,43 +1,42 @@
 import { useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../static/images/logo.svg';
-// import AsyncSelect from 'react-select/async';
-import { getFullInfoCountry, getOptionsCountry } from '../store/country/fullInfoCountrySelectors';
-import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
+import { getOptionsCountry } from '../store/country/countriesSelectors';
+import { IOptionCountry } from '../store/country/types';
+import { TbWorldSearch } from 'react-icons/tb';
+import { getListCountry } from '../store/country/countriesSelectors';
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const fullInfoCountry = useSelector(getOptionsCountry);
+  const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
 
-  // const getDataCity = () => {
-  //   return fullInfoCountry.map((item) => ({
-  //     value: item.name.common,
-  //     label: item.name.common,
-  //   }));
-  // };
+  const s = useSelector(getListCountry);
 
-  // const FindDataCity = (inputValue:string) => {
-  //   return fullInfoCountry.filter((item) => { if (inputValue === item.name.common) {
-  //     value: item.name.common,
-  //     label: item.name.common,
-  //   });
-  // };
+  const findCounty = (inputValue: string) => {
+    return optionsCountry.filter((item) =>
+      item.value.toLowerCase().includes(inputValue.toLowerCase()),
+    );
+  };
 
-  // let timerId: ReturnType<typeof setTimeout>;
+  let timerId: ReturnType<typeof setTimeout>;
 
-  // const promiseOptions = (inputValue: string) => {
-  //   return new Promise((resolve, reject) => {
-  //     clearTimeout(timerId);
-  //     timerId = setTimeout(async () => {
-  //       try {
-  //         const results = await getDataCity;
-  //         resolve(results);
-  //       } catch (error) {
-  //         reject(error);
-  //       }
-  //     }, 1000);
-  //   });
-  // };
+  const promiseOptions = (inputValue: string) => {
+    return new Promise<IOptionCountry[]>((resolve, reject) => {
+      clearTimeout(timerId);
+      timerId = setTimeout(async () => {
+        try {
+          const results = await findCounty(inputValue);
+          resolve(results);
+        } catch (error) {
+          reject(error);
+        }
+      }, 1000);
+    });
+  };
+
+  // const getInfoCountry = (setCounrty) => {};
+
   {
     /* <AsyncSelect
           classNamePrefix="custom-select-weather"
@@ -48,10 +47,24 @@ export default function Header({}: Props) {
           value={nameCity}
         /> */
   }
+
+  const customIcon = () => (
+    <div>
+      <TbWorldSearch color="black" />
+    </div>
+  );
+
   return (
     <div className="header-container">
       <div className="find-country">
-        <Select options={fullInfoCountry} />
+        <AsyncSelect
+          placeholder="Введите название страны"
+          classNamePrefix="custom-select"
+          defaultOptions={optionsCountry}
+          loadOptions={promiseOptions}
+          components={{ DropdownIndicator: customIcon }}
+          // onChange={getInfoCountry}
+        />
       </div>
       <Logo width={90} height={80} />
     </div>

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import fullInfoCountryReducer from './country/fullInfoCountrySlice';
+import infoCountriesReducer from './country/infoCountrySlice';
 
-import fullInfoCountrySaga from './country/fullInfoCountrySaga';
+import infoCountriesSaga from './country/infoCountriesSaga';
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -9,9 +9,9 @@ export const saga = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    fullInfoCountry: fullInfoCountryReducer,
+    infoCountries: infoCountriesReducer,
   },
   middleware: [saga],
 });
 
-saga.run(fullInfoCountrySaga);
+saga.run(infoCountriesSaga);

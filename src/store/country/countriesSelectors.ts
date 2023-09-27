@@ -1,9 +1,9 @@
 import { IStore } from '../types';
 
-export const getFullInfoCountry = (state: IStore) => state.fullInfoCountry.data;
+export const getListCountry = (state: IStore) => state.infoCountries.listCountries;
 
 export const getOptionsCountry = (state: IStore) => {
-  return state.fullInfoCountry.data.map((item) => ({
+  return state.infoCountries.listCountries.map((item) => ({
     value: item.name.common,
     label: item.name.common,
   }));
