@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://restcountries.com/v3.1/region/europe',
+  baseURL: 'https://restcountries.com/v3.1',
 });
 
 // instance.interceptors.request.use(

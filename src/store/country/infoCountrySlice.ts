@@ -21,7 +21,7 @@ export const infoCountriesSlice = createSlice({
       ...state,
       isLoading: false,
     }),
-    getListCountryFetch: (state) => ({
+    getListCountriesFetch: (state) => ({
       ...state,
       isLoading: true,
     }),
@@ -43,7 +43,7 @@ export const {
   getFullInfoCountryFetch,
   getFullInfoCountrySuccess,
   getFullInfoCountryFailure,
-  getListCountryFetch,
+  getListCountriesFetch,
   getListCountrySuccess,
   getListCountryFailure,
 } = infoCountriesSlice.actions;

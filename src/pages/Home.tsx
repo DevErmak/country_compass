@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getListCountryFetch } from '../store/country/infoCountrySlice';
+import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 // import { getFullInfoCountry } from '../store/country/countriesSelectors';
 
 type Props = {};
@@ -10,7 +10,7 @@ export default function HomeContainer({}: Props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getListCountryFetch());
+    dispatch(getListCountriesFetch());
   }, []);
 
   // console.log(fullInfoCountry);

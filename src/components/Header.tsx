@@ -1,17 +1,27 @@
 import { useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../static/images/logo.svg';
 import AsyncSelect from 'react-select/async';
-import { getOptionsCountry } from '../store/country/countriesSelectors';
+import { ge, getOptionsCountry } from '../store/country/countriesSelectors';
 import { IOptionCountry } from '../store/country/types';
 import { TbWorldSearch } from 'react-icons/tb';
 import { getListCountry } from '../store/country/countriesSelectors';
+import { useDispatch } from 'react-redux';
+import { getListCountriesFetch } from '../store/country/infoCountrySlice';
+import { useEffect } from 'react';
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
+  const dispatch = useDispatch();
 
-  const s = useSelector(getListCountry);
+  useEffect(() => {
+    dispatch(getListCountriesFetch());
+  }, []);
+
+  const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
+  const op = useSelector(ge);
+
+  console.log('qwe', op);
 
   const findCounty = (inputValue: string) => {
     return optionsCountry.filter((item) =>
@@ -34,8 +44,10 @@ export default function Header({}: Props) {
       }, 1000);
     });
   };
-
-  // const getInfoCountry = (setCounrty) => {};
+  const getFullInfoCountry = () => {
+    console.log(123124124);
+    dispatch(getListCountriesFetch());
+  };
 
   {
     /* <AsyncSelect
@@ -63,7 +75,7 @@ export default function Header({}: Props) {
           defaultOptions={optionsCountry}
           loadOptions={promiseOptions}
           components={{ DropdownIndicator: customIcon }}
-          // onChange={getInfoCountry}
+          onChange={getFullInfoCountry}
         />
       </div>
       <Logo width={90} height={80} />
