@@ -8,15 +8,17 @@ export const infoCountriesSlice = createSlice({
     isLoading: false,
   },
   reducers: {
-    getFullInfoCountryFetch: (state) => ({
+    getFullInfoCountryFetch: (state, { payload }) => ({
       ...state,
       isLoading: true,
     }),
-    getFullInfoCountrySuccess: (state, action) => ({
-      ...state,
-      fullInfoCountry: action.payload.data,
-      isLoading: false,
-    }),
+    getFullInfoCountrySuccess: (state, action) => {
+      return {
+        ...state,
+        fullInfoCountry: action.payload.data,
+        isLoading: false,
+      };
+    },
     getFullInfoCountryFailure: (state) => ({
       ...state,
       isLoading: false,

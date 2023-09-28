@@ -6,14 +6,11 @@ import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 type Props = {};
 
 export default function HomeContainer({}: Props) {
-  // const fullInfoCountry = useSelector(getFullInfoCountry);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
   }, []);
-
-  // console.log(fullInfoCountry);
 
   return <div></div>;
 }

@@ -1,31 +1,30 @@
 import { useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../static/images/logo.svg';
 import AsyncSelect from 'react-select/async';
-import { ge, getOptionsCountry } from '../store/country/countriesSelectors';
+import { getOptionsCountry, getState } from '../store/country/countriesSelectors';
 import { IOptionCountry } from '../store/country/types';
 import { TbWorldSearch } from 'react-icons/tb';
 import { getListCountry } from '../store/country/countriesSelectors';
 import { useDispatch } from 'react-redux';
-import { getListCountriesFetch } from '../store/country/infoCountrySlice';
+import { getFullInfoCountryFetch, getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 export default function Header({}: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
   }, []);
 
   const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
-  const op = useSelector(ge);
-
-  console.log('qwe', op);
 
   const findCounty = (inputValue: string) => {
     return optionsCountry.filter((item) =>
-      item.value.toLowerCase().includes(inputValue.toLowerCase()),
+      item.label.toLowerCase().includes(inputValue.toLowerCase()),
     );
   };
 
@@ -44,21 +43,10 @@ export default function Header({}: Props) {
       }, 1000);
     });
   };
-  const getFullInfoCountry = () => {
-    console.log(123124124);
-    dispatch(getListCountriesFetch());
+  const getFullInfoCountry = (value: IOptionCountry | null) => {
+    dispatch(getFullInfoCountryFetch(value?.value));
+    navigate('/full-info-country');
   };
-
-  {
-    /* <AsyncSelect
-          classNamePrefix="custom-select-weather"
-          onChange={handleChange}
-          components={{ DropdownIndicator: customIcon }}
-          placeholder="Введите название страны"
-          loadOptions={promiseOptions}
-          value={nameCity}
-        /> */
-  }
 
   const customIcon = () => (
     <div>
@@ -78,7 +66,6 @@ export default function Header({}: Props) {
           onChange={getFullInfoCountry}
         />
       </div>
-      <Logo width={90} height={80} />
     </div>
   );
 }

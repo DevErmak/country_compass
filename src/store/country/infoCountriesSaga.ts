@@ -8,8 +8,8 @@ function* workGetListCountriesFetch(): SagaIterator {
   yield put(getListCountrySuccess(listCountries));
 }
 
-function* workFullInfoCountryFetch(): SagaIterator {
-  const listCountries = yield call(() => axios.get('/name/United%20States?fullText=true'));
+function* workFullInfoCountryFetch({ payload }: { type: string; payload: string }): SagaIterator {
+  const listCountries = yield call(() => axios.get(`/name/${payload}?fullText=true`));
   yield put(getFullInfoCountrySuccess(listCountries));
 }
 
