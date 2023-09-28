@@ -10,4 +10,5 @@ export interface CountrySlice {
   listCountries: Array<IListCountries>;
   fullInfoCountry?: Array<IFullInfoCountry>;
   isLoading: boolean;
+  isFullInfoCountry: boolean;
 }

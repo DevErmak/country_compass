@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import PrivateFullInfoCountry from './pages/PrivateFullInfoCountry';
 import FullInfoCountry from './pages/FullInfoCountry';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
@@ -12,7 +13,9 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<Home />} />
-            <Route path="full-info-country" element={<FullInfoCountry />} />
+            <Route element={<PrivateFullInfoCountry />}>
+              <Route path="full-info-country" element={<FullInfoCountry />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

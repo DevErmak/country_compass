@@ -6,6 +6,8 @@ export const getListCountry = (state: IStore) => state.infoCountries.listCountri
 
 export const getFullInfoCountry = (state: IStore) => state.infoCountries.fullInfoCountry;
 
+export const isFullInfoCountry = (state: IStore) => state.infoCountries.isFullInfoCountry;
+
 export const getOptionsCountry = (state: IStore) => {
   return state.infoCountries.listCountries.map((item) => ({
     value: item.name.common,
