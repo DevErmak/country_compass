@@ -1,7 +1,11 @@
 import { useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../static/images/logo.svg';
 import AsyncSelect from 'react-select/async';
-import { getOptionsCountry, getState } from '../store/country/countriesSelectors';
+import {
+  getOptionsCountry,
+  getState,
+  isFullInfoCountry,
+} from '../store/country/countriesSelectors';
 import { IOptionCountry } from '../store/country/types';
 import { TbWorldSearch } from 'react-icons/tb';
 import { getListCountry } from '../store/country/countriesSelectors';
@@ -43,8 +47,8 @@ export default function Header({}: Props) {
       }, 1000);
     });
   };
-  const getFullInfoCountry = (value: IOptionCountry | null) => {
-    dispatch(getFullInfoCountryFetch(value?.value));
+  const getFullInfoCountry = async (value: IOptionCountry | null) => {
+    await dispatch(getFullInfoCountryFetch(value?.value));
     navigate('/full-info-country');
   };
 

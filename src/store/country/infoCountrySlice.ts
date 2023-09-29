@@ -18,7 +18,7 @@ export const infoCountriesSlice = createSlice({
         ...state,
         fullInfoCountry: action.payload.data,
         isLoading: false,
-        isFullInfoCountry: true,
+        isFullInfoCountry: action.payload.isFullInfoCountry,
       };
     },
     getFullInfoCountryFailure: (state) => ({

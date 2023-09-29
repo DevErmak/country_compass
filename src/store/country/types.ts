@@ -1,5 +1,5 @@
 import { IFullInfoCountry } from './typesIFullInfoCountry';
-import { Cnr, IListCountries } from './typesIListCountries';
+import { IListCountries } from './typesIListCountries';
 
 export interface IOptionCountry {
   value: string;

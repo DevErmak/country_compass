@@ -1,0 +1,49 @@
+.container-background {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  padding-top: 30%;
+}
+
+.container {
+  color: rgb(0, 0, 0);
+}
+
+.star {
+  position: absolute;
+  right: 0px;
+}
+.top-name {
+  position: absolute;
+  top: 40vh;
+  left: 55vh;
+  border: none;
+  width: auto;
+  min-width: 500px;
+  background: #066ba580;
+  padding: 15px;
+  border-radius: 9px;
+  font-size: 50px;
+  font-family: Sang Bleu, serif;
+}
+
+.flag-img {
+  width: 100%;
+  height: auto;
+}
+
+.flag-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.top-name-rus-common {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fafafa;
+}
+
+.top-name-eng-common {
+  color: #fafafa9d;
+}

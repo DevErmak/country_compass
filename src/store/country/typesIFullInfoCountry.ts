@@ -1,4 +1,5 @@
 export interface IFullInfoCountry {
+  [key: string | number | symbol]: any;
   name: Name;
   tld: string[];
   cca2: string;
