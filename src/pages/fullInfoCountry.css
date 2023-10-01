@@ -1,46 +1,114 @@
-.container-background {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  padding-top: 30%;
-}
-
-.container {
-  color: rgb(0, 0, 0);
-}
-
 .star {
   position: absolute;
   right: 0px;
 }
 .top-name {
   position: absolute;
-  top: 40vh;
-  left: 55vh;
+  /* margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: auto; */
+  /* top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0; */
+  /* margin: center; */
+  /* position: absolute; */
+  /* margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  /* top: 0; */
+  /* left: 0;
+  right: 0; */
+  /* width: 50%;
+  height: 30%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center; */
+
+  /* width: 50%;
+  height: 15%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; */
+
+  /* display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center; */
+
+  /* left: 20%;
+  top: 20%;
+  height: 60%;
+  width: 60%; */
+
+  /* width: 60vw;
+  height: 60vh;
+  margin: 20vh auto; */
+
+  /* left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto; */
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   border: none;
-  width: auto;
-  min-width: 500px;
   background: #066ba580;
   padding: 15px;
   border-radius: 9px;
   font-size: 50px;
-  font-family: Sang Bleu, serif;
+  font-family:
+    Sang Bleu,
+    serif;
 }
 
 .flag-img {
+  object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .flag-container {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .top-name-rus-common {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-items: center;
   color: #fafafa;
 }
 
