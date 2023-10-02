@@ -1,0 +1,6 @@
+.container-countries-cardes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 54px;
+  margin: 42px 113px 39px 113px;
+}

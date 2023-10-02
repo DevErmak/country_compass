@@ -20,13 +20,17 @@ export default function CountryCard({
     <div className="container-country-card">
       <img className="flag-img" src={flags} alt={flagsAlt} />
       <div className="info-country-card">
-        <div className="name-country">{nameCountry}</div>
-        <div className="name-capital">
+        <div className="name-card-country">{nameCountry}</div>
+        <div className="name-card-capital">
           <div className="label-for-info-country">Capital:</div>
           {nameCapital}
         </div>
       </div>
-      {isFavorites ? <Star className="star" /> : <StarFavorites className="star-favorites" />}
+      {isFavorites ? (
+        <Star className="star-card" />
+      ) : (
+        <StarFavorites className="star-card-favorites" />
+      )}
     </div>
   );
 }

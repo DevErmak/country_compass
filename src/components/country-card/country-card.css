@@ -1,36 +1,42 @@
 .container-country-card {
+  position: relative;
   width: 230px;
   height: 230px;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .label-for-info-country {
   font-size: 12px;
   font-weight: 400;
 }
-.name-country {
-  font-size: 20px;
+.name-card-country {
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 
-.name-capital {
+.name-card-capital {
   font-size: 15px;
   font-weight: 600;
 }
 
-.star {
+.star-card {
   position: absolute;
-  top: 18px;
+  bottom: 18px;
   right: 21px;
   width: 24px;
   height: 24px;
 }
 
-.star-favorites {
+.star-card-favorites {
   position: absolute;
-  top: 18px;
+  bottom: 18px;
   right: 21px;
   width: 24px;
   height: 24px;
+}
+.info-country-card {
+  margin: 13px 37px 22px 12px;
 }

@@ -110,6 +110,7 @@ export interface Translations {
 }
 
 export interface Languages {
+  [key: string | number | symbol]: any;
   eng: string;
 }
 

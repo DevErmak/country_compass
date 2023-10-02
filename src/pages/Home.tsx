@@ -9,6 +9,9 @@ import {
 } from '../store/country/countriesSelectors';
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
+import SelectorCountry from '../components/SelectorCountry';
+
+import './home.css';
 
 // import { getFullInfoCountry } from '../store/country/countriesSelectors';
 
@@ -29,27 +32,22 @@ export default function HomeContainer({}: Props) {
   if (ff) {
     return <Navigate to="/full-info-country" />;
   }
-  const getCapital = (capital: any, separator: string): string => {
-    // const properties = capital.map((item: string) => item);
-    return capital.join(separator);
-  };
-  console.log(
-    '---------------->listCountry.map((country) => getCapital(country.capital, ',
-    '));',
-    listCountry.map((country) => country.capital),
-  );
+
   return (
-    <div>
-      {listCountry.map((country) => (
-        <CountryCard
-          key={country.id}
-          flags={country.flags.svg}
-          flagsAlt={country.flags.alt}
-          isFavorites={false}
-          nameCountry={country.name.official}
-          nameCapital={getCapital(country.capital, ', ')}
-        />
-      ))}
-    </div>
+    <>
+      <SelectorCountry />
+      <div className="container-countries-cardes">
+        {listCountry.map((country) => (
+          <CountryCard
+            key={country.id}
+            flags={country.flags.svg}
+            flagsAlt={country.flags.alt}
+            isFavorites={false}
+            nameCountry={country.name.official}
+            nameCapital={country.capital.join(', ')}
+          />
+        ))}
+      </div>
+    </>
   );
 }

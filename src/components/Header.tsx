@@ -3,5 +3,5 @@ import SelectorCountry from './SelectorCountry';
 type Props = {};
 
 export default function Header({}: Props) {
-  return <SelectorCountry />;
+  return <div></div>;
 }
