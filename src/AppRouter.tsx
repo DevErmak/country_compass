@@ -12,9 +12,9 @@ function AppRouter() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
-            <Route path="/home" element={<Home />} />
+            <Route index element={<Home />} />
             {/* <Route element={<PrivateFullInfoCountry />}> */}
-            <Route path="/full-info-country" element={<FullInfoCountry />} />
+            <Route path="full-info-country" element={<FullInfoCountry />} />
             {/* </Route> */}
           </Route>
         </Routes>

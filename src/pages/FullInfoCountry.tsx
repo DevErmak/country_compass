@@ -14,9 +14,8 @@ type Props = {};
 export default function PrivateFullInfoCountry({}: Props) {
   const ff = useSelector(isFullInfoCountry);
   const fullInfoCountry = useSelector(getFullInfoCountry);
-  console.log('---------------->fullInfoCountry', fullInfoCountry);
   if (!ff) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 
   const getCurrencies = (currencies: any, separator: string): string => {
@@ -43,7 +42,7 @@ export default function PrivateFullInfoCountry({}: Props) {
   if (typeof fullInfoCountry !== 'undefined') {
     const currencies = getCurrencies(fullInfoCountry[0].currencies, ', ');
     const languages = getLanguages(fullInfoCountry[0].languages, ', ');
-    const capital = getLanguages(fullInfoCountry[0].capital, ', ');
+    const capital = getCapital(fullInfoCountry[0].capital, ', ');
     const population = getPopulation(fullInfoCountry[0].population);
 
     return (

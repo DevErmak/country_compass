@@ -54,7 +54,7 @@ export interface CoatOfArms {
 export interface Flags {
   png: string;
   svg: string;
-  alt?: string;
+  alt: string;
 }
 
 export interface Car {
