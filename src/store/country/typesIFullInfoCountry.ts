@@ -119,6 +119,7 @@ export interface Idd {
 }
 
 export interface Currencies {
+  [key: string | number | symbol]: any;
   USD: USD;
 }
 

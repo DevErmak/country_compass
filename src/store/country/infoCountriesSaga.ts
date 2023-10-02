@@ -10,8 +10,7 @@ function* workGetListCountriesFetch(): SagaIterator {
 
 function* workFullInfoCountryFetch({ payload }: { type: string; payload: string }): SagaIterator {
   let listCountries = yield call(() => axios.get(`/name/${payload}?fullText=true`));
-  yield (listCountries = { ...listCountries, isFullInfoCountry: true });
-  yield put(getFullInfoCountrySuccess(listCountries));
+  yield put(getFullInfoCountrySuccess({ ...listCountries, isFullInfoCountry: true }));
 }
 
 function* infoCountriesSaga() {

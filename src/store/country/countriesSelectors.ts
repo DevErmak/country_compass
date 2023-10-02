@@ -11,6 +11,6 @@ export const isFullInfoCountry = (state: IStore) => state.infoCountries.isFullIn
 export const getOptionsCountry = (state: IStore) => {
   return state.infoCountries.listCountries.map((item) => ({
     value: item.name.common,
-    label: item.translations.rus.common,
+    label: item.name.common,
   }));
 };

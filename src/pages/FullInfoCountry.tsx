@@ -1,379 +1,68 @@
 import { useSelector } from 'react-redux';
-import { getFullInfoCountry } from '../store/country/countriesSelectors';
+import { getFullInfoCountry, isFullInfoCountry } from '../store/country/countriesSelectors';
 // import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 // import { useEffect } from 'react';
 import './fullInfoCountry.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import parse from 'html-react-parser';
+import { Navigate } from 'react-router-dom';
+import InfoCountry from '../components/InfoCountry/InfoCountry';
+import Flag from '../components/falg/Flag';
 type Props = {};
 
 export default function PrivateFullInfoCountry({}: Props) {
-  //   const navigate = useNavigate();
+  const ff = useSelector(isFullInfoCountry);
   const fullInfoCountry = useSelector(getFullInfoCountry);
-  console.log(fullInfoCountry);
-  const [isStarVisible, setIsStarVisible] = useState(false);
-  // const [svgData, setSvgData] = useState(null);
+  console.log('---------------->fullInfoCountry', fullInfoCountry);
+  if (!ff) {
+    return <Navigate to="/home" />;
+  }
 
-  // useEffect(() => {
-  //   if (typeof fullInfoCountry !== 'undefined') {
-  //     axios
-  //       .get(fullInfoCountry[0].flags.svg)
-  //       .then((response) => setSvgData(response.data))
-  //       .catch((error) => console.log(error));
-  //   }
-  // }, [fullInfoCountry]);
+  const getCurrencies = (currencies: any, separator: string): string => {
+    const properties = Object.keys(currencies).map((key) => currencies[key].name);
+    return properties.join(separator);
+  };
 
-  //   useEffect(() => {
-  //     if (typeof fullInfoCountry === 'undefined') {
-  //       console.log('undef');
-  //       navigate('/');
-  //     } else if (fullInfoCountry.length === 0) {
-  //       console.log('posto');
-  //       navigate('/');
-  //     }
-  //   }, []);
-  // console.log(svgData);
+  const getLanguages = (languages: any, separator: string): string => {
+    const properties = Object.keys(languages).map((key) => languages[key]);
+    return properties.join(separator);
+  };
 
-  // function getAttributesFromRegex(input: any, regex: RegExp): any {
-  //   if (typeof input !== 'undefined') {
-  //     const matches = regex.exec(input);
-  //     if (matches === null) {
-  //       throw new Error('Invalid input');
-  //     }
-  //     const attributes = matches.slice(1);
-  //     return attributes.join('');
-  //   }
-  // }
+  const getCapital = (capital: any, separator: string): string => {
+    const properties = capital.map((key: number) => capital[key]);
+    return properties.join(separator);
+  };
 
-  // let width = getAttributesFromRegex(svgData, /width=“(\d+)”/);
-  // let height = getAttributesFromRegex(svgData, /height=“(\d+)”/);
-
-  // console.log('qwe', width, height);
-
-  // function replaceSvgParams(svg: any, width: string, height: string): any {
-  //   console.log('qqqqqqqqqweqw');
-
-  // const matches = regex.exec(input);
-  // if (matches === null) {
-  //   throw new Error('Invalid input');
-  // }
-  // const attributes = matches.slice(1);
-  // return attributes.join('');
-
-  // const reWidth = new RegExp(`width="(\\d+)""`, 'g');
-  // const reHeight = new RegExp(`height="(\\d+)"""`, 'g');
-
-  // const matchesWidth = reWidth.exec(svg);
-  // console.log('matchesWidth', matchesWidth);
-  // const matchesHeight = reHeight.exec(svg);
-  // console.log('e', matchesHeight);
-  // if (!matchesWidth || !matchesHeight) {
-  //   throw new Error('Invalid SVG');
-  // }
-
-  // svg = svg
-  //   .replace(reWidth, () => `width="${Number(matchesWidth[1]) * 2}"`)
-  //   .replace(reHeight, () => `height="${Number(matchesHeight[1]) * 2}"`);
-
-  // return svg;
-
-  // const parsedStr = svg?.replace(/width="([^"]+)"/g, (match, width) => {
-  //   const parsedWidth = parseInt(width);
-  //   const multipliedWidth = parsedWidth * parseInt(newWidth);
-  //   return (width = '${multipliedWidth}');
-  // });
-
-  // const parsedStrWithHeight = parsedStr.replace(/height="([^"]+)"/g, (match, height) => {
-  //   const parsedHeight = parseInt(height);
-  //   const multipliedHeight = parsedHeight * parseInt(newHeight);
-  //   return (height = `${multipliedHeight}`);
-  // });
-
-  // return parsedStrWithHeight;
-
-  // const newStr = svg?.replace(/width="[^"]+"/g, `width="${width}"`);
-  // return newStr?.replace(/height="[^"]+"/g, `height="${height}"`);
-
-  // const regex = /(width\s*=\s*“\d+”)(height\s*=\s*“\d+”)/g;
-  // return svg?.replace(regex, $1 ${width} $2 ${height});
-  // const reWidth = /(width=“.?)“/g;
-  // const reHeight = /(height=”.?)”/g;
-  // svg as string;
-  // if (typeof svg !== null) {
-  //   svg = svg?.replace(reWidth, (width = '${width}'));
-  //   svg = svg?.replace(reHeight, (height = '${height}'));
-  // }
-
-  // return svg;
-  // }
+  const getPopulation = (population: any): string =>
+    population
+      .toString()
+      .replace(/,/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
   if (typeof fullInfoCountry !== 'undefined') {
+    const currencies = getCurrencies(fullInfoCountry[0].currencies, ', ');
+    const languages = getLanguages(fullInfoCountry[0].languages, ', ');
+    const capital = getLanguages(fullInfoCountry[0].capital, ', ');
+    const population = getPopulation(fullInfoCountry[0].population);
+
     return (
-      <div className="container">
-        <div
-          className="flag-container"
-          onMouseEnter={() => setIsStarVisible(true)}
-          onMouseLeave={() => setIsStarVisible(false)}
-        >
-          {isStarVisible && <span className="star">⭐</span>}
-
-          <img
-            className="flag-img"
-            src={fullInfoCountry[0].flags.svg}
-            alt={fullInfoCountry[0].flags.alt}
-          />
-
-          {/* <div flag-img>{svgData ? parse(svgData) : ''}</div> */}
-          {/* <img
-            className="flag-img"
-            src={fullInfoCountry[0].flags.svg}
-            alt={fullInfoCountry[0].flags.alt}
-          /> */}
-          <div className="top-name">
-            <div className="top-name-rus-common">
-              {fullInfoCountry[0].translations.rus.common}
-              <div className="top-name-eng-common">{fullInfoCountry[0].name.common}</div>
-            </div>
-          </div>
-        </div>
-
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
-        <dl className="name-container">
-          <dt>Общие название:</dt>
-          <dd className="name-rus-common">{fullInfoCountry[0].translations.rus.common}</dd>
-          <dd className="name-eng-common">{fullInfoCountry[0].name.common}(eng)</dd>
-          <dt>Полное название:</dt>
-          <dd className="name-eng-official">{fullInfoCountry[0].translations.rus.official}</dd>
-          <dd className="name-eng-official">{fullInfoCountry[0].name.official}(eng)</dd>
-        </dl>
+      <div className="full-info-country">
+        <InfoCountry
+          nameCountry={fullInfoCountry[0].name.official}
+          nameCapital={capital}
+          currencies={currencies}
+          region={fullInfoCountry[0].region}
+          languages={languages}
+          population={population}
+          isFavorites={true}
+        />
+        <Flag
+          flags={fullInfoCountry[0].flags.svg}
+          flagsAlt={fullInfoCountry[0].flags.alt}
+          coatOfArms={fullInfoCountry[0].coatOfArms.svg}
+        />
       </div>
     );
-  } else return <div>123</div>;
+  } else return <div></div>;
 }
