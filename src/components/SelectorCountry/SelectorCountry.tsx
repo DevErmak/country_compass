@@ -1,24 +1,19 @@
 import { useSelector } from 'react-redux';
-import { ReactComponent as Logo } from '../static/images/logo.svg';
 import AsyncSelect from 'react-select/async';
-import {
-  getOptionsCountry,
-  getState,
-  isFullInfoCountry,
-} from '../store/country/countriesSelectors';
-import { IOptionCountry } from '../store/country/types';
-import { TbWorldSearch } from 'react-icons/tb';
-import { getListCountry } from '../store/country/countriesSelectors';
+import { getOptionsCountry } from '../../store/country/countriesSelectors';
+import { IOptionCountry } from '../../store/country/types';
 import { useDispatch } from 'react-redux';
-import { getFullInfoCountryFetch, getListCountriesFetch } from '../store/country/infoCountrySlice';
+import {
+  getFullInfoCountryFetch,
+  getListCountriesFetch,
+} from '../../store/country/infoCountrySlice';
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import './selector-country.css';
 
 type Props = {};
 
 export default function Header({}: Props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
@@ -49,24 +44,21 @@ export default function Header({}: Props) {
   };
   const getFullInfoCountry = (value: IOptionCountry | null) => {
     dispatch(getFullInfoCountryFetch(value?.value));
-    // return <Navigate to="/" />;
   };
-
-  const customIcon = () => (
-    <div>
-      <TbWorldSearch color="black" />
-    </div>
-  );
 
   return (
     <div className="header-container">
+      <div className="label-search">Search your country:</div>
       <div className="find-country">
         <AsyncSelect
-          placeholder="Введите название страны"
+          placeholder={null}
           classNamePrefix="custom-select"
           defaultOptions={optionsCountry}
           loadOptions={promiseOptions}
-          components={{ DropdownIndicator: customIcon }}
+          components={{
+            IndicatorSeparator: () => null,
+            DropdownIndicator: () => null,
+          }}
           onChange={getFullInfoCountry}
         />
       </div>

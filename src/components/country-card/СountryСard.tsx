@@ -18,7 +18,7 @@ export default function CountryCard({
 }: Props) {
   return (
     <div className="container-country-card">
-      <img className="flag-img" src={flags} alt={flagsAlt} />
+      <img className="flag-img-card" src={flags} alt={flagsAlt} />
       <div className="info-country-card">
         <div className="name-card-country">{nameCountry}</div>
         <div className="name-card-capital">

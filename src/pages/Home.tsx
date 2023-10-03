@@ -9,7 +9,7 @@ import {
 } from '../store/country/countriesSelectors';
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
-import SelectorCountry from '../components/SelectorCountry';
+import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
 
 import './home.css';
 
@@ -36,7 +36,7 @@ export default function HomeContainer({}: Props) {
   return (
     <>
       <SelectorCountry />
-      <div className="container-countries-cardes">
+      <div className="container-countries-cards">
         {listCountry.map((country) => (
           <CountryCard
             key={country.id}
