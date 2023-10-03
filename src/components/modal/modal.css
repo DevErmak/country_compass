@@ -1,0 +1,54 @@
+#portal {
+  min-width: 0px;
+  min-height: 0px;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.modal-auth {
+  position: fixed;
+  width: 1024px;
+  height: 766px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  padding: 37.33px 25px 27px 25px;
+  border-radius: 10px;
+  background: #fff;
+  width: 25px;
+  height: 25px;
+}
+
+.login-container {
+  position: fixed;
+  border-radius: 10px;
+  background: #fff;
+  width: 400px;
+  height: 389px;
+  flex-shrink: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sign-in {
+  width: 74px;
+  height: 28px;
+  flex-shrink: 0;
+}

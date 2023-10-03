@@ -6,6 +6,8 @@ import { getListCountry, isFullInfoCountry } from '../store/country/countriesSel
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
+import Modal from '../components/modal/Modal';
+import ReactDOM from 'react-dom';
 
 import './home.css';
 
@@ -31,6 +33,12 @@ export default function HomeContainer({}: Props) {
 
   return (
     <>
+      {true ? (
+        ReactDOM.createPortal(<Modal />, document.getElementById('portal') as HTMLElement)
+      ) : (
+        <div></div>
+      )}
+
       <SelectorCountry />
       <div className="container-countries-cards">
         {listCountry.map((country) => (
