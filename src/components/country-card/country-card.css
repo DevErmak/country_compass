@@ -9,6 +9,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+}
+.container-country-card:hover .name-card-country {
+  transition: color 0.5s;
+  color: blue;
 }
 
 .label-for-info-country {

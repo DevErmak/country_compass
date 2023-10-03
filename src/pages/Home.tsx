@@ -2,11 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import {
-  getFullInfoCountry,
-  getListCountry,
-  isFullInfoCountry,
-} from '../store/country/countriesSelectors';
+import { getListCountry, isFullInfoCountry } from '../store/country/countriesSelectors';
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
@@ -39,7 +35,7 @@ export default function HomeContainer({}: Props) {
       <div className="container-countries-cards">
         {listCountry.map((country) => (
           <CountryCard
-            key={country.id}
+            key={country.name.official}
             flags={country.flags.svg}
             flagsAlt={country.flags.alt}
             isFavorites={false}

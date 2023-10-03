@@ -10,7 +10,7 @@ export default function layout({}: Props) {
     <>
       <Header isLogin={false} />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

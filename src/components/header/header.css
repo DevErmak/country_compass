@@ -15,3 +15,18 @@
 .spacer {
   margin-left: auto;
 }
+.name-site {
+  cursor: pointer;
+}
+.login {
+  cursor: pointer;
+}
+.register {
+  cursor: pointer;
+}
+.logout {
+  cursor: pointer;
+}
+.my-countries {
+  cursor: pointer;
+}

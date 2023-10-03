@@ -13,17 +13,20 @@ export const infoCountriesSlice = createSlice({
       ...state,
       isLoading: true,
     }),
-    getFullInfoCountrySuccess: (state, action) => {
-      return {
-        ...state,
-        fullInfoCountry: action.payload.data,
-        isLoading: false,
-        isFullInfoCountry: action.payload.isFullInfoCountry,
-      };
-    },
+    getFullInfoCountrySuccess: (state, action) => ({
+      ...state,
+      fullInfoCountry: action.payload.data,
+      isLoading: false,
+      isFullInfoCountry: action.payload.isFullInfoCountry,
+    }),
     getFullInfoCountryFailure: (state) => ({
       ...state,
       isLoading: false,
+    }),
+    getFullInfoCountryClear: (state) => ({
+      ...state,
+      fullInfoCountry: [],
+      isFullInfoCountry: false,
     }),
     getListCountriesFetch: (state) => ({
       ...state,
@@ -50,4 +53,5 @@ export const {
   getListCountriesFetch,
   getListCountrySuccess,
   getListCountryFailure,
+  getFullInfoCountryClear,
 } = infoCountriesSlice.actions;
