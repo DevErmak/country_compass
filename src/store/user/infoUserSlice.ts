@@ -1,34 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserSlice } from './types';
 
-type PayloadType = {
-  data: string;
-};
-
-export const infoCountriesSlice = createSlice({
+export const infoUserSlice = createSlice({
   name: 'infoUser',
   initialState: {
-    listFavoriteCountries: undefined,
+    listFavoriteCountries: [],
     isAuthentication: false,
+    isActiveModal: false,
   } as IUserSlice,
   reducers: {
-    logInUser: (state) => ({
+    addFavoriteCountry: (state, { payload }) => ({
       ...state,
-      isAuthentication: true,
+      listFavoriteCountries: Array.from(new Set([...state.listFavoriteCountries, payload])),
     }),
-    addFavoriteCountry: (state, { payload }: { payload: PayloadType }) => ({
+    setAuthentication: (state, { payload }) => ({
       ...state,
-      listFavoriteCountries: Array.from(
-        new Set([...(state.listFavoriteCountries || []), payload.data]),
-      ),
+      isAuthentication: payload,
     }),
-    logOutUser: (state) => ({
-      ...state,
-      isAuthentication: false,
-    }),
+    setActiveModal: (state, { payload }) => {
+      console.log('---------------->payload', payload);
+      return {
+        ...state,
+        isActiveModal: payload,
+      };
+    },
   },
 });
 
-export default infoCountriesSlice.reducer;
+export default infoUserSlice.reducer;
 
-export const { logInUser, addFavoriteCountry, logOutUser } = infoCountriesSlice.actions;
+export const { addFavoriteCountry, setAuthentication, setActiveModal } = infoUserSlice.actions;

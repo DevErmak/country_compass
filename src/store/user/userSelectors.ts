@@ -2,15 +2,8 @@ import { IStore } from '../types';
 
 export const getState = (state: IStore) => state;
 
-export const getListCountry = (state: IStore) => state.infoCountries.listCountries;
+export const getIsActiveModal = (state: IStore) => state.infoUser.isActiveModal;
 
-export const getFullInfoCountry = (state: IStore) => state.infoCountries.fullInfoCountry;
+export const getIsAuthentication = (state: IStore) => state.infoUser.isAuthentication;
 
-export const isFullInfoCountry = (state: IStore) => state.infoCountries.isFullInfoCountry;
-
-export const getOptionsCountry = (state: IStore) => {
-  return state.infoCountries.listCountries.map((item) => ({
-    value: item.name.official,
-    label: item.name.official,
-  }));
-};
+export const getListFavoriteCountries = (state: IStore) => state.infoUser.listFavoriteCountries;

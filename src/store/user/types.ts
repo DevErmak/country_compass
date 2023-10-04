@@ -1,4 +1,5 @@
 export interface IUserSlice {
-  listFavoriteCountries: Array<string> | undefined;
+  listFavoriteCountries: Array<string>;
   isAuthentication: boolean;
+  isActiveModal: boolean;
 }

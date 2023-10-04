@@ -1,0 +1,88 @@
+.container-register {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 37.33px 25px 27px 25px;
+}
+
+.form-register > div {
+  display: flex;
+  flex-direction: column;
+}
+.form-register > .btn-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-register {
+  width: 74px;
+  height: 28px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.label-login {
+  width: 35px;
+  height: 17.5px;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 30.33px;
+}
+
+.label-password {
+  width: 59px;
+  height: 17.5px;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 50.33px;
+}
+
+#btn-register {
+  width: 133px;
+  height: 41px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 15px;
+  background: #d9d9d9;
+  padding: 6px 30px 7px 29px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 33.33px;
+}
+
+.input-login {
+  width: 350px;
+  height: 53.667px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding-left: 25px;
+}
+
+.input-password {
+  width: 350px;
+  height: 53.667px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding-left: 25px;
+}
+
+.input-confirm-password {
+  width: 350px;
+  height: 53.667px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding-left: 25px;
+}
+
+.label-confirm-password {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 50.33px;
+}
