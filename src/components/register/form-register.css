@@ -22,12 +22,20 @@
   font-size: 20px;
   font-weight: 600;
 }
+
 .label-login {
   width: 35px;
   height: 17.5px;
   font-size: 12px;
   font-weight: 400;
   margin-top: 30.33px;
+  transition: 0.5s all;
+}
+
+.label-login.not-valid {
+  width: auto;
+  color: red;
+  transition: 0.5s all;
 }
 
 .label-password {
@@ -36,6 +44,13 @@
   font-size: 12px;
   font-weight: 400;
   margin-top: 50.33px;
+  transition: 0.5s all;
+}
+
+.label-password.not-valid {
+  width: auto;
+  color: red;
+  transition: 0.5s all;
 }
 
 #btn-register {
@@ -59,6 +74,12 @@
   border: 1px solid #d9d9d9;
   background: #fff;
   padding-left: 25px;
+  transition: 0.5s all;
+}
+
+.input-login.not-valid {
+  border: 1px solid #ff0000;
+  transition: 0.5s all;
 }
 
 .input-password {
@@ -69,6 +90,12 @@
   border: 1px solid #d9d9d9;
   background: #fff;
   padding-left: 25px;
+  transition: 0.5s all;
+}
+
+.input-password.not-valid {
+  border: 1px solid #ff0000;
+  transition: 0.5s all;
 }
 
 .input-confirm-password {
@@ -79,10 +106,23 @@
   border: 1px solid #d9d9d9;
   background: #fff;
   padding-left: 25px;
+  transition: 0.5s all;
+}
+
+.input-confirm-password.not-valid {
+  border: 1px solid #ff0000;
+  transition: 0.5s all;
 }
 
 .label-confirm-password {
   font-size: 12px;
   font-weight: 400;
   margin-top: 50.33px;
+  transition: 0.5s all;
+}
+
+.label-confirm-password.not-valid {
+  width: auto;
+  color: red;
+  transition: 0.5s all;
 }

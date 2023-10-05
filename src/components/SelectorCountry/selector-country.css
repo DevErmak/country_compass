@@ -19,7 +19,6 @@
   margin-left: 113px !important;
 }
 .custom-select__menu {
-  position: relative !important;
   -webkit-transition: all 100ms !important;
   transition: all 100ms !important;
   background-color: #fff !important;
