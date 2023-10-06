@@ -1,26 +1,97 @@
 import './form-login.css';
-
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { ZodError, isValid, z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { addFavoriteCountry, setAuthentication } from '../../store/user/infoUserSlice';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 type Props = {};
 
 export default function FormLogin({}: Props) {
+  const [isActiveAnimate, setActiveAnimate] = useState(true);
+  const dispatch = useDispatch();
+
+  const formSchemaLogin = z.object({
+    login: z.string().trim().min(1, { message: 'Field is required' }).email('Email is not correct'),
+    password: z.string().min(1, { message: 'Field is required' }),
+  });
+
+  type LoginFields = z.infer<typeof formSchemaLogin>;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setFocus,
+    trigger,
+    formState: { isDirty, isSubmitting, errors, isValid },
+  } = useForm<LoginFields>({
+    mode: 'all',
+    resolver: zodResolver(formSchemaLogin),
+  });
+
+  const onSubmit: SubmitHandler<LoginFields> = (data) => {
+    let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
+    if (userInfo !== null) {
+      const user = userInfo.find((item: any) => item.name === data.login);
+      if (user === undefined) {
+        setActiveAnimate(false);
+        setTimeout(() => setActiveAnimate(true), 600);
+      } else {
+        if (user.password === data.password) {
+          dispatch(addFavoriteCountry(user.listFavorite));
+          dispatch(setAuthentication(true));
+        } else {
+          setActiveAnimate(false);
+          setTimeout(() => setActiveAnimate(true), 600);
+        }
+      }
+    }
+    reset();
+  };
+
+  useEffect(() => {
+    setFocus('login');
+  }, []);
+
   return (
     <div className="container-sign-in">
       <div className="sign-in">Sign in</div>
-      <form className="form-sign-in">
+      <form onSubmit={handleSubmit(onSubmit)} className="form-sign-in">
         <div>
-          <label htmlFor="input-login" className="label-login">
-            Login:
+          <label
+            htmlFor="input-login"
+            className={errors.login ? 'label-login not-valid' : 'label-login'}
+          >
+            {errors.login ? 'Login: ' + errors.login?.message : 'Login:'}
           </label>
-          <input className="input-login" />
+          <input
+            {...register('login')}
+            type="text"
+            className={
+              isActiveAnimate ? 'input-login-sign-in' : 'input-login-sign-in input-not-valid'
+            }
+          />
         </div>
         <div>
-          <label htmlFor="input-password" className="label-password">
-            Password:
+          <label
+            htmlFor="password"
+            className={errors.password ? 'label-password not-valid' : 'label-password'}
+          >
+            {errors.password ? 'Password: ' + errors.password?.message : 'Password:'}
           </label>
-          <input className="input-password" />
+          <input
+            {...register('password')}
+            type="password"
+            className={
+              isActiveAnimate ? 'input-password-sign-in' : 'input-password-sign-in input-not-valid'
+            }
+          />
         </div>
         <div className="btn-sign-in">
-          <input type="submit" value="Sign in" id="btn-sign-in" />
+          <button type="submit" id="btn-sign-in" disabled={!isValid}>
+            Sign in
+          </button>
         </div>
       </form>
     </div>

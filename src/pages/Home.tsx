@@ -6,9 +6,9 @@ import { getListCountry, isFullInfoCountry } from '../store/country/countriesSel
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
-import Modal from '../components/modal/Modal';
 
 import './home.css';
+import { getIsAuthentication } from '../store/user/userSelectors';
 
 // import { getFullInfoCountry } from '../store/country/countriesSelectors';
 
@@ -25,7 +25,8 @@ export default function HomeContainer({}: Props) {
   console.log('---------------->listCountry', listCountry);
 
   const ff = useSelector(isFullInfoCountry);
-
+  const isAuth = useSelector(getIsAuthentication);
+  console.log('---------------->isAuth', isAuth);
   if (ff) {
     return <Navigate to="/full-info-country" />;
   }

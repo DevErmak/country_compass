@@ -51,7 +51,7 @@
   margin-top: 33.33px;
 }
 
-.input-login {
+.input-login-sign-in {
   width: 350px;
   height: 53.667px;
   flex-shrink: 0;
@@ -61,7 +61,7 @@
   padding-left: 25px;
 }
 
-.input-password {
+.input-password-sign-in {
   width: 350px;
   height: 53.667px;
   flex-shrink: 0;
@@ -69,4 +69,28 @@
   border: 1px solid #d9d9d9;
   background: #fff;
   padding-left: 25px;
+}
+
+@keyframes input-not-valid {
+  10%,
+  90% {
+    transform: translateX(-0.5px);
+  }
+  20%,
+  80% {
+    transform: translateX(1px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-2px);
+  }
+  40%,
+  60% {
+    transform: translateX(2px);
+  }
+}
+.input-not-valid {
+  border: 1px solid #ff0000;
+  animation: input-not-valid 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both;
 }

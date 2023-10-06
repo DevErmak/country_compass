@@ -17,13 +17,10 @@ export const infoUserSlice = createSlice({
       ...state,
       isAuthentication: payload,
     }),
-    setActiveModal: (state, { payload }) => {
-      console.log('---------------->payload', payload);
-      return {
-        ...state,
-        isActiveModal: payload,
-      };
-    },
+    setActiveModal: (state, { payload }) => ({
+      ...state,
+      isActiveModal: payload,
+    }),
   },
 });
 

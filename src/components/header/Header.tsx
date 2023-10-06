@@ -3,7 +3,7 @@ import './header.css';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryClear } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import { getIsActiveModal, getState } from '../../store/user/userSelectors';
+import { getIsActiveModal, getIsAuthentication, getState } from '../../store/user/userSelectors';
 import { setActiveModal } from '../../store/user/infoUserSlice';
 import Modal from '../modal/Modal';
 import ReactDOM from 'react-dom';
@@ -11,11 +11,11 @@ import { useState } from 'react';
 import FormLogin from '../login/FormLogin';
 import FormRegister from '../register/FormRegister';
 
-type Props = {
-  isLogin: boolean;
-};
+type Props = {};
 
-export default function Header({ isLogin }: Props) {
+export default function Header({}: Props) {
+  const isLogin = useSelector(getIsAuthentication);
+
   const dispatch = useDispatch();
   const isActiveModal = useSelector(getIsActiveModal);
   console.log('---------------->isActiveModal', isActiveModal);
