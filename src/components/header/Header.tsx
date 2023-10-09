@@ -1,10 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryClear } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import { getIsActiveModal, getIsAuthentication, getState } from '../../store/user/userSelectors';
-import { setActiveModal } from '../../store/user/infoUserSlice';
+import {
+  getIsActiveModal,
+  getIsAuthentication,
+  getListFavoriteCountries,
+  getState,
+  getUserName,
+} from '../../store/user/userSelectors';
+import { setActiveModal, setAuthentication } from '../../store/user/infoUserSlice';
 import Modal from '../modal/Modal';
 import ReactDOM from 'react-dom';
 import { useState } from 'react';
@@ -14,6 +20,9 @@ import FormRegister from '../register/FormRegister';
 type Props = {};
 
 export default function Header({}: Props) {
+  const navigate = useNavigate();
+  const listFavorite = useSelector(getListFavoriteCountries);
+
   const isLogin = useSelector(getIsAuthentication);
 
   const dispatch = useDispatch();
@@ -23,47 +32,60 @@ export default function Header({}: Props) {
   console.log('---------------->State', State);
 
   const [isRegister, setIsRegister] = useState(false);
+  const userName = useSelector(getUserName);
 
-  const goHome = () => {
+  const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());
+  };
+
+  const ClickOnLogOut = () => {
+    let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
+    console.log('123213-----------123213----->userInfo', userInfo);
+    console.log('123213-----------123213----->userName', userName);
+
+    if (userInfo !== null) {
+      const user = userInfo.find((item: any) => item.name === userName);
+      if (user !== undefined) {
+        console.log('123123---------------->user', user);
+        const newUserInfo = userInfo.filter((item: any) => user !== item);
+        user.listFavorite = listFavorite;
+        newUserInfo.push(user);
+        localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
+      }
+    }
+    dispatch(setAuthentication(false));
   };
 
   const ClickOnLogin = () => {
     dispatch(setActiveModal(true));
-    console.log('---------------->qwe');
     setIsRegister(false);
-    // return <Modal children={<div>qwe1</div>} />;
-    // return ReactDOM.createPortal(
-    //   <Modal> login</Modal>,
-    //   document.getElementById('portal') as HTMLElement,
-    // );
   };
 
   const ClickOnRegister = () => {
     dispatch(setActiveModal(true));
     setIsRegister(true);
-    // return ReactDOM.createPortal(
-    //   <Modal> register </Modal>,
-    //   document.getElementById('portal') as HTMLElement,
-    // );
   };
 
   if (isLogin)
     return (
       <div className="container-header">
-        <div className="name-site" onClick={() => goHome()}>
+        <div className="name-site" onClick={() => ClickOnNameSite()}>
           Europe.know
         </div>
         <div className="spacer"></div>
-        <div className="logout">Logout</div>
-        <div className="my-countries">My countries</div>
+        <div className="logout" onClick={() => ClickOnLogOut()}>
+          Logout
+        </div>
+        <div className="my-countries" onClick={() => navigate('my-countries')}>
+          My countries
+        </div>
       </div>
     );
   else
     return (
       <>
         <div className="container-header">
-          <div className="name-site" onClick={() => goHome()}>
+          <div className="name-site" onClick={() => ClickOnNameSite()}>
             Europe.know
           </div>
           <div className="spacer"></div>

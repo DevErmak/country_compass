@@ -2,7 +2,7 @@ import './form-login.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ZodError, isValid, z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addFavoriteCountry, setAuthentication } from '../../store/user/infoUserSlice';
+import { addFavoriteCountry, setAuthentication, setUserName } from '../../store/user/infoUserSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 type Props = {};
@@ -39,6 +39,8 @@ export default function FormLogin({}: Props) {
         setTimeout(() => setActiveAnimate(true), 600);
       } else {
         if (user.password === data.password) {
+          dispatch(setUserName(user.name));
+          console.log('32!--------------->user.listFavorite', user.listFavorite);
           dispatch(addFavoriteCountry(user.listFavorite));
           dispatch(setAuthentication(true));
         } else {

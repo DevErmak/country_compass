@@ -9,6 +9,9 @@ import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
 
 import './home.css';
 import { getIsAuthentication, getListFavoriteCountries } from '../store/user/userSelectors';
+import { setActiveModal } from '../store/user/infoUserSlice';
+
+// import { getFullInfoCountry } from '../store/country/countriesSelectors';
 
 type Props = {};
 
@@ -19,38 +22,30 @@ export default function HomeContainer({}: Props) {
     dispatch(getListCountriesFetch());
   }, []);
 
-  const listCountry = useSelector(getListCountry);
-  const listFavoriteCountries = useSelector(getListFavoriteCountries);
+  const listFavoriteCountry = useSelector(getListFavoriteCountries);
+  console.log('---------------->listfavoriteinsitefavoriteCountry', listFavoriteCountry);
 
-  const ff = useSelector(isFullInfoCountry);
-  if (ff) {
-    return <Navigate to="/full-info-country" />;
+  const isAuth = useSelector(getIsAuthentication);
+  console.log('---------------->isAuth', isAuth);
+  if (!isAuth) {
+    dispatch(setActiveModal(true));
+    return <Navigate to="/" />;
   }
 
   return (
     <>
-      <SelectorCountry />
       <div className="container-countries-cards">
-        {listCountry.map((country) => (
+        {/* {listCountry.map((country) => (
           <CountryCard
             key={country.name.official}
             flags={country.flags.svg}
             flagsAlt={country.flags.alt}
+            isFavorites={false}
             nameCountry={country.name.official}
             nameCapital={country.capital.join(', ')}
-            isFavorite={(() => {
-              console.log('---------------->listFavoriteCountries', listFavoriteCountries);
-              console.log('---------------->co', country.name.official);
-              const test = listFavoriteCountries.includes(country.name.official);
-              console.log(
-                '---------------->listFavoriteCountries.includes(country.name.official)',
-                test,
-              );
-              debugger;
-              return test;
-            })()}
           />
-        ))}
+        ))} */}
+        list favoryte
       </div>
     </>
   );

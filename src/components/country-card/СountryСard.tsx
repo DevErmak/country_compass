@@ -1,31 +1,34 @@
 import './country-card.css';
-import { ReactComponent as Star } from '../../static/images/star.svg';
-import { ReactComponent as StarFavorites } from '../../static/images/star-favorites.svg';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryFetch } from '../../store/country/infoCountrySlice';
+
+import BtnFavorite from './BtnFavorite';
+
 type Props = {
   flags: string;
   flagsAlt: string;
-  isFavorites: boolean;
   nameCountry: string;
   nameCapital: string;
+  isFavorite: boolean;
 };
 
 export default function CountryCard({
   flags,
   flagsAlt,
-  isFavorites,
   nameCountry,
   nameCapital,
+  isFavorite,
 }: Props) {
   const dispatch = useDispatch();
 
-  const getFullInfoCountry = (nameCountry: string) => {
-    dispatch(getFullInfoCountryFetch(nameCountry));
-  };
+  console.log('---------------->is', isFavorite);
+  debugger;
 
   return (
-    <div className="container-country-card" onClick={() => getFullInfoCountry(nameCountry)}>
+    <div
+      className="container-country-card"
+      onClick={() => dispatch(getFullInfoCountryFetch(nameCountry))}
+    >
       <img className="flag-img-card" src={flags} alt={flagsAlt} />
       <div className="info-country-card">
         <div className="name-card-country">{nameCountry}</div>
@@ -34,11 +37,7 @@ export default function CountryCard({
           {nameCapital}
         </div>
       </div>
-      {isFavorites ? (
-        <Star className="star-card" />
-      ) : (
-        <StarFavorites className="star-card-favorites" />
-      )}
+      <BtnFavorite nameCountry={nameCountry} isFavorite={isFavorite} />
     </div>
   );
 }

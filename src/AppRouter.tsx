@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import FullInfoCountry from './pages/FullInfoCountry';
+import MyCountries from './pages/MyCountries';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
 import DefaultLayout from './layout/DefaultLayout';
@@ -13,6 +14,7 @@ function AppRouter() {
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<Home />} />
             <Route path="full-info-country" element={<FullInfoCountry />} />
+            <Route path="my-countries" element={<MyCountries />} />
           </Route>
         </Routes>
       </BrowserRouter>
