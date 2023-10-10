@@ -8,29 +8,33 @@ import {
   removeFavoriteCountry,
   setActiveModal,
 } from '../../store/user/infoUserSlice';
-import { AnyAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { string } from 'zod';
-type Props = { nameCountry: string; isFavorite: boolean };
 
-export default function BtnFavorite({ nameCountry, isFavorite }: Props) {
+type Props = { nameCountry: string };
+
+export default function BtnFavorite({ nameCountry }: Props) {
   const dispatch = useDispatch();
 
-  const onClickStar = (
-    param: string | boolean,
-    dispatchCountry: (param: string | boolean) => AnyAction,
-    e: React.SyntheticEvent,
-  ) => {
-    e.stopPropagation();
-    dispatch(dispatchCountry(param));
-  };
+  // const onClickStar = (
+  //   param: string | boolean,
+  //   dispatchCountry: (param: string | boolean) => AnyAction,
+  //   e: React.SyntheticEvent,
+  // ) => {
+  //   e.stopPropagation();
+  //   dispatch(dispatchCountry(param));
+  // };
 
   const handleAddFavoriteCountry = (nameCountry: string[], e: React.SyntheticEvent) => {
     e.stopPropagation();
     dispatch(addFavoriteCountry(nameCountry));
   };
 
-  // const listFavoriteCountries = useSelector(getListFavoriteCountries);
+  const handleRemoveFavoriteCountry = (nameCountry: string[], e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    dispatch(removeFavoriteCountry(nameCountry));
+  };
+
+  const listFavoriteCountries = useSelector(getListFavoriteCountries);
 
   const isLogin = useSelector(getIsAuthentication);
 
@@ -39,14 +43,13 @@ export default function BtnFavorite({ nameCountry, isFavorite }: Props) {
   //   '---------------->listFavoriteCountries.includes(nameCountry)',
   //   listFavoriteCountries.includes(nameCountry),
   // );
-  console.log('---------------->isFavorite', isFavorite);
 
   // if (isLogin) {
-  if (isFavorite)
+  if (listFavoriteCountries.includes(nameCountry))
     return (
       <StarFavorites
         className="star-card-favorites"
-        onClick={(e) => onClickStar(nameCountry, removeFavoriteCountry, e)}
+        onClick={(e) => handleRemoveFavoriteCountry([nameCountry], e)}
       />
     );
   else

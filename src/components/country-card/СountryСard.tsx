@@ -9,20 +9,10 @@ type Props = {
   flagsAlt: string;
   nameCountry: string;
   nameCapital: string;
-  isFavorite: boolean;
 };
 
-export default function CountryCard({
-  flags,
-  flagsAlt,
-  nameCountry,
-  nameCapital,
-  isFavorite,
-}: Props) {
+export default function CountryCard({ flags, flagsAlt, nameCountry, nameCapital }: Props) {
   const dispatch = useDispatch();
-
-  console.log('---------------->is', isFavorite);
-  debugger;
 
   return (
     <div
@@ -37,7 +27,7 @@ export default function CountryCard({
           {nameCapital}
         </div>
       </div>
-      <BtnFavorite nameCountry={nameCountry} isFavorite={isFavorite} />
+      <BtnFavorite nameCountry={nameCountry} />
     </div>
   );
 }
