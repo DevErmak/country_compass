@@ -1,6 +1,17 @@
+.home-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+}
+
 .container-countries-cards {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  gap: 54px;
-  margin: 42px 113px 39px 113px;
+  gap: 50px; */
+
+  margin: 20px 20% auto 20%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 50px;
 }

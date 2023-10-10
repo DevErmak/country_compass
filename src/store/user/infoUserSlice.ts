@@ -7,7 +7,7 @@ export const infoUserSlice = createSlice({
     userName: '',
     listFavoriteCountries: [],
     isAuthentication: false,
-    isActiveModal: false,
+    infoModal: { isActiveModal: false, formModal: 'login' },
   } as IUserSlice,
   reducers: {
     addFavoriteCountry: (state, { payload }) => ({
@@ -15,14 +15,23 @@ export const infoUserSlice = createSlice({
       listFavoriteCountries: Array.from(new Set([...state.listFavoriteCountries, ...payload])),
     }),
     removeFavoriteCountry: (state, { payload }) => {
+      console.log('---------------->remove');
+      console.log('---------------->payload', payload);
+
       const newListFavoriteCountries = state.listFavoriteCountries.filter(
-        (item: string) => payload !== item,
+        (item: string) => payload[0] !== item,
       );
+      console.log('---------------->newListFavoriteCountries', newListFavoriteCountries);
+
       return {
         ...state,
         listFavoriteCountries: newListFavoriteCountries,
       };
     },
+    clearAllFavoriteCountry: (state) => ({
+      ...state,
+      listFavoriteCountries: [],
+    }),
     setUserName: (state, { payload }) => ({
       ...state,
       userName: payload,
@@ -31,9 +40,9 @@ export const infoUserSlice = createSlice({
       ...state,
       isAuthentication: payload,
     }),
-    setActiveModal: (state, { payload }) => ({
+    setModal: (state, { payload }) => ({
       ...state,
-      isActiveModal: payload,
+      infoModal: { isActiveModal: payload.isActiveModal, formModal: payload.formModal },
     }),
   },
 });
@@ -43,7 +52,8 @@ export default infoUserSlice.reducer;
 export const {
   addFavoriteCountry,
   setAuthentication,
-  setActiveModal,
+  setModal,
   setUserName,
   removeFavoriteCountry,
+  clearAllFavoriteCountry,
 } = infoUserSlice.actions;

@@ -2,7 +2,9 @@ import { IStore } from '../types';
 
 export const getState = (state: IStore) => state;
 
-export const getIsActiveModal = (state: IStore) => state.infoUser.isActiveModal;
+export const getIsActiveModal = (state: IStore) => state.infoUser.infoModal.isActiveModal;
+
+export const getFormModal = (state: IStore) => state.infoUser.infoModal.formModal;
 
 export const getIsAuthentication = (state: IStore) => state.infoUser.isAuthentication;
 

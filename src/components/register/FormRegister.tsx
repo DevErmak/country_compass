@@ -79,12 +79,14 @@ export default function FormLogin({}: Props) {
     <div className="container-register">
       <div className="modal-register">Register</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-register">
+        <div>{errors.login && errors.login?.message}</div>
+
         <div>
           <label
             htmlFor="username"
             className={errors.login ? 'label-login not-valid' : 'label-login'}
           >
-            {errors.login ? 'Login: ' + errors.login?.message : 'Login:'}
+            Login:
           </label>
           <input
             {...register('login')}

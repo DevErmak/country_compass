@@ -1,41 +1,40 @@
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryClear } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
 import {
+  getFormModal,
   getIsActiveModal,
   getIsAuthentication,
   getListFavoriteCountries,
   getState,
   getUserName,
 } from '../../store/user/userSelectors';
-import { setActiveModal, setAuthentication } from '../../store/user/infoUserSlice';
+import {
+  setModal,
+  setAuthentication,
+  clearAllFavoriteCountry,
+} from '../../store/user/infoUserSlice';
 import Modal from '../modal/Modal';
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
 import FormLogin from '../login/FormLogin';
 import FormRegister from '../register/FormRegister';
+import { formModal } from '../../store/user/types';
 
 type Props = {};
 
 export default function Header({}: Props) {
   const navigate = useNavigate();
   const listFavorite = useSelector(getListFavoriteCountries);
-
   const isLogin = useSelector(getIsAuthentication);
-
   const dispatch = useDispatch();
-  const isActiveModal = useSelector(getIsActiveModal);
-  console.log('---------------->isActiveModal', isActiveModal);
-  const State = useSelector(getState);
-  console.log('---------------->State', State);
-
-  const [isRegister, setIsRegister] = useState(false);
+  const stateModal = useSelector(getFormModal);
   const userName = useSelector(getUserName);
 
   const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());
+    navigate('/');
   };
 
   const ClickOnLogOut = () => {
@@ -54,16 +53,15 @@ export default function Header({}: Props) {
       }
     }
     dispatch(setAuthentication(false));
+    dispatch(clearAllFavoriteCountry());
   };
 
   const ClickOnLogin = () => {
-    dispatch(setActiveModal(true));
-    setIsRegister(false);
+    dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
   };
 
   const ClickOnRegister = () => {
-    dispatch(setActiveModal(true));
-    setIsRegister(true);
+    dispatch(setModal({ isActiveModal: true, formModal: formModal.register }));
   };
 
   if (isLogin)
@@ -81,30 +79,22 @@ export default function Header({}: Props) {
         </div>
       </div>
     );
-  else
-    return (
-      <>
-        <div className="container-header">
-          <div className="name-site" onClick={() => ClickOnNameSite()}>
-            Europe.know
-          </div>
-          <div className="spacer"></div>
-          <div className="login" onClick={() => ClickOnLogin()}>
-            Login
-          </div>
-          <div className="register" onClick={() => ClickOnRegister()}>
-            Register
-          </div>
+  else console.log('!2123-------------->stateModal', stateModal);
+  return (
+    <>
+      <div className="container-header">
+        <div className="name-site" onClick={() => ClickOnNameSite()}>
+          Europe.know
         </div>
-        {isRegister ? (
-          <Modal>
-            <FormRegister />
-          </Modal>
-        ) : (
-          <Modal>
-            <FormLogin />
-          </Modal>
-        )}
-      </>
-    );
+        <div className="spacer"></div>
+        <div className="login" onClick={() => ClickOnLogin()}>
+          Login
+        </div>
+        <div className="register" onClick={() => ClickOnRegister()}>
+          Register
+        </div>
+      </div>
+      <Modal>{stateModal === formModal.login ? <FormLogin /> : <FormRegister />}</Modal>
+    </>
+  );
 }

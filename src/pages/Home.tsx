@@ -18,7 +18,7 @@ export default function HomeContainer({}: Props) {
 
   // let myuuid = uuidv4();
 
-  const genCardId = useId();
+  // const genCardId = useId();
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
@@ -33,13 +33,14 @@ export default function HomeContainer({}: Props) {
   }
 
   return (
-    <>
-      <SelectorCountry />
+    <div className="home-container">
+      <div className="search">
+        <SelectorCountry />
+      </div>
       <div className="container-countries-cards">
         {listCountry.map((country) => (
           <CountryCard
-            // key={Math.floor(Math.random() * Number(genCardId)) + country.name.official}
-            key={uuidv4(country.name.official as V4Options)}
+            key={country.name.official}
             flags={country.flags.svg}
             flagsAlt={country.flags.alt}
             nameCountry={country.name.official}
@@ -47,6 +48,6 @@ export default function HomeContainer({}: Props) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }

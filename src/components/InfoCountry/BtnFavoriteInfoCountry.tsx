@@ -1,8 +1,6 @@
 import React from 'react';
 import { getIsAuthentication, getListFavoriteCountries } from '../../store/user/userSelectors';
 import { useSelector } from 'react-redux';
-import { ReactComponent as Star } from '../../static/images/star.svg';
-import { ReactComponent as StarFavorites } from '../../static/images/star-favorites.svg';
 import {
   addFavoriteCountry,
   removeFavoriteCountry,
@@ -16,7 +14,7 @@ import { BsStar } from 'react-icons/bs';
 
 type Props = { nameCountry: string };
 
-export default function BtnFavorite({ nameCountry }: Props) {
+export default function BtnFavoriteInfoCountry({ nameCountry }: Props) {
   const dispatch = useDispatch();
   const listFavoriteCountries = useSelector(getListFavoriteCountries);
   const isLogin = useSelector(getIsAuthentication);
@@ -40,15 +38,15 @@ export default function BtnFavorite({ nameCountry }: Props) {
     if (listFavoriteCountries.includes(nameCountry))
       return (
         <BsFillStarFill
-          className="star-card-favorites"
+          className="star-favorites"
           onClick={(e) => handleRemoveFavoriteCountry([nameCountry], e)}
         />
       );
     else
       return (
-        <BsStar className="star-card" onClick={(e) => handleAddFavoriteCountry([nameCountry], e)} />
+        <BsStar className="star" onClick={(e) => handleAddFavoriteCountry([nameCountry], e)} />
       );
   } else {
-    return <BsStar className="star-card" onClick={(e) => handleGoFormLogin(e)} />;
+    return <BsStar className="star" onClick={(e) => handleGoFormLogin(e)} />;
   }
 }

@@ -11,7 +11,7 @@
   pointer-events: none;
 }
 
-.modal-container {
+.backdrop {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -27,20 +27,20 @@
   pointer-events: none;
 }
 
-.modal-container.active {
+.backdrop.active {
   opacity: 1;
   pointer-events: all;
   width: 100vw;
   height: 100vh;
 }
-.modal-content {
+.modal-container {
   border-radius: 10px;
   background: #fff;
   width: auto;
   height: auto;
-  transform: scale(0.5);
+  transform: scale(0);
   transition: 0.5s all;
 }
-.modal-content.active {
+.modal-container.active {
   transform: scale(1);
 }

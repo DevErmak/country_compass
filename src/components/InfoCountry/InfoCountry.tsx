@@ -2,6 +2,7 @@
 import './info-country.css';
 import { ReactComponent as Star } from '../../static/images/star.svg';
 import { ReactComponent as StarFavorites } from '../../static/images/star-favorites.svg';
+import BtnFavoriteInfoCountry from './BtnFavoriteInfoCountry';
 
 type Props = {
   nameCountry: string;
@@ -24,7 +25,8 @@ export default function InfoCountry({
 }: Props) {
   return (
     <div className="container-info-country">
-      {isFavorites ? <Star className="star" /> : <StarFavorites className="star-favorites" />}
+      <BtnFavoriteInfoCountry nameCountry={nameCountry} />
+      {/* {isFavorites ? <Star className="star" /> : <StarFavorites className="star-favorites" />} */}
       <div className="text-info-country">
         <div className="name-country">{nameCountry}</div>
         <div className="name-capital">

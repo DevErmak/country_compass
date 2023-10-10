@@ -1,15 +1,19 @@
 .container-header {
   width: 100vw;
   height: auto;
-  flex-shrink: 0;
   background: #fff;
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  column-gap: 30px;
+  /* display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto;*/
   padding: 17px 22px 18px 21px;
+  column-gap: 20px;
   font-size: 20px;
   font-weight: 400;
+  box-sizing: border-box;
 }
 
 .spacer {

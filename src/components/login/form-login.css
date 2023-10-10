@@ -94,3 +94,18 @@
   border: 1px solid #ff0000;
   animation: input-not-valid 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both;
 }
+
+.error-login {
+  position: absolute;
+  color: red;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.error-password {
+  position: absolute;
+  color: red;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

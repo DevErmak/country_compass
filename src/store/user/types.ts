@@ -2,5 +2,10 @@ export interface IUserSlice {
   userName: string;
   listFavoriteCountries: Array<string>;
   isAuthentication: boolean;
-  isActiveModal: boolean;
+  infoModal: { isActiveModal: boolean; formModal: formModal };
+}
+
+export enum formModal {
+  register = 'register',
+  login = 'login',
 }

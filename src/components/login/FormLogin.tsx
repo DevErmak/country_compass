@@ -61,11 +61,12 @@ export default function FormLogin({}: Props) {
       <div className="sign-in">Sign in</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-sign-in">
         <div>
+          <div className={'error-login'}>{errors.login && errors.login?.message}</div>
           <label
             htmlFor="input-login"
             className={errors.login ? 'label-login not-valid' : 'label-login'}
           >
-            {errors.login ? 'Login: ' + errors.login?.message : 'Login:'}
+            Login:
           </label>
           <input
             {...register('login')}
@@ -76,11 +77,12 @@ export default function FormLogin({}: Props) {
           />
         </div>
         <div>
+          <div className={'error-password'}>{errors.password && errors.password?.message}</div>
           <label
             htmlFor="password"
             className={errors.password ? 'label-password not-valid' : 'label-password'}
           >
-            {errors.password ? 'Password: ' + errors.password?.message : 'Password:'}
+            Password:
           </label>
           <input
             {...register('password')}
