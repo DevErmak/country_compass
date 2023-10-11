@@ -1,9 +1,12 @@
+.search {
+  position: fixed;
+  z-index: 1;
+  top: 80px;
+}
+
 .label-search {
   font-size: 20px;
   font-weight: 400;
-  /* margin-top: 48px; */
-  /* margin-left: 113px; */
-  /* margin-right: 714px; */
 }
 
 .custom-select__control {

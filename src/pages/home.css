@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   gap: 50px; */
 
-  margin: 20px 20% auto 20%;
+  margin: 160px 20% auto 20%;
   display: grid;
   grid-template-columns: 230px 230px 230px;
   gap: 50px;

@@ -1,6 +1,9 @@
 .container-header {
   width: 100vw;
-  height: auto;
+  height: 60px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   background: #fff;
   flex-shrink: 0;
   display: flex;

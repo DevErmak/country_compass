@@ -9,11 +9,13 @@ import {
 } from '../../store/country/infoCountrySlice';
 import { useEffect } from 'react';
 import './selector-country.css';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 export default function Header({}: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   dispatch(getListCountriesFetch());
@@ -44,6 +46,7 @@ export default function Header({}: Props) {
   };
   const getFullInfoCountry = (value: IOptionCountry | null) => {
     dispatch(getFullInfoCountryFetch(value?.value));
+    navigate('/full-info-country');
   };
 
   return (
