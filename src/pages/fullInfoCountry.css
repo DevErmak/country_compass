@@ -1,6 +1,6 @@
 .full-info-country {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 560px 350px;
   grid-gap: 50px;
-  margin: 50px;
+  margin: 50px 10% auto 10%;
 }

@@ -15,9 +15,9 @@ type Props = {};
 export default function Header({}: Props) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getListCountriesFetch());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getListCountriesFetch());
+  // }, []);
 
   const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
 

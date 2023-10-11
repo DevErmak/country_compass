@@ -54,6 +54,7 @@ export default function Header({}: Props) {
     }
     dispatch(setAuthentication(false));
     dispatch(clearAllFavoriteCountry());
+    dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
   };
 
   const ClickOnLogin = () => {

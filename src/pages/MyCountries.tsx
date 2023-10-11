@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import { getListCountry, isFullInfoCountry } from '../store/country/countriesSelectors';
-import { Navigate } from 'react-router-dom';
+import { getListCountry, getIsFullInfoCountry } from '../store/country/countriesSelectors';
+import { Navigate, useNavigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
 
@@ -20,41 +20,60 @@ type Props = {};
 
 export default function HomeContainer({}: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getListCountriesFetch());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getListCountriesFetch());
+  // }, []);
 
   const listFavoriteCountry = useSelector(getListFavoriteCountries);
   const listCountry = useSelector(getListCountry);
+  const isFullInfoCountry = useSelector(getIsFullInfoCountry);
 
   const isAuth = useSelector(getIsAuthentication);
+  console.log('-asdw--------------->isAuth', isAuth);
   if (!isAuth) {
     dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
     return <Navigate to="/" />;
   }
+  // if (isFullInfoCountry) {
+  //   return <Navigate to="/full-info-country" />;
+  // }
 
-  let listFullInfoFavoriteCountry: IListCountries[] = [];
+  if (Object.keys(listFavoriteCountry).length === 0) {
+    return (
+      <div className="empty-favorite-container">
+        <div className="info-about-empty-favorite">
+          <div>The list of favorite countries is empty.</div>
+          <div className="choose-country" onClick={() => navigate('/')}>
+            Choose a country
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    let listFullInfoFavoriteCountry: IListCountries[] = [];
 
-  listFavoriteCountry.map((nameFavoriteCountry) =>
-    listFullInfoFavoriteCountry.push(
-      listCountry.find(
-        (country) => country.name.official === nameFavoriteCountry,
-      ) as IListCountries,
-    ),
-  );
+    listFavoriteCountry.map((nameFavoriteCountry) =>
+      listFullInfoFavoriteCountry.push(
+        listCountry.find(
+          (country) => country.name.official === nameFavoriteCountry,
+        ) as IListCountries,
+      ),
+    );
 
-  return (
-    <div className="container-countries-cards">
-      {listFullInfoFavoriteCountry.map((country) => (
-        <CountryCard
-          key={country.name.official}
-          flags={country.flags.svg}
-          flagsAlt={country.flags.alt}
-          nameCountry={country.name.official}
-          nameCapital={country.capital.join(', ')}
-        />
-      ))}
-    </div>
-  );
+    return (
+      <div className="container-countries-cards">
+        {listFullInfoFavoriteCountry.map((country) => (
+          <CountryCard
+            key={country.name.official}
+            flags={country.flags.svg}
+            flagsAlt={country.flags.alt}
+            nameCountry={country.name.official}
+            nameCapital={country.capital.join(', ')}
+          />
+        ))}
+      </div>
+    );
+  }
 }

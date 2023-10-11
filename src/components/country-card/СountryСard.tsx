@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import { getFullInfoCountryFetch } from '../../store/country/infoCountrySlice';
 
 import BtnFavorite from './BtnFavorite';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getIsLoading } from '../../store/country/countriesSelectors';
+import Loader from '../loader/Loader';
 
 type Props = {
   flags: string;
@@ -13,12 +17,17 @@ type Props = {
 
 export default function CountryCard({ flags, flagsAlt, nameCountry, nameCapital }: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const isLoading = useSelector(getIsLoading);
+
+  const handleClickCard = (nameCountry: string) => {
+    dispatch(getFullInfoCountryFetch(nameCountry));
+    // if (isLoading) return <Loader />;
+    navigate('/full-info-country');
+  };
 
   return (
-    <div
-      className="container-country-card"
-      onClick={() => dispatch(getFullInfoCountryFetch(nameCountry))}
-    >
+    <div className="container-country-card" onClick={() => handleClickCard(nameCountry)}>
       <img className="flag-img-card" src={flags} alt={flagsAlt} />
       <div className="info-country-card">
         <div className="name-card-country">{nameCountry}</div>

@@ -4,13 +4,16 @@ import Header from '../components/header/Header';
 import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 import { getIsAuthentication } from '../store/user/userSelectors';
+import Loader from '../components/loader/Loader';
+import { getIsLoading } from '../store/country/countriesSelectors';
 
 type Props = {};
 
 export default function DefaultLayout({}: Props) {
-  const isAuth = useSelector(getIsAuthentication);
-
-  console.log('---------------->LayoutisAuth', isAuth);
+  // const isLoading = useSelector(getIsLoading);
+  // if (isLoading) {
+  //   <Loader />;
+  // } else {
   return (
     <>
       <Header />
@@ -18,4 +21,5 @@ export default function DefaultLayout({}: Props) {
       {/* <Footer /> */}
     </>
   );
+  // }
 }
