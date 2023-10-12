@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import { getListCountry, getIsFullInfoCountry } from '../store/country/countriesSelectors';
+import {
+  getListCountry,
+  getIsFullInfoCountry,
+  getInfoErrorResponse,
+} from '../store/country/countriesSelectors';
 import { Navigate, useNavigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
@@ -28,7 +32,8 @@ export default function HomeContainer({}: Props) {
 
   const listFavoriteCountry = useSelector(getListFavoriteCountries);
   const listCountry = useSelector(getListCountry);
-  const isFullInfoCountry = useSelector(getIsFullInfoCountry);
+  // const isFullInfoCountry = useSelector(getIsFullInfoCountry);
+  const infoErrorResponse = useSelector(getInfoErrorResponse);
 
   const isAuth = useSelector(getIsAuthentication);
   console.log('-asdw--------------->isAuth', isAuth);
@@ -40,6 +45,9 @@ export default function HomeContainer({}: Props) {
   //   return <Navigate to="/full-info-country" />;
   // }
 
+  if (infoErrorResponse.trim().length !== 0) {
+    return <Navigate to="/" />;
+  }
   if (Object.keys(listFavoriteCountry).length === 0) {
     return (
       <div className="empty-favorite-container">

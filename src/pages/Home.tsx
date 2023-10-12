@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import {
   getListCountry,
   getIsFullInfoCountry,
   getIsLoading,
+  getInfoErrorResponse,
 } from '../store/country/countriesSelectors';
 import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/country-card/СountryСard';
@@ -15,6 +16,9 @@ import { V4Options, v4 as uuidv4 } from 'uuid';
 import './home.css';
 import { getIsAuthentication, getListFavoriteCountries } from '../store/user/userSelectors';
 import Loader from '../components/loader/Loader';
+import axios from 'axios';
+import ErrorFetch from '../components/error/ErrorFetch';
+import { IListCountries } from '../store/country/typesIListCountries';
 
 type Props = {};
 
@@ -25,12 +29,17 @@ export default function HomeContainer({}: Props) {
 
   // const genCardId = useId();
 
+  const [isFetchListCountry, setIsFetchListCountry] = useState(false);
+
   useEffect(() => {
     dispatch(getListCountriesFetch());
   }, []);
 
   const isLoading = useSelector(getIsLoading);
   const listCountry = useSelector(getListCountry);
+  const infoErrorResponse = useSelector(getInfoErrorResponse);
+  console.log('---------------->infoErrorResponse', infoErrorResponse);
+
   // const listFavoriteCountries = useSelector(getListFavoriteCountries);
 
   // const isFullInfoCountry = useSelector(getIsFullInfoCountry);
@@ -39,26 +48,44 @@ export default function HomeContainer({}: Props) {
   // }
 
   console.log('---------------->isLoading', isLoading);
-  if (isLoading) {
-    return <Loader />;
-  } else {
-    return (
-      <div className="home-container">
-        <div className="search">
-          <SelectorCountry />
+  console.log('---------------->listCountry', listCountry);
+  // debugger;
+  // if (listCountry === undefined) setIsFetchListCountry(!isFetchListCountry);
+  // else {
+  //   if (Object.keys(listCountry as Array<IListCountries>).length === 0)
+  //     setIsFetchListCountry(!isFetchListCountry);
+  //   else
+  if (infoErrorResponse.trim().length === 0) {
+    // if (
+    //   listCountry !== undefined &&
+    //   Object.keys(listCountry as Array<IListCountries>).length === 0
+    // ) {
+    //   console.log('---------------->isLoading', isLoading);
+    if (isLoading) {
+      // setIsFetchListCountry(true);
+      return <Loader />;
+    } else {
+      // setIsFetchListCountry(false);
+      return (
+        <div className="home-container">
+          <div className="search">
+            <SelectorCountry />
+          </div>
+          <div className="container-countries-cards">
+            {(listCountry as Array<IListCountries>).map((country: any) => (
+              <CountryCard
+                key={country.name.official}
+                flags={country.flags.svg}
+                flagsAlt={country.flags.alt}
+                nameCountry={country.name.official}
+                nameCapital={country.capital.join(', ')}
+              />
+            ))}
+          </div>
         </div>
-        <div className="container-countries-cards">
-          {listCountry.map((country) => (
-            <CountryCard
-              key={country.name.official}
-              flags={country.flags.svg}
-              flagsAlt={country.flags.alt}
-              nameCountry={country.name.official}
-              nameCapital={country.capital.join(', ')}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+      );
+      //   }
+    }
+  } else return <ErrorFetch infoError={infoErrorResponse} />;
+  // }
 }

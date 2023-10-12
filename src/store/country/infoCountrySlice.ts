@@ -7,6 +7,7 @@ export const infoCountriesSlice = createSlice({
     fullInfoCountry: [],
     isFullInfoCountry: false,
     isLoading: false,
+    infoErrorResponse: '',
   },
   reducers: {
     getFullInfoCountryFetch: (state, { payload }) => ({
@@ -18,9 +19,11 @@ export const infoCountriesSlice = createSlice({
       fullInfoCountry: action.payload.data,
       isLoading: false,
       isFullInfoCountry: action.payload.isFullInfoCountry,
+      infoErrorResponse: '',
     }),
-    getFullInfoCountryFailure: (state) => ({
+    getFullInfoCountryFailure: (state, { payload }) => ({
       ...state,
+      infoErrorResponse: payload,
       isLoading: false,
     }),
     getFullInfoCountryClear: (state) => ({
@@ -36,9 +39,11 @@ export const infoCountriesSlice = createSlice({
       ...state,
       listCountries: action.payload.data,
       isLoading: false,
+      infoErrorResponse: '',
     }),
-    getListCountryFailure: (state) => ({
+    getListCountryFailure: (state, { payload }) => ({
       ...state,
+      infoErrorResponse: payload,
       isLoading: false,
     }),
   },

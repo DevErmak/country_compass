@@ -16,3 +16,5 @@ export const getOptionsCountry = (state: IStore) => {
     label: item.name.official,
   }));
 };
+
+export const getInfoErrorResponse = (state: IStore) => state.infoCountries.infoErrorResponse;

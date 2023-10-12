@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="container-flag"
+>
+  <div
+    className="flag"
+  >
+    Flag
+  </div>
+  <img
+    alt=""
+    className="flag-img"
+    src=""
+  />
+  <div
+    className="coat-of-arms"
+  >
+    Coat of arms
+  </div>
+  <img
+    alt=""
+    className="coat-of-arms-img"
+    src=""
+  />
+</div>
+`;

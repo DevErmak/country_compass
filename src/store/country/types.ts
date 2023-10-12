@@ -11,4 +11,5 @@ export interface CountrySlice {
   fullInfoCountry?: Array<IFullInfoCountry>;
   isLoading: boolean;
   isFullInfoCountry: boolean;
+  infoErrorResponse: string;
 }
