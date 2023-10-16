@@ -1,7 +1,9 @@
 .search {
   position: fixed;
   z-index: 1;
-  top: 80px;
+  top: 60px;
+  background-color: #eeeeee;
+  padding-top: 20px;
 }
 
 .label-search {
@@ -30,6 +32,7 @@
   color: #000000 !important;
   width: 798px !important;
   height: 46px !important;
+  top: 38px !important;
   /* margin-left: 113px !important; */
 }
 

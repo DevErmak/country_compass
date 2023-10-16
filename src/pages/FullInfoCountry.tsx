@@ -7,8 +7,8 @@ import {
 import './fullInfoCountry.css';
 import { Navigate } from 'react-router-dom';
 import InfoCountry from '../components/InfoCountry/InfoCountry';
-import Flag from '../components/falg/Flag';
-import Loader from '../components/loader/Loader';
+import Flag from '../components/Falg/Flag';
+import Loader from '../components/Loader/Loader';
 
 type Props = {};
 

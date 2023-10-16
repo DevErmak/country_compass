@@ -8,7 +8,7 @@ import {
   getInfoErrorResponse,
 } from '../store/country/countriesSelectors';
 import { Navigate, useNavigate } from 'react-router-dom';
-import CountryCard from '../components/country-card/СountryСard';
+import CountryCard from '../components/CountryCard/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
 
 import './home.css';

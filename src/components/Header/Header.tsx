@@ -16,10 +16,10 @@ import {
   setAuthentication,
   clearAllFavoriteCountry,
 } from '../../store/user/infoUserSlice';
-import Modal from '../modal/Modal';
+import Modal from '../Modal/Modal';
 import ReactDOM from 'react-dom';
-import FormLogin from '../login/FormLogin';
-import FormRegister from '../register/FormRegister';
+import FormLogin from '../Login/FormLogin';
+import FormRegister from '../Register/FormRegister';
 import { formModal } from '../../store/user/types';
 
 type Props = {};

@@ -14,6 +14,7 @@ export const store = configureStore({
     infoUser: infoUserReducer,
   },
   middleware: [saga],
+  // preloadedState: {infoCountries: infoUser:}
 });
 
 saga.run(infoCountriesSaga);

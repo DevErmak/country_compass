@@ -6,7 +6,7 @@ import BtnFavorite from './BtnFavorite';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsLoading } from '../../store/country/countriesSelectors';
-import Loader from '../loader/Loader';
+import Loader from '../Loader/Loader';
 
 type Props = {
   flags: string;

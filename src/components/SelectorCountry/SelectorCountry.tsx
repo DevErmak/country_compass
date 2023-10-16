@@ -63,6 +63,7 @@ export default function Header({}: Props) {
             DropdownIndicator: () => null,
           }}
           onChange={getFullInfoCountry}
+          // menuIsOpen={true}
         />
       </div>
     </div>
