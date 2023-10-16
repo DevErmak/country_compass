@@ -15,13 +15,9 @@ export const infoUserSlice = createSlice({
       listFavoriteCountries: Array.from(new Set([...state.listFavoriteCountries, ...payload])),
     }),
     removeFavoriteCountry: (state, { payload }) => {
-      console.log('---------------->remove');
-      console.log('---------------->payload', payload);
-
       const newListFavoriteCountries = state.listFavoriteCountries.filter(
         (item: string) => payload[0] !== item,
       );
-      console.log('---------------->newListFavoriteCountries', newListFavoriteCountries);
 
       return {
         ...state,

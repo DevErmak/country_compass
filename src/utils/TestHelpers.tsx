@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import type { Store } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
@@ -75,6 +76,7 @@ export const renderComponentWithStore = ({
         ) : (
           <Component {...renderProps}>{children}</Component>
         )}
+        <div id="portal"></div>
       </MemoryRouter>
     </Provider>
   );
@@ -111,6 +113,7 @@ export const renderComponent = ({
       ) : (
         <Component {...props}>{children}</Component>
       )}
+      <div id="portal"></div>
     </MemoryRouter>,
   );
 

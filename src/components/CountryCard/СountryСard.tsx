@@ -18,11 +18,9 @@ type Props = {
 export default function CountryCard({ flags, flagsAlt, nameCountry, nameCapital }: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const isLoading = useSelector(getIsLoading);
 
   const handleClickCard = (nameCountry: string) => {
     dispatch(getFullInfoCountryFetch(nameCountry));
-    // if (isLoading) return <Loader />;
     navigate('/full-info-country');
   };
 

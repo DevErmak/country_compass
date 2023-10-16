@@ -25,10 +25,6 @@ type Props = {};
 export default function HomeContainer({}: Props) {
   const dispatch = useDispatch();
 
-  // let myuuid = uuidv4();
-
-  // const genCardId = useId();
-
   const [isFetchListCountry, setIsFetchListCountry] = useState(false);
 
   useEffect(() => {
@@ -38,34 +34,11 @@ export default function HomeContainer({}: Props) {
   const isLoading = useSelector(getIsLoading);
   const listCountry = useSelector(getListCountry);
   const infoErrorResponse = useSelector(getInfoErrorResponse);
-  console.log('---------------->infoErrorResponse', infoErrorResponse);
 
-  // const listFavoriteCountries = useSelector(getListFavoriteCountries);
-
-  // const isFullInfoCountry = useSelector(getIsFullInfoCountry);
-  // if (isFullInfoCountry) {
-  //   return <Navigate to="/full-info-country" />;
-  // }
-
-  console.log('---------------->isLoading', isLoading);
-  console.log('---------------->listCountry', listCountry);
-  // debugger;
-  // if (listCountry === undefined) setIsFetchListCountry(!isFetchListCountry);
-  // else {
-  //   if (Object.keys(listCountry as Array<IListCountries>).length === 0)
-  //     setIsFetchListCountry(!isFetchListCountry);
-  //   else
   if (infoErrorResponse.trim().length === 0) {
-    // if (
-    //   listCountry !== undefined &&
-    //   Object.keys(listCountry as Array<IListCountries>).length === 0
-    // ) {
-    //   console.log('---------------->isLoading', isLoading);
     if (isLoading) {
-      // setIsFetchListCountry(true);
       return <Loader />;
     } else {
-      // setIsFetchListCountry(false);
       return (
         <div className="home-container">
           <div className="search">
@@ -84,8 +57,6 @@ export default function HomeContainer({}: Props) {
           </div>
         </div>
       );
-      //   }
     }
   } else return <ErrorFetch infoError={infoErrorResponse} />;
-  // }
 }

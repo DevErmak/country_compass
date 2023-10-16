@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly selector-country 1`] = `
+<div>
+  <div
+    class="header-container"
+  >
+    <div
+      class="label-search"
+    >
+      Search your country:
+    </div>
+    <div
+      class="find-country"
+    >
+      <div
+        class=" css-b62m3t-container"
+      >
+        <span
+          class="css-1f43avz-a11yText-A11yText"
+          id="react-select-2-live-region"
+        />
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          class="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          class="custom-select__control css-13cymwt-control"
+        >
+          <div
+            class="custom-select__value-container css-1fdsijx-ValueContainer"
+          >
+            <div
+              class="custom-select__placeholder css-1jqq78o-placeholder"
+              id="react-select-2-placeholder"
+            />
+            <div
+              class="custom-select__input-container css-qbdosj-Input"
+              data-value=""
+            >
+              <input
+                aria-autocomplete="list"
+                aria-describedby="react-select-2-placeholder"
+                aria-expanded="false"
+                aria-haspopup="true"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                class="custom-select__input"
+                id="react-select-2-input"
+                role="combobox"
+                spellcheck="false"
+                style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                tabindex="0"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            class="custom-select__indicators css-1hb7zxy-IndicatorsContainer"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="portal"
+  />
+</div>
+`;

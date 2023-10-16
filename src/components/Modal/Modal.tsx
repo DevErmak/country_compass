@@ -11,9 +11,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function Login({ children }: Props) {
+export default function Modal({ children }: Props) {
   const dispatch = useDispatch();
   const isActiveModal = useSelector(getIsActiveModal);
+  const domElement = React.useRef(document.getElementById('portal'));
   return ReactDOM.createPortal(
     <div
       className={isActiveModal ? 'backdrop active' : 'backdrop'}
@@ -26,6 +27,8 @@ export default function Login({ children }: Props) {
         {children}
       </div>
     </div>,
-    document.getElementById('portal') as HTMLElement,
+    // document.getElementById('portal') as HTMLElement,
+    domElement.current as HTMLElement,
+    // document.root.nextElementSibling,
   );
 }

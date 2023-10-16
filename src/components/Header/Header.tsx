@@ -39,13 +39,10 @@ export default function Header({}: Props) {
 
   const ClickOnLogOut = () => {
     let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
-    console.log('123213-----------123213----->userInfo', userInfo);
-    console.log('123213-----------123213----->userName', userName);
 
     if (userInfo !== null) {
       const user = userInfo.find((item: any) => item.name === userName);
       if (user !== undefined) {
-        console.log('123123---------------->user', user);
         const newUserInfo = userInfo.filter((item: any) => user !== item);
         user.listFavorite = listFavorite;
         newUserInfo.push(user);
@@ -80,7 +77,6 @@ export default function Header({}: Props) {
         </div>
       </div>
     );
-  else console.log('!2123-------------->stateModal', stateModal);
   return (
     <>
       <div className="container-header">

@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly FormLogin 1`] = `
+<div>
+  <div
+    class="container-sign-in"
+  >
+    <div
+      class="sign-in"
+    >
+      Sign in
+    </div>
+    <form
+      class="form-sign-in"
+    >
+      <div>
+        <div
+          class="error-login"
+        />
+        <label
+          class="label-login"
+          for="input-login"
+        >
+          Login:
+        </label>
+        <input
+          class="input-login-sign-in"
+          name="login"
+          type="text"
+        />
+      </div>
+      <div>
+        <div
+          class="error-password"
+        />
+        <label
+          class="label-password"
+          for="password"
+        >
+          Password:
+        </label>
+        <input
+          class="input-password-sign-in"
+          name="password"
+          type="password"
+        />
+      </div>
+      <div
+        class="btn-sign-in"
+      >
+        <button
+          disabled=""
+          id="btn-sign-in"
+          type="submit"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <div
+    id="portal"
+  />
+</div>
+`;

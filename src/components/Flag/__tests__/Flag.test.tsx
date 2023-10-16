@@ -1,9 +1,10 @@
+import Flag from '../Flag';
 import { renderComponent } from '../../../utils/TestHelpers';
-import Loader from '../Loader';
 
 it('renders correctly Flag', () => {
   const { container } = renderComponent({
-    Component: Loader,
+    Component: Flag,
+    props: { flags: '', flagsAlt: '', coatOfArms: '' },
   });
   expect(container).toMatchSnapshot();
 });

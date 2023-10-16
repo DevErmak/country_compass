@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly FormRegister 1`] = `
+<div>
+  <div
+    class="container-register"
+  >
+    <div
+      class="modal-register"
+    >
+      Register
+    </div>
+    <form
+      class="form-register"
+    >
+      <div />
+      <div>
+        <label
+          class="label-login"
+          for="username"
+        >
+          Login:
+        </label>
+        <input
+          class="input-login-register"
+          name="login"
+          type="text"
+        />
+      </div>
+      <div>
+        <label
+          class="label-password"
+          for="password"
+        >
+          Password:
+        </label>
+        <input
+          class="input-password-register"
+          name="password"
+          type="password"
+        />
+      </div>
+      <div>
+        <label
+          class="label-confirm-password"
+          for="username"
+        >
+          Confirm password:
+        </label>
+        <input
+          class="input-confirm-password-register"
+          name="confirmPassword"
+          type="password"
+        />
+      </div>
+      <div
+        class="btn-register"
+      >
+        <button
+          disabled=""
+          id="btn-register"
+          type="submit"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+  <div
+    id="portal"
+  />
+</div>
+`;

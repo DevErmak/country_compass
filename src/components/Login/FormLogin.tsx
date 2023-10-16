@@ -40,7 +40,6 @@ export default function FormLogin({}: Props) {
       } else {
         if (user.password === data.password) {
           dispatch(setUserName(user.name));
-          console.log('32!--------------->user.listFavorite', user.listFavorite);
           dispatch(addFavoriteCountry(user.listFavorite));
           dispatch(setAuthentication(true));
         } else {

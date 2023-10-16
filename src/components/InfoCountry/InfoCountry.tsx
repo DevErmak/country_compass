@@ -11,7 +11,6 @@ type Props = {
   region: string;
   languages: string;
   population: string;
-  isFavorites: boolean;
 };
 
 export default function InfoCountry({
@@ -21,12 +20,10 @@ export default function InfoCountry({
   region,
   languages,
   population,
-  isFavorites,
 }: Props) {
   return (
     <div className="container-info-country">
       <BtnFavoriteInfoCountry nameCountry={nameCountry} />
-      {/* {isFavorites ? <Star className="star" /> : <StarFavorites className="star-favorites" />} */}
       <div className="text-info-country">
         <div className="name-country">{nameCountry}</div>
         <div className="name-capital">

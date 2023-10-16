@@ -13,13 +13,9 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
-export default function Header({}: Props) {
+export default function SelectorCountry({}: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   dispatch(getListCountriesFetch());
-  // }, []);
 
   const optionsCountry: IOptionCountry[] = useSelector(getOptionsCountry);
 
@@ -63,7 +59,6 @@ export default function Header({}: Props) {
             DropdownIndicator: () => null,
           }}
           onChange={getFullInfoCountry}
-          // menuIsOpen={true}
         />
       </div>
     </div>
