@@ -19,13 +19,13 @@ import Loader from '../components/Loader/Loader';
 import axios from 'axios';
 import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../store/country/typesIListCountries';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../api/graphqlV1/requests';
 
 type Props = {};
 
 export default function HomeContainer({}: Props) {
   const dispatch = useDispatch();
-
-  const [isFetchListCountry, setIsFetchListCountry] = useState(false);
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
@@ -34,6 +34,21 @@ export default function HomeContainer({}: Props) {
   const isLoading = useSelector(getIsLoading);
   const listCountry = useSelector(getListCountry);
   const infoErrorResponse = useSelector(getInfoErrorResponse);
+
+  const { loading, error, data } = useQuery(GET_ME, {
+    context: {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoicXdlQHF3ZS5xd2UiLCJpYXQiOjE2OTgxNjIwNjR9.YDwP5dkfMBJC3JIEcOrLGhrwcFgcXEqo7GtKtvpKvGA',
+      },
+    },
+  });
+  console.log('!!!---------------->data', loading);
+  console.log('!!!---------------->data', error);
+  console.log('!!!---------------->data', data);
+
+  if (loading) console.log('---------------->Loading...');
+  if (error) console.log(`Error! ${error.message}`);
 
   if (infoErrorResponse.trim().length === 0) {
     if (isLoading) {
