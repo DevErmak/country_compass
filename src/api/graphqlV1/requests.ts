@@ -19,3 +19,11 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const REGISTER = gql`
+  mutation RegisterUser($createUser: CreateUserInput!) {
+    registerUser(createUser: $createUser) {
+      token
+    }
+  }
+`;

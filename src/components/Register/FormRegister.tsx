@@ -5,11 +5,18 @@ import { ZodError, isValid, z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { setAuthentication } from '../../store/user/infoUserSlice';
 import { useDispatch } from 'react-redux';
+import { useMutation, useQuery } from '@apollo/client';
+import Loader from '../Loader/Loader';
+import ErrorFetch from '../ErrorFetch/ErrorFetch';
+import { REGISTER } from '../../api/graphqlV1/requests';
 
 type Props = {};
 
 export default function FormRegister({}: Props) {
   const dispatch = useDispatch();
+  useEffect(() => {
+    setFocus('login');
+  }, []);
 
   const formSchemaRegister = z
     .object({
@@ -46,36 +53,55 @@ export default function FormRegister({}: Props) {
     resolver: zodResolver(formSchemaRegister),
   });
 
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
+
+  // if (loading) return <Loader />;
+  // if (error) return <ErrorFetch infoError={`Submission error! ${error.message}`} />;
+  if (loading) console.log('---------------->load');
+  if (error) console.log(`Submission error! ${error.message}`);
+  // if (error?.message === 'User has been registered') alert('such a user exists');
+
+  console.log('222-------222--------->data', data);
+
   const onSubmit: SubmitHandler<RegisterFields> = (data) => {
-    let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
-    if (userInfo !== null)
-      if (userInfo.find((item: any) => item.name === data.login) === undefined) {
-        userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        dispatch(setAuthentication(true));
-      } else {
-        alert('such a user exists');
-      }
-    else {
-      userInfo = [];
-      userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
-      localStorage.setItem('userInfo', JSON.stringify(userInfo));
-      dispatch(setAuthentication(true));
-    }
+    registerUser({
+      variables: {
+        createUser: {
+          login: data.login,
+          password: data.password,
+        },
+      },
+    });
+
+    console.log('---------------->error?.message', error?.message);
+
+    // let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
+    // if (userInfo !== null)
+    //   if (userInfo.find((item: any) => item.name === data.login) === undefined) {
+    //     userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
+    //     localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    //     dispatch(setAuthentication(true));
+    //   } else {
+    //     alert('such a user exists');
+    //   }
+    // else {
+    //   userInfo = [];
+    //   userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
+    //   localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    //   dispatch(setAuthentication(true));
+    // }
 
     reset();
   };
-
-  useEffect(() => {
-    setFocus('login');
-  }, []);
 
   return (
     <div className="container-register">
       <div className="modal-register">Register</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-register">
-        <div>{errors.login && errors.login?.message}</div>
-
+        {error?.message === 'User has been registered' ? (
+          <div className={'error-user-exists'}> such a user exists </div>
+        ) : null}
+        <div className={'error-login-reg '}>{errors.login && errors.login?.message}</div>
         <div>
           <label
             htmlFor="username"
@@ -89,12 +115,13 @@ export default function FormRegister({}: Props) {
             className={errors.login ? 'input-login-register not-valid' : 'input-login-register'}
           />
         </div>
+        <div className={'error-password-reg'}>{errors.password && errors.password?.message}</div>
         <div>
           <label
             htmlFor="password"
             className={errors.password ? 'label-password not-valid' : 'label-password'}
           >
-            {errors.password ? 'Password: ' + errors.password?.message : 'Password:'}
+            Password:
           </label>
           <input
             {...register('password')}
@@ -103,6 +130,9 @@ export default function FormRegister({}: Props) {
               errors.password ? 'input-password-register not-valid' : 'input-password-register'
             }
           />
+        </div>
+        <div className={'error-confirm-password'}>
+          {errors.confirmPassword && errors.confirmPassword?.message}
         </div>
         <div>
           <label
@@ -113,9 +143,7 @@ export default function FormRegister({}: Props) {
                 : 'label-confirm-password'
             }
           >
-            {errors.confirmPassword
-              ? 'Confirm password: ' + errors.confirmPassword?.message
-              : 'Confirm password:'}
+            Confirm password:
           </label>
           <input
             {...register('confirmPassword')}
