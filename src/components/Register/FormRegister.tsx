@@ -9,6 +9,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import Loader from '../Loader/Loader';
 import ErrorFetch from '../ErrorFetch/ErrorFetch';
 import { REGISTER } from '../../api/graphqlV1/requests';
+import { onError } from '@apollo/client/link/error';
 
 type Props = {};
 
@@ -53,12 +54,26 @@ export default function FormRegister({}: Props) {
     resolver: zodResolver(formSchemaRegister),
   });
 
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
+  // const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER);
 
   // if (loading) return <Loader />;
   // if (error) return <ErrorFetch infoError={`Submission error! ${error.message}`} />;
   if (loading) console.log('---------------->load');
   if (error) console.log(`Submission error! ${error.message}`);
+  console.log('---------------->error.graphQLErrors', error?.graphQLErrors);
+
+  onError(({ graphQLErrors, networkError, response, operation }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `PYPYPYPYPYP [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        ),
+      );
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+    // response.errors = { errorPolicy: 'all' };
+  });
+
   // if (error?.message === 'User has been registered') alert('such a user exists');
 
   console.log('222-------222--------->data', data);
