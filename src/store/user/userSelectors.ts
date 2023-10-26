@@ -11,3 +11,5 @@ export const getIsAuthentication = (state: IStore) => state.infoUser.isAuthentic
 export const getListFavoriteCountries = (state: IStore) => state.infoUser.listFavoriteCountries;
 
 export const getUserName = (state: IStore) => state.infoUser.userName;
+
+export const getAuthToken = (state: IStore) => state.infoUser.authToken;

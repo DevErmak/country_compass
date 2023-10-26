@@ -8,6 +8,7 @@ export const infoUserSlice = createSlice({
     listFavoriteCountries: [],
     isAuthentication: false,
     infoModal: { isActiveModal: false, formModal: 'login' },
+    authToken: '',
   } as IUserSlice,
   reducers: {
     addFavoriteCountry: (state, { payload }) => ({
@@ -40,6 +41,10 @@ export const infoUserSlice = createSlice({
       ...state,
       infoModal: { isActiveModal: payload.isActiveModal, formModal: payload.formModal },
     }),
+    setAuthToken: (state, { payload }) => ({
+      ...state,
+      authToken: payload,
+    }),
   },
 });
 
@@ -52,4 +57,5 @@ export const {
   setUserName,
   removeFavoriteCountry,
   clearAllFavoriteCountry,
+  setAuthToken,
 } = infoUserSlice.actions;

@@ -3,13 +3,15 @@ import './form-register.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ZodError, isValid, z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { setAuthentication } from '../../store/user/infoUserSlice';
+import { setAuthToken, setAuthentication } from '../../store/user/infoUserSlice';
 import { useDispatch } from 'react-redux';
 import { useMutation, useQuery } from '@apollo/client';
 import Loader from '../Loader/Loader';
 import ErrorFetch from '../ErrorFetch/ErrorFetch';
 import { REGISTER } from '../../api/graphqlV1/requests';
-import { onError } from '@apollo/client/link/error';
+
+import { ToastContainer, Zoom, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {};
 
@@ -54,27 +56,52 @@ export default function FormRegister({}: Props) {
     resolver: zodResolver(formSchemaRegister),
   });
 
-  // const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER);
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
 
   // if (loading) return <Loader />;
   // if (error) return <ErrorFetch infoError={`Submission error! ${error.message}`} />;
   if (loading) console.log('---------------->load');
   if (error) console.log(`Submission error! ${error.message}`);
+
+  useEffect(() => {
+    if (error?.message === 'User has been registered')
+      toast.error('User has been registered', {
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        transition: Zoom,
+      });
+  }, [error]);
+
+  useEffect(() => {
+    if (data !== undefined) {
+      if (data.registerUser !== null) {
+        console.log('qwe---------------->data', data);
+        console.log('qwe---------------->dataasdasd', data.registerUser.__typename);
+        if (data.registerUser.__typename === 'AccessToken')
+          dispatch(setAuthToken(data.registerUser.token));
+        else
+          toast.error('you were unable to register', {
+            position: 'top-center',
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+            transition: Zoom,
+          });
+      }
+    }
+  }, [data]);
+
   console.log('---------------->error.graphQLErrors', error?.graphQLErrors);
-
-  onError(({ graphQLErrors, networkError, response, operation }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `PYPYPYPYPYP [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
-      );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-    // response.errors = { errorPolicy: 'all' };
-  });
-
-  // if (error?.message === 'User has been registered') alert('such a user exists');
 
   console.log('222-------222--------->data', data);
 
@@ -113,9 +140,7 @@ export default function FormRegister({}: Props) {
     <div className="container-register">
       <div className="modal-register">Register</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-register">
-        {error?.message === 'User has been registered' ? (
-          <div className={'error-user-exists'}> such a user exists </div>
-        ) : null}
+        <ToastContainer />
         <div className={'error-login-reg '}>{errors.login && errors.login?.message}</div>
         <div>
           <label
