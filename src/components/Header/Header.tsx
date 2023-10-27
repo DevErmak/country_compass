@@ -21,6 +21,8 @@ import ReactDOM from 'react-dom';
 import FormLogin from '../Login/FormLogin';
 import FormRegister from '../Register/FormRegister';
 import { formModal } from '../../store/user/types';
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
 
 type Props = {};
 
@@ -31,6 +33,12 @@ export default function Header({}: Props) {
   const dispatch = useDispatch();
   const stateModal = useSelector(getFormModal);
   const userName = useSelector(getUserName);
+  const [cookie, setCookie] = useCookies(['accessToken']);
+  useEffect(() => {
+    if (cookie.accessToken) dispatch(setAuthentication(true));
+    else dispatch(setAuthentication(false));
+    console.log('---------------->cookieValue', cookie.accessToken);
+  }, [cookie.accessToken]);
 
   const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());

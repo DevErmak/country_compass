@@ -12,6 +12,7 @@ import { REGISTER } from '../../api/graphqlV1/requests';
 
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
 
 type Props = {};
 
@@ -78,14 +79,19 @@ export default function FormRegister({}: Props) {
       });
   }, [error]);
 
+  const [cookie, setCookie] = useCookies(['accessToken']);
   useEffect(() => {
     if (data !== undefined) {
       if (data.registerUser !== null) {
         console.log('qwe---------------->data', data);
         console.log('qwe---------------->dataasdasd', data.registerUser.__typename);
-        if (data.registerUser.__typename === 'AccessToken')
-          dispatch(setAuthToken(data.registerUser.token));
-        else
+        if (data.registerUser.__typename === 'AccessToken') {
+          // dispatch(setAuthToken(data.registerUser.token));
+          setCookie('accessToken', data.registerUser.token);
+          // dispatch(setAuthentication(true));
+          // let cookieValue = cookie.accessToken;
+          // console.log('---------------->cookieValue', cookieValue);
+        } else
           toast.error('you were unable to register', {
             position: 'top-center',
             autoClose: 1500,

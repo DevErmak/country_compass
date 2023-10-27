@@ -21,6 +21,8 @@ import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../store/country/typesIListCountries';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../api/graphqlV1/requests';
+import { useCookies } from 'react-cookie';
+import { setAuthentication } from '../store/user/infoUserSlice';
 
 type Props = {};
 
