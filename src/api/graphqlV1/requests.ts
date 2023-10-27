@@ -27,3 +27,11 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const LOGIN = gql`
+  query Login($login: String!, $password: String!) {
+    login(login: $login, password: $password) {
+      token
+    }
+  }
+`;

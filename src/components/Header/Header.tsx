@@ -33,7 +33,7 @@ export default function Header({}: Props) {
   const dispatch = useDispatch();
   const stateModal = useSelector(getFormModal);
   const userName = useSelector(getUserName);
-  const [cookie, setCookie] = useCookies(['accessToken']);
+  const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
   useEffect(() => {
     if (cookie.accessToken) dispatch(setAuthentication(true));
     else dispatch(setAuthentication(false));
@@ -46,19 +46,21 @@ export default function Header({}: Props) {
   };
 
   const ClickOnLogOut = () => {
-    let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
+    //запись стран
+    // let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
 
-    if (userInfo !== null) {
-      const user = userInfo.find((item: any) => item.name === userName);
-      if (user !== undefined) {
-        const newUserInfo = userInfo.filter((item: any) => user !== item);
-        user.listFavorite = listFavorite;
-        newUserInfo.push(user);
-        localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
-      }
-    }
-    dispatch(setAuthentication(false));
+    // if (userInfo !== null) {
+    //   const user = userInfo.find((item: any) => item.name === userName);
+    //   if (user !== undefined) {
+    //     const newUserInfo = userInfo.filter((item: any) => user !== item);
+    //     user.listFavorite = listFavorite;
+    //     newUserInfo.push(user);
+    //     localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
+    //   }
+    // }
     dispatch(clearAllFavoriteCountry());
+    removeCookie('accessToken');
+    dispatch(setAuthentication(false));
     dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
   };
 
