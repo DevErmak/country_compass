@@ -7,15 +7,23 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsLoading } from '../../store/country/countriesSelectors';
 import Loader from '../Loader/Loader';
+import BtnSetFavorite from '../BtnSetFavorite/BtnSetFavorite';
 
 type Props = {
-  flags: string;
-  flagsAlt: string;
-  nameCountry: string;
-  nameCapital: string;
+  currentInfoCountry: {
+    nameCountry: string;
+    nameCapital: string;
+    currencies: string;
+    region: string;
+    languages: string;
+    population: string;
+    flags: string;
+    flagsAlt: string;
+    coatOfArms: string;
+  };
 };
 
-export default function CountryCard({ flags, flagsAlt, nameCountry, nameCapital }: Props) {
+export default function CountryCard({ currentInfoCountry }: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,16 +33,23 @@ export default function CountryCard({ flags, flagsAlt, nameCountry, nameCapital 
   };
 
   return (
-    <div className="container-country-card" onClick={() => handleClickCard(nameCountry)}>
-      <img className="flag-img-card" src={flags} alt={flagsAlt} />
+    <div
+      className="container-country-card"
+      onClick={() => handleClickCard(currentInfoCountry.nameCountry)}
+    >
+      <img
+        className="flag-img-card"
+        src={currentInfoCountry.flags}
+        alt={currentInfoCountry.flagsAlt}
+      />
       <div className="info-country-card">
-        <div className="name-card-country">{nameCountry}</div>
+        <div className="name-card-country">{currentInfoCountry.nameCountry}</div>
         <div className="name-card-capital">
           <div className="label-for-info-country">Capital:</div>
-          {nameCapital}
+          {currentInfoCountry.nameCapital}
         </div>
       </div>
-      <BtnFavorite nameCountry={nameCountry} />
+      <BtnSetFavorite fullInfoCountry={currentInfoCountry} modCard="card" />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import {
   setModal,
   setAuthentication,
   clearAllFavoriteCountry,
+  addFavoriteCountry,
 } from '../../store/user/infoUserSlice';
 import Modal from '../Modal/Modal';
 import ReactDOM from 'react-dom';
@@ -22,7 +23,9 @@ import FormLogin from '../Login/FormLogin';
 import FormRegister from '../Register/FormRegister';
 import { formModal } from '../../store/user/types';
 import { useCookies } from 'react-cookie';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { GET_FAVOURITECOUNTRIES } from '../../api/graphqlV1/requests';
 
 type Props = {};
 
@@ -34,11 +37,34 @@ export default function Header({}: Props) {
   const stateModal = useSelector(getFormModal);
   const userName = useSelector(getUserName);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
+
+  const [getFavoriteCountry, { data, loading, error }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
+    errorPolicy: 'all',
+  });
+  const [listFavoriteCountry, setListFavoriteCountry] = useState([]);
+
   useEffect(() => {
-    if (cookie.accessToken) dispatch(setAuthentication(true));
-    else dispatch(setAuthentication(false));
+    if (cookie.accessToken) {
+      dispatch(setAuthentication(true));
+      getFavoriteCountry({
+        context: {
+          headers: {
+            ...Headers,
+            authorization: `Bearer ${cookie.accessToken}`,
+          },
+        },
+      });
+    } else dispatch(setAuthentication(false));
     console.log('---------------->cookieValue', cookie.accessToken);
   }, [cookie.accessToken]);
+
+  useEffect(() => {
+    if (data) {
+      console.log('---------------->data', data);
+      if (data.getMe.FavoriteCountry !== null)
+        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+    }
+  }, [data]);
 
   const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());

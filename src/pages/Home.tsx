@@ -20,7 +20,6 @@ import axios from 'axios';
 import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../store/country/typesIListCountries';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../api/graphqlV1/requests';
 import { useCookies } from 'react-cookie';
 import { setAuthentication } from '../store/user/infoUserSlice';
 
@@ -62,15 +61,25 @@ export default function HomeContainer({}: Props) {
             <SelectorCountry />
           </div>
           <div className="container-countries-cards">
-            {(listCountry as Array<IListCountries>).map((country: any) => (
-              <CountryCard
-                key={country.name.official}
-                flags={country.flags.svg}
-                flagsAlt={country.flags.alt}
-                nameCountry={country.name.official}
-                nameCapital={country.capital.join(', ')}
-              />
-            ))}
+            {(listCountry as Array<IListCountries>).map((country: any) => {
+              let currentInfoCountry = {
+                nameCountry: country.name.official,
+                nameCapital: country.capital.join(', '),
+                currencies: Object.keys(country.currencies).join(', '),
+                region: country.region,
+                languages: Object.keys(country.languages).join(', '),
+                population: country.population
+                  .toString()
+                  .replace(/,/g, '')
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+                flags: country.flags.svg,
+                flagsAlt: country.flags.alt,
+                coatOfArms: country.coatOfArms.svg,
+              };
+              return (
+                <CountryCard key={country.name.official} currentInfoCountry={currentInfoCountry} />
+              );
+            })}
           </div>
         </div>
       );

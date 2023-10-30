@@ -1,0 +1,31 @@
+.star-card {
+  position: absolute;
+  bottom: 18px;
+  right: 21px;
+  width: 24px;
+  height: 24px;
+}
+
+.star-card-favorites {
+  position: absolute;
+  bottom: 18px;
+  right: 21px;
+  width: 24px;
+  height: 24px;
+}
+
+.star {
+  position: absolute;
+  top: 18px;
+  right: 21px;
+  width: 24px;
+  height: 24px;
+}
+
+.star-favorites {
+  position: absolute;
+  top: 18px;
+  right: 21px;
+  width: 24px;
+  height: 24px;
+}

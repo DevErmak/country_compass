@@ -1,51 +1,45 @@
-// import { AiFillStar } from 'react-icons/ai';
 import './info-country.css';
-import { ReactComponent as Star } from '../../static/images/star.svg';
-import { ReactComponent as StarFavorites } from '../../static/images/star-favorites.svg';
-import BtnFavoriteInfoCountry from './BtnFavoriteInfoCountry';
+import BtnSetFavorite from '../BtnSetFavorite/BtnSetFavorite';
 
 type Props = {
-  nameCountry: string;
-  nameCapital: string;
-  currencies: string;
-  region: string;
-  languages: string;
-  population: string;
+  fullInfoCountry: {
+    nameCountry: string;
+    nameCapital: string;
+    currencies: string;
+    region: string;
+    languages: string;
+    population: string;
+    flags: string;
+    flagsAlt: string;
+    coatOfArms: string;
+  };
 };
 
-export default function InfoCountry({
-  nameCountry,
-  nameCapital,
-  currencies,
-  region,
-  languages,
-  population,
-}: Props) {
+export default function InfoCountry({ fullInfoCountry }: Props) {
   return (
     <div className="container-info-country">
-      <BtnFavoriteInfoCountry nameCountry={nameCountry} />
+      <BtnSetFavorite fullInfoCountry={fullInfoCountry} modCard="" />
       <div className="text-info-country">
-        <div className="name-country">{nameCountry}</div>
+        <div className="name-country">{fullInfoCountry.nameCountry}</div>
         <div className="name-capital">
           <div className="label-for-info-country">Capital:</div>
-          {nameCapital}
+          {fullInfoCountry.nameCapital}
         </div>
         <div className="currencies">
           <div className="label-for-info-country">Currencies:</div>
-          {currencies}
+          {fullInfoCountry.currencies}
         </div>
         <div className="region">
           <div className="label-for-info-country">Currencies:</div>
-
-          {region}
+          {fullInfoCountry.region}
         </div>
         <div className="languages">
           <div className="label-for-info-country">Currencies:</div>
-          {languages}
+          {fullInfoCountry.languages}
         </div>
         <div className="population">
           <div className="label-for-info-country">Population:</div>
-          {population}
+          {fullInfoCountry.population}
         </div>
       </div>
     </div>

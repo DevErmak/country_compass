@@ -1,5 +1,5 @@
 import { renderComponentWithStore } from '../../../utils/TestHelpers';
-import BtnFavoriteInfoCountry from '../BtnFavoriteInfoCountry';
+import BtnFavoriteInfoCountry from '../../BtnSetFavorite/BtnSetFavorite';
 import InfoCountry from '../InfoCountry';
 
 describe('InfoCountry', () => {
