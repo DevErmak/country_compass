@@ -26,6 +26,7 @@ import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { GET_FAVOURITECOUNTRIES } from '../../api/graphqlV1/requests';
+import { Zoom, toast } from 'react-toastify';
 
 type Props = {};
 
@@ -58,13 +59,35 @@ export default function Header({}: Props) {
     console.log('---------------->cookieValue', cookie.accessToken);
   }, [cookie.accessToken]);
 
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log('---------------->data', data);
+  //     if (data.getMe.FavoriteCountry !== null)
+  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+  //   }
+  // }, [data]);
+
   useEffect(() => {
-    if (data) {
-      console.log('---------------->data', data);
-      if (data.getMe.FavoriteCountry !== null)
-        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+    switch (error?.message) {
+      case 'User not found':
+        toast.error('User not found', {
+          position: 'top-center',
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          transition: Zoom,
+        });
+        dispatch(clearAllFavoriteCountry());
+        removeCookie('accessToken');
+        dispatch(setAuthentication(false));
+        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
+        break;
     }
-  }, [data]);
+  }, [error]);
 
   const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());

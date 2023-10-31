@@ -6,7 +6,7 @@ import CountryCard from '../components/CountryCard/СountryСard';
 
 import './home.css';
 import { getIsAuthentication, getListFavoriteCountries } from '../store/user/userSelectors';
-import { setModal } from '../store/user/infoUserSlice';
+import { addFavoriteCountry, setModal } from '../store/user/infoUserSlice';
 import { formModal } from '../store/user/types';
 import { IListCountries } from '../store/country/typesIListCountries';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
@@ -20,6 +20,7 @@ export default function HomeContainer({}: Props) {
   console.log('---------------->asd');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [listCurrentInfoFavoriteCountry, setListCurrentInfoFavoriteCountry] = useState([]);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
   const { loading, error, data } = useQuery(GET_FAVOURITECOUNTRIES, {
     context: {
@@ -35,8 +36,8 @@ export default function HomeContainer({}: Props) {
 
   console.log('---------------->asssd');
 
-  // const listFavoriteCountry = useSelector(getListFavoriteCountries);
-  const [listFavoriteCountry, setListFavoriteCountry] = useState([]);
+  const listFavoriteCountry = useSelector(getListFavoriteCountries);
+  // const [listFavoriteCountry, setListFavoriteCountry] = useState([]);
   // getFavoriteCountry({
   //   context: {
   //     headers: {
@@ -46,9 +47,23 @@ export default function HomeContainer({}: Props) {
   //   },
   // });
   useEffect(() => {
-    if (data.getMe.FavoriteCountry) {
-      console.log('---------------->data', data);
-      setListFavoriteCountry(data.getMe.FavoriteCountry);
+    if (data) {
+      console.log('datachange');
+      console.log('---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+      if (data.getMe.FavoriteCountry) {
+        const listInfoFavoriteCountry = data.getMe.FavoriteCountry.map((favoriteCountry: any) => ({
+          nameCountry: favoriteCountry.nameCountry,
+          nameCapital: favoriteCountry.nameCapital,
+          currencies: favoriteCountry.currencies,
+          region: favoriteCountry.region,
+          languages: favoriteCountry.languages,
+          population: favoriteCountry.population,
+          flags: favoriteCountry.flags,
+          flagsAlt: favoriteCountry.flagsAlt,
+          coatOfArms: favoriteCountry.coatOfArms,
+        }));
+        setListCurrentInfoFavoriteCountry(listInfoFavoriteCountry);
+      }
     }
   }, [data]);
 
@@ -78,11 +93,13 @@ export default function HomeContainer({}: Props) {
       </div>
     );
   } else {
+    console.log('111---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
     return (
       <div className="container-countries-cards">
-        {listFavoriteCountry.map((infoCountry: any, i: any) => (
-          <CountryCard key={i} currentInfoCountry={infoCountry} />
-        ))}
+        {listCurrentInfoFavoriteCountry.map((infoCountry: any, i: any) => {
+          console.log('qweasd---------------->infoCountry', infoCountry);
+          return <CountryCard key={i} currentInfoCountry={infoCountry} />;
+        })}
       </div>
     );
   }

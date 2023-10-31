@@ -1,5 +1,6 @@
 export interface IUserSlice {
   userName: string;
+  // listFavoriteCountries: Array<string>;
   listFavoriteCountries: Array<string>;
   isAuthentication: boolean;
   infoModal: { isActiveModal: boolean; formModal: formModal };
