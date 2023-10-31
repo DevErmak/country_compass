@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { BsFillStarFill } from 'react-icons/bs';
 
 import { BsStar } from 'react-icons/bs';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import {
   DELETE_FAVOURITECOUNTRIES,
   GET_FAVOURITECOUNTRIES,
@@ -46,7 +46,7 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
   const isLogin = useSelector(getIsAuthentication);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  const { loading, error, data } = useQuery(GET_FAVOURITECOUNTRIES, {
+  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
     context: {
       headers: {
         ...Headers,
@@ -55,17 +55,30 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
     },
     errorPolicy: 'all',
   });
-
   useEffect(() => {
     if (data) {
       if (data.getMe.FavoriteCountry) {
-        const listNameFavoriteCountry = data.getMe.FavoriteCountry.map(
-          (favoriteCountry: any) => favoriteCountry.nameCountry,
-        );
-        dispatch(addFavoriteCountry(listNameFavoriteCountry));
+        console.log('!!---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
       }
     }
   }, [data]);
+  useEffect(() => {
+    switch (error?.message) {
+      case 'Cannot return null for non-nullable field Query.getMe.':
+        dispatch(clearAllFavoriteCountry());
+        removeCookie('accessToken');
+        dispatch(setAuthentication(false));
+        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
+        break;
+      case 'relation "country" does not exist':
+        dispatch(clearAllFavoriteCountry());
+        removeCookie('accessToken');
+        dispatch(setAuthentication(false));
+        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
+        break;
+    }
+  }, [error]);
 
   const [
     setFavoriteCountry,
@@ -91,86 +104,54 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
   useEffect(() => {
     switch (errorSetFavoriteCountry?.message) {
       case 'relation "country" does not exist':
-        toast.error('work is underway on the server', {
-          position: 'top-center',
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-          transition: Zoom,
-        });
         dispatch(clearAllFavoriteCountry());
         removeCookie('accessToken');
         dispatch(setAuthentication(false));
         dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
         break;
-      // default:
-      //   toast.error('the country was not added', {
-      //     position: 'top-center',
-      //     autoClose: 1500,
-      //     hideProgressBar: true,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'colored',
-      //     transition: Zoom,
-      //   });
+      case 'User not found':
+        dispatch(clearAllFavoriteCountry());
+        removeCookie('accessToken');
+        dispatch(setAuthentication(false));
+        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
+        break;
     }
   }, [errorSetFavoriteCountry]);
 
   useEffect(() => {
     switch (errorDeleteFavoriteCountry?.message) {
       case 'relation "country" does not exist':
-        toast.error('work is underway on the server', {
-          position: 'top-center',
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-          transition: Zoom,
-        });
         dispatch(clearAllFavoriteCountry());
         removeCookie('accessToken');
         dispatch(setAuthentication(false));
         dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
         break;
-      // default:
-      //   toast.error('the country has not been deleted', {
-      //     position: 'top-center',
-      //     autoClose: 1500,
-      //     hideProgressBar: true,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'colored',
-      //     transition: Zoom,
-      //   });
+      case 'User not found':
+        dispatch(clearAllFavoriteCountry());
+        removeCookie('accessToken');
+        dispatch(setAuthentication(false));
+        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
+        break;
     }
   }, [errorDeleteFavoriteCountry]);
 
   useEffect(() => {
     if (dataSetFavoriteCountry) {
       console.log('---------------->dataSetFavoriteCountry', dataSetFavoriteCountry);
-      dispatch(addFavoriteCountry([dataSetFavoriteCountry.CreateFavoriteCountry.nameCountry]));
+      // dispatch(addFavoriteCountry(dataSetFavoriteCountry.CreateFavoriteCountry));
+      getFavoriteCountry();
     }
   }, [dataSetFavoriteCountry]);
 
   useEffect(() => {
     if (dataDeleteFavoriteCountry) {
       console.log('---------------->dataDeleteFavoriteCountry', dataDeleteFavoriteCountry);
-      dispatch(removeFavoriteCountry([dataDeleteFavoriteCountry.DeleteFavoriteCountry]));
+      getFavoriteCountry();
+      // dispatch(removeFavoriteCountry(dataDeleteFavoriteCountry.DeleteFavoriteCountry));
     }
   }, [dataDeleteFavoriteCountry]);
 
-  const handleAddFavoriteCountry = (nameCountry: string[], e: React.SyntheticEvent) => {
+  const handleAddFavoriteCountry = (nameCountry: string, e: React.SyntheticEvent) => {
     e.stopPropagation();
     // dispatch(addFavoriteCountry(nameCountry));
     setFavoriteCountry({
@@ -196,7 +177,7 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
     });
   };
 
-  const handleRemoveFavoriteCountry = (nameCountry: string[], e: React.SyntheticEvent) => {
+  const handleRemoveFavoriteCountry = (nameCountry: string, e: React.SyntheticEvent) => {
     e.stopPropagation();
     // dispatch(removeFavoriteCountry(nameCountry));
     console.log('handleRemoveFavoriteCountry');
@@ -225,25 +206,24 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
     //   listFavoriteCountries.includes(fullInfoCountry.nameCountry),
     // );
 
-    if (listFavoriteCountries.includes(fullInfoCountry.nameCountry))
+    // if (listFavoriteCountries.includes(fullInfoCountry.nameCountry))
+    if (
+      listFavoriteCountries.find(
+        (favoriteCountry) => fullInfoCountry.nameCountry === favoriteCountry.nameCountry,
+      )
+    )
       return (
-        <>
-          <ToastContainer />
-          <BsFillStarFill
-            className={modCard !== 'card' ? 'star-favorites' : 'star-card-favorites'}
-            onClick={(e) => handleRemoveFavoriteCountry([fullInfoCountry.nameCountry], e)}
-          />
-        </>
+        <BsFillStarFill
+          className={modCard !== 'card' ? 'star-favorites' : 'star-card-favorites'}
+          onClick={(e) => handleRemoveFavoriteCountry(fullInfoCountry.nameCountry, e)}
+        />
       );
     else
       return (
-        <>
-          <ToastContainer />
-          <BsStar
-            className={modCard !== 'card' ? 'star' : 'star-card'}
-            onClick={(e) => handleAddFavoriteCountry([fullInfoCountry.nameCountry], e)}
-          />
-        </>
+        <BsStar
+          className={modCard !== 'card' ? 'star' : 'star-card'}
+          onClick={(e) => handleAddFavoriteCountry(fullInfoCountry.nameCountry, e)}
+        />
       );
   } else {
     return (

@@ -20,19 +20,73 @@ export default function HomeContainer({}: Props) {
   console.log('---------------->asd');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [listCurrentInfoFavoriteCountry, setListCurrentInfoFavoriteCountry] = useState([]);
+  // const [listCurrentInfoFavoriteCountry, setListCurrentInfoFavoriteCountry] = useState([]);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
-  const { loading, error, data } = useQuery(GET_FAVOURITECOUNTRIES, {
+
+  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
     context: {
       headers: {
         ...Headers,
         authorization: `Bearer ${cookie.accessToken}`,
       },
     },
+    // fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   });
+  useEffect(() => {
+    if (data) {
+      if (data.getMe.FavoriteCountry) {
+        // const listNameFavoriteCountry = data.getMe.FavoriteCountry.map(
+        //   (favoriteCountry: any) => favoriteCountry.nameCountry,
+        // );
+        console.log('!!---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+      }
+    }
+  }, [data]);
 
-  console.log('qwe---------------->error', error);
+  useEffect(() => {
+    getFavoriteCountry();
+  }, []);
+
+  // const { loading, error, data } = useQuery(GET_FAVOURITECOUNTRIES, {
+  //   context: {
+  //     headers: {
+  //       ...Headers,
+  //       authorization: `Bearer ${cookie.accessToken}`,
+  //     },
+  //   },
+  //   errorPolicy: 'all',
+  // });
+
+  // const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
+  //   context: {
+  //     headers: {
+  //       ...Headers,
+  //       authorization: `Bearer ${cookie.accessToken}`,
+  //     },
+  //   },
+  //   errorPolicy: 'all',
+  // });
+  // useEffect(() => {
+  //   console.log('---------------->data', data);
+  //   if (data) {
+  //     if (data.getMe.FavoriteCountry) {
+  //       // const listNameFavoriteCountry = data.getMe.FavoriteCountry.map(
+  //       //   (favoriteCountry: any) => favoriteCountry.nameCountry,
+  //       // );
+  //       console.log('11---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+  //     }
+  //   }
+  // }, [data]);
+
+  // useEffect(() => {
+  //   console.log('!!!!---------------->qweqweqweqwe');
+  //   getFavoriteCountry();
+  // }, []);
+
+  // console.log('qwe---------------->error', error);
 
   console.log('---------------->asssd');
 
@@ -46,26 +100,26 @@ export default function HomeContainer({}: Props) {
   //     },
   //   },
   // });
-  useEffect(() => {
-    if (data) {
-      console.log('datachange');
-      console.log('---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
-      if (data.getMe.FavoriteCountry) {
-        const listInfoFavoriteCountry = data.getMe.FavoriteCountry.map((favoriteCountry: any) => ({
-          nameCountry: favoriteCountry.nameCountry,
-          nameCapital: favoriteCountry.nameCapital,
-          currencies: favoriteCountry.currencies,
-          region: favoriteCountry.region,
-          languages: favoriteCountry.languages,
-          population: favoriteCountry.population,
-          flags: favoriteCountry.flags,
-          flagsAlt: favoriteCountry.flagsAlt,
-          coatOfArms: favoriteCountry.coatOfArms,
-        }));
-        setListCurrentInfoFavoriteCountry(listInfoFavoriteCountry);
-      }
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log('datachange');
+  //     console.log('---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+  //     // if (data.getMe.FavoriteCountry) {
+  //     //   const listInfoFavoriteCountry = data.getMe.FavoriteCountry.map((favoriteCountry: any) => ({
+  //     //     nameCountry: favoriteCountry.nameCountry,
+  //     //     nameCapital: favoriteCountry.nameCapital,
+  //     //     currencies: favoriteCountry.currencies,
+  //     //     region: favoriteCountry.region,
+  //     //     languages: favoriteCountry.languages,
+  //     //     population: favoriteCountry.population,
+  //     //     flags: favoriteCountry.flags,
+  //     //     flagsAlt: favoriteCountry.flagsAlt,
+  //     //     coatOfArms: favoriteCountry.coatOfArms,
+  //     //   }));
+  //     //   setListCurrentInfoFavoriteCountry(listInfoFavoriteCountry);
+  //     // }
+  //   }
+  // }, [data]);
 
   console.log('---------------->listFavoriteCountry', listFavoriteCountry);
   // const listCountry = useSelector(getListCountry);s
@@ -93,10 +147,10 @@ export default function HomeContainer({}: Props) {
       </div>
     );
   } else {
-    console.log('111---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+    // console.log('111---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
     return (
       <div className="container-countries-cards">
-        {listCurrentInfoFavoriteCountry.map((infoCountry: any, i: any) => {
+        {listFavoriteCountry.map((infoCountry: any, i: any) => {
           console.log('qweasd---------------->infoCountry', infoCountry);
           return <CountryCard key={i} currentInfoCountry={infoCountry} />;
         })}

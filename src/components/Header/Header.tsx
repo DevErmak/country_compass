@@ -39,55 +39,12 @@ export default function Header({}: Props) {
   const userName = useSelector(getUserName);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  const [getFavoriteCountry, { data, loading, error }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
-    errorPolicy: 'all',
-  });
-  const [listFavoriteCountry, setListFavoriteCountry] = useState([]);
-
   useEffect(() => {
     if (cookie.accessToken) {
       dispatch(setAuthentication(true));
-      getFavoriteCountry({
-        context: {
-          headers: {
-            ...Headers,
-            authorization: `Bearer ${cookie.accessToken}`,
-          },
-        },
-      });
     } else dispatch(setAuthentication(false));
     console.log('---------------->cookieValue', cookie.accessToken);
   }, [cookie.accessToken]);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log('---------------->data', data);
-  //     if (data.getMe.FavoriteCountry !== null)
-  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-  //   }
-  // }, [data]);
-
-  useEffect(() => {
-    switch (error?.message) {
-      case 'User not found':
-        toast.error('User not found', {
-          position: 'top-center',
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-          transition: Zoom,
-        });
-        dispatch(clearAllFavoriteCountry());
-        removeCookie('accessToken');
-        dispatch(setAuthentication(false));
-        dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
-        break;
-    }
-  }, [error]);
 
   const ClickOnNameSite = () => {
     dispatch(getFullInfoCountryClear());
@@ -95,18 +52,6 @@ export default function Header({}: Props) {
   };
 
   const ClickOnLogOut = () => {
-    //запись стран
-    // let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
-
-    // if (userInfo !== null) {
-    //   const user = userInfo.find((item: any) => item.name === userName);
-    //   if (user !== undefined) {
-    //     const newUserInfo = userInfo.filter((item: any) => user !== item);
-    //     user.listFavorite = listFavorite;
-    //     newUserInfo.push(user);
-    //     localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
-    //   }
-    // }
     dispatch(clearAllFavoriteCountry());
     removeCookie('accessToken');
     dispatch(setAuthentication(false));

@@ -19,17 +19,42 @@ import Loader from '../components/Loader/Loader';
 import axios from 'axios';
 import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../store/country/typesIListCountries';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { useCookies } from 'react-cookie';
-import { setAuthentication } from '../store/user/infoUserSlice';
+import { addFavoriteCountry, setAuthentication } from '../store/user/infoUserSlice';
+import { GET_FAVOURITECOUNTRIES } from '../api/graphqlV1/requests';
 
 type Props = {};
 
 export default function HomeContainer({}: Props) {
   const dispatch = useDispatch();
+  const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
+
+  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
+    context: {
+      headers: {
+        ...Headers,
+        authorization: `Bearer ${cookie.accessToken}`,
+      },
+    },
+    // fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  });
+  useEffect(() => {
+    if (data) {
+      if (data.getMe.FavoriteCountry) {
+        // const listNameFavoriteCountry = data.getMe.FavoriteCountry.map(
+        //   (favoriteCountry: any) => favoriteCountry.nameCountry,
+        // );
+        console.log('!!---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
+        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+      }
+    }
+  }, [data]);
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
+    getFavoriteCountry();
   }, []);
 
   const isLoading = useSelector(getIsLoading);

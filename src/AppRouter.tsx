@@ -16,6 +16,14 @@ function AppRouter() {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     link,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
   });
 
   return (

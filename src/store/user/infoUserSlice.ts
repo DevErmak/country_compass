@@ -11,13 +11,34 @@ export const infoUserSlice = createSlice({
     authToken: '',
   } as IUserSlice,
   reducers: {
-    addFavoriteCountry: (state, { payload }) => ({
-      ...state,
-      listFavoriteCountries: Array.from(new Set([...state.listFavoriteCountries, ...payload])),
-    }),
+    addFavoriteCountry: (state, { payload }) => {
+      // console.log('---------------->state.listFavoriteCountries', state.listFavoriteCountries);
+      // const isHaveCountry = state.listFavoriteCountries.find((item) => {
+      //   console.log('---------------->item', item.nameCountry);
+      //   console.log('!!---------------->payload', payload.nameCountry);
+      //   return item.nameCountry === payload.nameCountry;
+      // });
+      // console.log('---------------->isHaveCountry', isHaveCountry);
+      // if (isHaveCountry) {
+      //   console.log('---------------->noser');
+      //   return {
+      //     ...state,
+      //   };
+      // } else {
+      //   console.log('---------------->ser');
+      //   return {
+      //     ...state,
+      //     listFavoriteCountries: state.listFavoriteCountries.concat(payload),
+      //   };
+      // }
+      return {
+        ...state,
+        listFavoriteCountries: payload,
+      };
+    },
     removeFavoriteCountry: (state, { payload }) => {
       const newListFavoriteCountries = state.listFavoriteCountries.filter(
-        (item: string) => payload[0] !== item,
+        (item) => payload !== item.nameCountry,
       );
 
       return {
