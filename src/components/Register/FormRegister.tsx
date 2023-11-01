@@ -57,7 +57,8 @@ export default function FormRegister({}: Props) {
     resolver: zodResolver(formSchemaRegister),
   });
 
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
+  // const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER);
 
   // if (loading) return <Loader />;
   // if (error) return `Error! ${error.message}`;
@@ -66,20 +67,20 @@ export default function FormRegister({}: Props) {
   // if (loading) console.log('---------------->load');
   // if (error) console.log(`Submission error! ${error.message}`);
 
-  useEffect(() => {
-    if (error?.message === 'User has been registered')
-      toast.error('User has been registered', {
-        position: 'top-center',
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-        transition: Zoom,
-      });
-  }, [error]);
+  // useEffect(() => {
+  //   if (error?.message === 'User has been registered')
+  //     toast.error('User has been registered', {
+  //       position: 'top-center',
+  //       autoClose: 1500,
+  //       hideProgressBar: true,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: 'colored',
+  //       transition: Zoom,
+  //     });
+  // }, [error]);
 
   const [cookie, setCookie] = useCookies(['accessToken']);
   useEffect(() => {
@@ -95,7 +96,7 @@ export default function FormRegister({}: Props) {
           // console.log('---------------->cookieValue', cookieValue);
         } else
           toast.error('you were unable to register', {
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 1500,
             hideProgressBar: true,
             closeOnClick: true,
@@ -149,7 +150,7 @@ export default function FormRegister({}: Props) {
       <div className="container-register">
         <div className="modal-register">Register</div>
         <form onSubmit={handleSubmit(onSubmit)} className="form-register">
-          <ToastContainer />
+          {/* <ToastContainer /> */}
           <div className={'error-login-reg '}>{errors.login && errors.login?.message}</div>
           <div>
             <label

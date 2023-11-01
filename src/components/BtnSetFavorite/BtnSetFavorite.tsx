@@ -21,7 +21,7 @@ import {
 } from '../../api/graphqlV1/requests';
 import { getFullInfoCountry } from '../../store/country/countriesSelectors';
 import { useCookies } from 'react-cookie';
-import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { Zoom, toast } from 'react-toastify';
 import './btn-set-favorite.css';
 import { formModal } from '../../store/user/types';
 
