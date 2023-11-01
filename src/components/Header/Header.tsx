@@ -1,32 +1,25 @@
-import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './header.css';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryClear } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
 import {
   getFormModal,
-  getIsActiveModal,
   getIsAuthentication,
   getListFavoriteCountries,
-  getState,
   getUserName,
 } from '../../store/user/userSelectors';
 import {
   setModal,
   setAuthentication,
   clearAllFavoriteCountry,
-  addFavoriteCountry,
 } from '../../store/user/infoUserSlice';
 import Modal from '../Modal/Modal';
-import ReactDOM from 'react-dom';
 import FormLogin from '../Login/FormLogin';
 import FormRegister from '../Register/FormRegister';
 import { formModal } from '../../store/user/types';
 import { useCookies } from 'react-cookie';
-import { useEffect, useState } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { GET_FAVOURITECOUNTRIES } from '../../api/graphqlV1/requests';
-import { Zoom, toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 type Props = {};
 
@@ -43,7 +36,6 @@ export default function Header({}: Props) {
     if (cookie.accessToken) {
       dispatch(setAuthentication(true));
     } else dispatch(setAuthentication(false));
-    console.log('---------------->cookieValue', cookie.accessToken);
   }, [cookie.accessToken]);
 
   const ClickOnNameSite = () => {

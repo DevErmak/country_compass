@@ -4,24 +4,19 @@ import { getListCountriesFetch } from '../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
 import {
   getListCountry,
-  getIsFullInfoCountry,
   getIsLoading,
   getInfoErrorResponse,
 } from '../store/country/countriesSelectors';
-import { Navigate } from 'react-router-dom';
 import CountryCard from '../components/CountryCard/СountryСard';
 import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
-import { V4Options, v4 as uuidv4 } from 'uuid';
 
 import './home.css';
-import { getIsAuthentication, getListFavoriteCountries } from '../store/user/userSelectors';
 import Loader from '../components/Loader/Loader';
-import axios from 'axios';
 import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../store/country/typesIListCountries';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useCookies } from 'react-cookie';
-import { addFavoriteCountry, setAuthentication } from '../store/user/infoUserSlice';
+import { addFavoriteCountry } from '../store/user/infoUserSlice';
 import { GET_FAVOURITECOUNTRIES } from '../api/graphqlV1/requests';
 
 type Props = {};
@@ -37,16 +32,11 @@ export default function HomeContainer({}: Props) {
         authorization: `Bearer ${cookie.accessToken}`,
       },
     },
-    // fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   });
   useEffect(() => {
     if (data) {
       if (data.getMe.FavoriteCountry) {
-        // const listNameFavoriteCountry = data.getMe.FavoriteCountry.map(
-        //   (favoriteCountry: any) => favoriteCountry.nameCountry,
-        // );
-        console.log('!!---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
         dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
       }
     }
@@ -60,21 +50,6 @@ export default function HomeContainer({}: Props) {
   const isLoading = useSelector(getIsLoading);
   const listCountry = useSelector(getListCountry);
   const infoErrorResponse = useSelector(getInfoErrorResponse);
-
-  // const { loading, error, data } = useQuery(GET_ME, {
-  //   context: {
-  //     headers: {
-  //       Authorization:
-  //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoicXdlQHF3ZS5xd2UiLCJpYXQiOjE2OTgxNjIwNjR9.YDwP5dkfMBJC3JIEcOrLGhrwcFgcXEqo7GtKtvpKvGA',
-  //     },
-  //   },
-  // });
-  // console.log('!!!---------------->data', loading);
-  // console.log('!!!---------------->data', error);
-  // console.log('!!!---------------->data', data);
-
-  // if (loading) console.log('---------------->Loading...');
-  // if (error) console.log(`Error! ${error.message}`);
 
   if (infoErrorResponse.trim().length === 0) {
     if (isLoading) {

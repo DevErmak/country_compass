@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import {
   addFavoriteCountry,
   clearAllFavoriteCountry,
-  removeFavoriteCountry,
   setAuthentication,
   setModal,
 } from '../../store/user/infoUserSlice';
@@ -13,15 +12,13 @@ import { useDispatch } from 'react-redux';
 import { BsFillStarFill } from 'react-icons/bs';
 
 import { BsStar } from 'react-icons/bs';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import {
   DELETE_FAVOURITECOUNTRIES,
   GET_FAVOURITECOUNTRIES,
   SET_FAVOURITECOUNTRIES,
 } from '../../api/graphqlV1/requests';
-import { getFullInfoCountry } from '../../store/country/countriesSelectors';
 import { useCookies } from 'react-cookie';
-import { Zoom, toast } from 'react-toastify';
 import './btn-set-favorite.css';
 import { formModal } from '../../store/user/types';
 
@@ -58,7 +55,6 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
   useEffect(() => {
     if (data) {
       if (data.getMe.FavoriteCountry) {
-        console.log('!!---------------->data.getMe.FavoriteCountry', data.getMe.FavoriteCountry);
         dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
       }
     }
@@ -137,23 +133,18 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
 
   useEffect(() => {
     if (dataSetFavoriteCountry) {
-      console.log('---------------->dataSetFavoriteCountry', dataSetFavoriteCountry);
-      // dispatch(addFavoriteCountry(dataSetFavoriteCountry.CreateFavoriteCountry));
       getFavoriteCountry();
     }
   }, [dataSetFavoriteCountry]);
 
   useEffect(() => {
     if (dataDeleteFavoriteCountry) {
-      console.log('---------------->dataDeleteFavoriteCountry', dataDeleteFavoriteCountry);
       getFavoriteCountry();
-      // dispatch(removeFavoriteCountry(dataDeleteFavoriteCountry.DeleteFavoriteCountry));
     }
   }, [dataDeleteFavoriteCountry]);
 
   const handleAddFavoriteCountry = (nameCountry: string, e: React.SyntheticEvent) => {
     e.stopPropagation();
-    // dispatch(addFavoriteCountry(nameCountry));
     setFavoriteCountry({
       context: {
         headers: {
@@ -179,8 +170,6 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
 
   const handleRemoveFavoriteCountry = (nameCountry: string, e: React.SyntheticEvent) => {
     e.stopPropagation();
-    // dispatch(removeFavoriteCountry(nameCountry));
-    console.log('handleRemoveFavoriteCountry');
     deleteFavoriteCountry({
       context: {
         headers: {
@@ -200,13 +189,6 @@ export default function BtnSetFavorite({ fullInfoCountry, modCard }: Props) {
   };
 
   if (isLogin) {
-    console.log('123---------------->listFav123oriteCountries', listFavoriteCountries);
-    // console.log(
-    //   '---------------->listFavoriteCountries.includes(fullInfoCountry.nameCountry)',
-    //   listFavoriteCountries.includes(fullInfoCountry.nameCountry),
-    // );
-
-    // if (listFavoriteCountries.includes(fullInfoCountry.nameCountry))
     if (
       listFavoriteCountries.find(
         (favoriteCountry) => fullInfoCountry.nameCountry === favoriteCountry.nameCountry,

@@ -31,16 +31,6 @@ export const DELETE_FAVOURITECOUNTRIES = gql`
   }
 `;
 
-// export const GET_ME = gql`
-//   query GetMe {
-//     getMe {
-//       FavoriteCountry {
-//         nameCountry
-//       }
-//     }
-//   }
-// `;
-
 export const REGISTER = gql`
   mutation RegisterUser($createUser: CreateUserInput!) {
     registerUser(createUser: $createUser) {

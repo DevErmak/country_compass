@@ -72,7 +72,6 @@ export const renderComponentWithStore = ({
 
   const renderComponent = (renderProps?: Record<string, any>) => {
     const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-      console.log('---------------->graphQLErrors', graphQLErrors);
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           switch (err.extensions.code) {
@@ -121,7 +120,20 @@ export const renderComponentWithStore = ({
           return forward(operation);
         }
       }
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (networkError) {
+        toast.error('server is unavailable', {
+          position: 'bottom-left',
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          transition: Zoom,
+        });
+        console.log(`[Network error]: ${networkError}`);
+      }
     });
 
     const httpLink = new HttpLink({ uri: 'http://localhost:3500/graphql' });

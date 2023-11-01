@@ -3,11 +3,7 @@ import AsyncSelect from 'react-select/async';
 import { getOptionsCountry } from '../../store/country/countriesSelectors';
 import { IOptionCountry } from '../../store/country/types';
 import { useDispatch } from 'react-redux';
-import {
-  getFullInfoCountryFetch,
-  getListCountriesFetch,
-} from '../../store/country/infoCountrySlice';
-import { useEffect } from 'react';
+import { getFullInfoCountryFetch } from '../../store/country/infoCountrySlice';
 import './selector-country.css';
 import { useNavigate } from 'react-router-dom';
 

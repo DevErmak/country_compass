@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './form-register.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ZodError, isValid, z } from 'zod';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { setAuthToken, setAuthentication } from '../../store/user/infoUserSlice';
-import { useDispatch } from 'react-redux';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Loader from '../Loader/Loader';
-import ErrorFetch from '../ErrorFetch/ErrorFetch';
 import { REGISTER } from '../../api/graphqlV1/requests';
 
-import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 
 type Props = {};
 
 export default function FormRegister({}: Props) {
-  const dispatch = useDispatch();
   useEffect(() => {
     setFocus('login');
   }, []);
@@ -57,43 +53,14 @@ export default function FormRegister({}: Props) {
     resolver: zodResolver(formSchemaRegister),
   });
 
-  // const [registerUser, { data, loading, error }] = useMutation(REGISTER, { errorPolicy: 'all' });
   const [registerUser, { data, loading, error }] = useMutation(REGISTER);
-
-  // if (loading) return <Loader />;
-  // if (error) return `Error! ${error.message}`;
-
-  // if (error) return <ErrorFetch infoError={`Submission error! ${error.message}`} />;
-  // if (loading) console.log('---------------->load');
-  // if (error) console.log(`Submission error! ${error.message}`);
-
-  // useEffect(() => {
-  //   if (error?.message === 'User has been registered')
-  //     toast.error('User has been registered', {
-  //       position: 'top-center',
-  //       autoClose: 1500,
-  //       hideProgressBar: true,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: 'colored',
-  //       transition: Zoom,
-  //     });
-  // }, [error]);
 
   const [cookie, setCookie] = useCookies(['accessToken']);
   useEffect(() => {
     if (data !== undefined) {
       if (data.registerUser !== null) {
-        console.log('qwe---------------->data', data);
-        console.log('qwe---------------->dataasdasd', data.registerUser.__typename);
         if (data.registerUser.__typename === 'AccessToken') {
-          // dispatch(setAuthToken(data.registerUser.token));
           setCookie('accessToken', data.registerUser.token);
-          // dispatch(setAuthentication(true));
-          // let cookieValue = cookie.accessToken;
-          // console.log('---------------->cookieValue', cookieValue);
         } else
           toast.error('you were unable to register', {
             position: 'bottom-left',
@@ -110,10 +77,6 @@ export default function FormRegister({}: Props) {
     }
   }, [data]);
 
-  console.log('---------------->error.graphQLErrors', error?.graphQLErrors);
-
-  console.log('222-------222--------->data', data);
-
   const onSubmit: SubmitHandler<RegisterFields> = (data) => {
     registerUser({
       variables: {
@@ -124,24 +87,6 @@ export default function FormRegister({}: Props) {
       },
     });
 
-    console.log('---------------->error?.message', error?.message);
-
-    // let userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
-    // if (userInfo !== null)
-    //   if (userInfo.find((item: any) => item.name === data.login) === undefined) {
-    //     userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
-    //     localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    //     dispatch(setAuthentication(true));
-    //   } else {
-    //     alert('such a user exists');
-    //   }
-    // else {
-    //   userInfo = [];
-    //   userInfo.push({ name: data.login, password: data.password, listFavorite: [] });
-    //   localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    //   dispatch(setAuthentication(true));
-    // }
-
     reset();
   };
   if (loading) return <Loader />;
@@ -150,7 +95,6 @@ export default function FormRegister({}: Props) {
       <div className="container-register">
         <div className="modal-register">Register</div>
         <form onSubmit={handleSubmit(onSubmit)} className="form-register">
-          {/* <ToastContainer /> */}
           <div className={'error-login-reg '}>{errors.login && errors.login?.message}</div>
           <div>
             <label

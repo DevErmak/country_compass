@@ -1,6 +1,5 @@
 export interface IUserSlice {
   userName: string;
-  // listFavoriteCountries: Array<string>;
   listFavoriteCountries: Array<{
     nameCountry: string;
     nameCapital: string;

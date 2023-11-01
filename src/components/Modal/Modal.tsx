@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import './modal.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -14,7 +14,6 @@ type Props = {
 export default function Modal({ children }: Props) {
   const dispatch = useDispatch();
   const isActiveModal = useSelector(getIsActiveModal);
-  // let portalRoot = document.getElementById('portal');
   const domElement = useRef<Element | DocumentFragment | null>(document.getElementById('portal'));
   if (domElement.current == null) {
     return null;
@@ -32,9 +31,5 @@ export default function Modal({ children }: Props) {
       </div>
     </div>,
     domElement.current,
-    // document.getElementById('portal'),
-    // document.getElementById('portal') as HTMLElement,
-    // domElement.current as HTMLElement,
-    // document.root.nextElementSibling,
   );
 }
