@@ -1,5 +1,4 @@
 import { renderComponentWithStore } from '../../../utils/TestHelpers';
-import BtnFavoriteInfoCountry from '../../BtnSetFavorite/BtnSetFavorite';
 import InfoCountry from '../InfoCountry';
 
 describe('InfoCountry', () => {
@@ -7,37 +6,17 @@ describe('InfoCountry', () => {
     const { container } = renderComponentWithStore({
       Component: InfoCountry,
       props: {
-        nameCountry: '',
-        nameCapital: '',
-        currencies: '',
-        region: '',
-        languages: '',
-        population: '',
-      },
-      preloadedState: {
-        infoCountries: {
-          listCountries: [],
-          fullInfoCountry: [],
-          isFullInfoCountry: false,
-          isLoading: false,
-          infoErrorResponse: '',
+        fullInfoCountry: {
+          nameCountry: '',
+          nameCapital: '',
+          currencies: '',
+          region: '',
+          languages: '',
+          population: '',
+          flags: '',
+          flagsAlt: '',
+          coatOfArms: '',
         },
-        infoUser: {
-          userName: '',
-          listFavoriteCountries: [],
-          isAuthentication: false,
-          infoModal: { isActiveModal: false, formModal: 'login' },
-        },
-      },
-    });
-    expect(container).toMatchSnapshot();
-  });
-
-  it('renders correctly BtnFavoriteInfoCountry', () => {
-    const { container } = renderComponentWithStore({
-      Component: BtnFavoriteInfoCountry,
-      props: {
-        nameCountry: '',
       },
       preloadedState: {
         infoCountries: {

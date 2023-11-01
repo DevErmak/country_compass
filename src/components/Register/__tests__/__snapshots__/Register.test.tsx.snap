@@ -13,7 +13,9 @@ exports[`renders correctly FormRegister 1`] = `
     <form
       class="form-register"
     >
-      <div />
+      <div
+        class="error-login-reg "
+      />
       <div>
         <label
           class="label-login"
@@ -27,6 +29,9 @@ exports[`renders correctly FormRegister 1`] = `
           type="text"
         />
       </div>
+      <div
+        class="error-password-reg"
+      />
       <div>
         <label
           class="label-password"
@@ -40,6 +45,9 @@ exports[`renders correctly FormRegister 1`] = `
           type="password"
         />
       </div>
+      <div
+        class="error-confirm-password"
+      />
       <div>
         <label
           class="label-confirm-password"

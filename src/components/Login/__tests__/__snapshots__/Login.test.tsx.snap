@@ -24,7 +24,7 @@ exports[`renders correctly FormLogin 1`] = `
           Login:
         </label>
         <input
-          class="input-login-sign-in"
+          class="input-login-sign-in input-not-valid"
           name="login"
           type="text"
         />
@@ -40,7 +40,7 @@ exports[`renders correctly FormLogin 1`] = `
           Password:
         </label>
         <input
-          class="input-password-sign-in"
+          class="input-password-sign-in input-not-valid"
           name="password"
           type="password"
         />

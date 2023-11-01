@@ -11,6 +11,10 @@ import { MemoryRouter } from 'react-router-dom';
 import infoCountriesReducer from '../store/country/infoCountrySlice';
 import infoUserReducer from '../store/user/infoUserSlice';
 import createSagaMiddleware from 'redux-saga';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { Zoom, toast } from 'react-toastify';
+import { onError } from '@apollo/client/link/error';
+import { useCookies } from 'react-cookie';
 export const saga = createSagaMiddleware();
 
 const rootReducer = combineReducers({
@@ -66,20 +70,98 @@ export const renderComponentWithStore = ({
     preloadedState,
   });
 
-  const renderComponent = (renderProps?: Record<string, any>) => (
-    <Provider store={mockStore}>
-      <MemoryRouter initialEntries={memoryRouterInitialEntries}>
-        {defaultFormValues ? (
-          <FormWrapper defaultValues={defaultFormValues}>
-            <Component {...renderProps}>{children}</Component>
-          </FormWrapper>
-        ) : (
-          <Component {...renderProps}>{children}</Component>
-        )}
-        <div id="portal"></div>
-      </MemoryRouter>
-    </Provider>
-  );
+  const renderComponent = (renderProps?: Record<string, any>) => {
+    const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+      console.log('---------------->graphQLErrors', graphQLErrors);
+      if (graphQLErrors) {
+        for (let err of graphQLErrors) {
+          switch (err.extensions.code) {
+            case 'UNAUTHENTICATED':
+              toast.error('you are unauthenticated', {
+                position: 'bottom-left',
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored',
+                transition: Zoom,
+              });
+              break;
+            case 'INTERNAL_SERVER_ERROR':
+              switch (err.message) {
+                case 'User has been registered':
+                  toast.error('User has been registered', {
+                    position: 'bottom-left',
+                    autoClose: 1500,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                    transition: Zoom,
+                  });
+                  break;
+                default:
+                  toast.error('we are maintenance', {
+                    position: 'bottom-left',
+                    autoClose: 1500,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                    transition: Zoom,
+                  });
+              }
+          }
+          return forward(operation);
+        }
+      }
+      if (networkError) console.log(`[Network error]: ${networkError}`);
+    });
+
+    const httpLink = new HttpLink({ uri: 'http://localhost:3500/graphql' });
+
+    const client = new ApolloClient({
+      cache: new InMemoryCache(),
+      link: from([errorLink, httpLink]),
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'all',
+        },
+        query: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'all',
+        },
+        mutate: {
+          errorPolicy: 'all',
+          fetchPolicy: 'no-cache',
+        },
+      },
+    });
+
+    return (
+      <ApolloProvider client={client}>
+        <Provider store={mockStore}>
+          <MemoryRouter initialEntries={memoryRouterInitialEntries}>
+            {defaultFormValues ? (
+              <FormWrapper defaultValues={defaultFormValues}>
+                <Component {...renderProps}>{children}</Component>
+              </FormWrapper>
+            ) : (
+              <Component {...renderProps}>{children}</Component>
+            )}
+            <div id="portal"></div>
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+  };
 
   const { container, rerender: reactRerender } = render(renderComponent(props));
 

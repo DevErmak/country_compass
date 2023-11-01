@@ -14,7 +14,6 @@ export interface IUserSlice {
   }>;
   isAuthentication: boolean;
   infoModal: { isActiveModal: boolean; formModal: formModal };
-  authToken: string;
 }
 
 export enum formModal {

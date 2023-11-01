@@ -2,7 +2,6 @@ import './country-card.css';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryFetch } from '../../store/country/infoCountrySlice';
 
-import BtnFavorite from './BtnFavorite';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsLoading } from '../../store/country/countriesSelectors';
