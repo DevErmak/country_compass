@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@apollo/client';
 import Loader from '../Loader/Loader';
-import { REGISTER } from '../../api/graphqlV1/requests';
+import { REGISTER } from '../../shared/api/graphqlV1';
 
 import { Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

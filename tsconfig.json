@@ -19,5 +19,5 @@
     "strictPropertyInitialization": false
   },
   "files": ["custom.d.ts"],
-  "include": ["src/", "custom.d.ts", "src/layout/.tsx"]
+  "include": ["src/", "custom.d.ts", "src/widgets/layout/.tsx"]
 }

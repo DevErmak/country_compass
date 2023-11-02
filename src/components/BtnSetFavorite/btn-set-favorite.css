@@ -4,6 +4,7 @@
   right: 21px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .star-card-favorites {
@@ -12,6 +13,7 @@
   right: 21px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .star {
@@ -20,6 +22,7 @@
   right: 21px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .star-favorites {
@@ -28,4 +31,5 @@
   right: 21px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }

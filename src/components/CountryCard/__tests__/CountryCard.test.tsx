@@ -1,5 +1,5 @@
 import СountryСard from '../СountryСard';
-import { renderComponentWithStore } from '../../../utils/TestHelpers';
+import { renderComponentWithStore } from '../../../widgets/test-helpers/TestHelpers';
 
 it('renders correctly Country-card', () => {
   const { container } = renderComponentWithStore({

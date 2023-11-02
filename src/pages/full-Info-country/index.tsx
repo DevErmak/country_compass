@@ -3,16 +3,16 @@ import {
   getFullInfoCountry,
   getIsFullInfoCountry,
   getIsLoading,
-} from '../store/country/countriesSelectors';
+} from '../../store/country/countriesSelectors';
 import './fullInfoCountry.css';
 import { Navigate } from 'react-router-dom';
-import InfoCountry from '../components/InfoCountry/InfoCountry';
-import Flag from '../components/Flag/Flag';
-import Loader from '../components/Loader/Loader';
+import InfoCountry from '../../components/InfoCountry/InfoCountry';
+import Flag from '../../components/Flag/Flag';
+import Loader from '../../components/Loader/Loader';
 
 type Props = {};
 
-export default function PrivateFullInfoCountry({}: Props) {
+export default function FullInfoCountry({}: Props) {
   const isFullInfoCountry = useSelector(getIsFullInfoCountry);
   const fullInfoCountry = useSelector(getFullInfoCountry);
   const isLoading = useSelector(getIsLoading);

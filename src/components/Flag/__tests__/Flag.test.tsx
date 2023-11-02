@@ -1,5 +1,5 @@
 import Flag from '../Flag';
-import { renderComponent } from '../../../utils/TestHelpers';
+import { renderComponent } from '../../../widgets/test-helpers/TestHelpers';
 
 it('renders correctly Flag', () => {
   const { container } = renderComponent({

@@ -3,14 +3,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { LOGIN } from '../../api/graphqlV1/requests';
+import { LOGIN } from '../../shared/api/graphqlV1';
 import { useLazyQuery } from '@apollo/client';
 import Loader from '../Loader/Loader';
 import { useCookies } from 'react-cookie';
 type Props = {};
 
 export default function FormLogin({}: Props) {
-  const [isActiveAnimate, setActiveAnimate] = useState(true);
+  const [isActiveAnimate, setActiveAnimate] = useState(false);
   useEffect(() => {
     setFocus('login');
   }, []);

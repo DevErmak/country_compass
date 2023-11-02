@@ -1,5 +1,5 @@
 import Header from '../Header';
-import { renderComponentWithStore } from '../../../utils/TestHelpers';
+import { renderComponentWithStore } from '../../../widgets/test-helpers/TestHelpers';
 
 it('renders correctly Header', () => {
   const { container } = renderComponentWithStore({

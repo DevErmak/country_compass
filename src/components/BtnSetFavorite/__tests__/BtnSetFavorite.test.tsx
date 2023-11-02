@@ -1,4 +1,4 @@
-import { renderComponentWithStore } from '../../../utils/TestHelpers';
+import { renderComponentWithStore } from '../../../widgets/test-helpers/TestHelpers';
 import BtnSetFavorite from '../BtnSetFavorite';
 
 it('renders correctly BtnSetFavorite', () => {

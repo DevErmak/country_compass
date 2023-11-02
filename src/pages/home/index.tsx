@@ -1,23 +1,23 @@
 import { useEffect, useId, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getListCountriesFetch } from '../store/country/infoCountrySlice';
+import { getListCountriesFetch } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
 import {
   getListCountry,
   getIsLoading,
   getInfoErrorResponse,
-} from '../store/country/countriesSelectors';
-import CountryCard from '../components/CountryCard/СountryСard';
-import SelectorCountry from '../components/SelectorCountry/SelectorCountry';
+} from '../../store/country/countriesSelectors';
+import CountryCard from '../../components/CountryCard/СountryСard';
+import SelectorCountry from '../../components/SelectorCountry/SelectorCountry';
 
 import './home.css';
-import Loader from '../components/Loader/Loader';
-import ErrorFetch from '../components/ErrorFetch/ErrorFetch';
-import { IListCountries } from '../store/country/typesIListCountries';
+import Loader from '../../components/Loader/Loader';
+import ErrorFetch from '../../components/ErrorFetch/ErrorFetch';
+import { IListCountries } from '../../store/country/typesIListCountries';
 import { useLazyQuery } from '@apollo/client';
 import { useCookies } from 'react-cookie';
-import { addFavoriteCountry } from '../store/user/infoUserSlice';
-import { GET_FAVOURITECOUNTRIES } from '../api/graphqlV1/requests';
+import { addFavoriteCountry } from '../../store/user/infoUserSlice';
+import { GET_FAVOURITECOUNTRIES } from '../../shared/api/graphqlV1';
 
 type Props = {};
 

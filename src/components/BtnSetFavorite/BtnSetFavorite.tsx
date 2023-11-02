@@ -17,7 +17,7 @@ import {
   DELETE_FAVOURITECOUNTRIES,
   GET_FAVOURITECOUNTRIES,
   SET_FAVOURITECOUNTRIES,
-} from '../../api/graphqlV1/requests';
+} from '../../shared/api/graphqlV1';
 import { useCookies } from 'react-cookie';
 import './btn-set-favorite.css';
 import { formModal } from '../../store/user/types';

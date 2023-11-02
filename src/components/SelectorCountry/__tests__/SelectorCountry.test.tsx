@@ -1,4 +1,4 @@
-import { renderComponentWithStore } from '../../../utils/TestHelpers';
+import { renderComponentWithStore } from '../../../widgets/test-helpers/TestHelpers';
 import SelectorCountry from '../SelectorCountry';
 
 it('renders correctly selector-country', () => {

@@ -1,16 +1,17 @@
 .home-container {
-  margin-top: 20px;
+  margin-top: 180px;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+}
+.favorite-container {
+  margin-top: 90px;
   display: grid;
   grid-template-rows: auto auto;
   justify-items: center;
 }
 
 .container-countries-cards {
-  /* display: flex;
-  flex-wrap: wrap;
-  gap: 50px; */
-
-  margin: 160px 20% auto 20%;
   display: grid;
   grid-template-columns: 230px 230px 230px;
   gap: 50px;
@@ -53,4 +54,5 @@
   font-size: 20px;
   font-weight: 600;
   margin-top: 33.33px;
+  cursor: pointer;
 }

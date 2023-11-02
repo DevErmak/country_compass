@@ -1,4 +1,4 @@
-import { renderComponent } from '../../../utils/TestHelpers';
+import { renderComponent } from '../../../widgets/test-helpers/TestHelpers';
 import Loader from '../Loader';
 
 it('renders correctly Flag', () => {

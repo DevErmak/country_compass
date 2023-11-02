@@ -1,21 +1,21 @@
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getInfoErrorResponse } from '../store/country/countriesSelectors';
+import { getInfoErrorResponse } from '../../store/country/countriesSelectors';
 import { Navigate, useNavigate } from 'react-router-dom';
-import CountryCard from '../components/CountryCard/СountryСard';
+import CountryCard from '../../components/CountryCard/СountryСard';
 
 import './home.css';
-import { getIsAuthentication, getListFavoriteCountries } from '../store/user/userSelectors';
-import { addFavoriteCountry, setModal } from '../store/user/infoUserSlice';
-import { formModal } from '../store/user/types';
+import { getIsAuthentication, getListFavoriteCountries } from '../../store/user/userSelectors';
+import { addFavoriteCountry, setModal } from '../../store/user/infoUserSlice';
+import { formModal } from '../../store/user/types';
 import { useLazyQuery } from '@apollo/client';
-import { GET_FAVOURITECOUNTRIES } from '../api/graphqlV1/requests';
+import { GET_FAVOURITECOUNTRIES } from '../../shared/api/graphqlV1';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
 
 type Props = {};
 
-export default function HomeContainer({}: Props) {
+export default function MyCountries({}: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
@@ -68,10 +68,12 @@ export default function HomeContainer({}: Props) {
     );
   } else {
     return (
-      <div className="container-countries-cards">
-        {listFavoriteCountry.map((infoCountry: any, i: any) => {
-          return <CountryCard key={i} currentInfoCountry={infoCountry} />;
-        })}
+      <div className="favorite-container">
+        <div className="container-countries-cards">
+          {listFavoriteCountry.map((infoCountry: any, i: any) => {
+            return <CountryCard key={i} currentInfoCountry={infoCountry} />;
+          })}
+        </div>
       </div>
     );
   }
