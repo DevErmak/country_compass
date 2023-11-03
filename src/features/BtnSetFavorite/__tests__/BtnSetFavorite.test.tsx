@@ -1,9 +1,23 @@
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import FormLogin from '../FormLogin';
+import BtnSetFavorite from '../BtnSetFavorite';
 
-it('renders correctly FormLogin', () => {
+it('renders correctly BtnSetFavorite', () => {
   const { container } = renderComponentWithStore({
-    Component: FormLogin,
+    Component: BtnSetFavorite,
+    props: {
+      fullInfoCountry: {
+        nameCountry: '',
+        nameCapital: '',
+        currencies: '',
+        region: '',
+        languages: '',
+        population: '',
+        flags: '',
+        flagsAlt: '',
+        coatOfArms: '',
+      },
+      modCard: '',
+    },
     preloadedState: {
       infoCountries: {
         listCountries: [],

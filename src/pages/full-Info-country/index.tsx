@@ -6,8 +6,8 @@ import {
 } from '../../store/country/countriesSelectors';
 import './fullInfoCountry.css';
 import { Navigate } from 'react-router-dom';
-import InfoCountry from '../../components/InfoCountry/InfoCountry';
-import Flag from '../../components/Flag/Flag';
+import InfoCountry from '../../entities/full-description-country';
+import Flag from '../../entities/Flag';
 import Loader from '../../components/Loader/Loader';
 
 type Props = {};

@@ -7,12 +7,12 @@ import {
   getIsLoading,
   getInfoErrorResponse,
 } from '../../store/country/countriesSelectors';
-import CountryCard from '../../components/CountryCard/СountryСard';
-import SelectorCountry from '../../components/SelectorCountry/SelectorCountry';
+import CountryCard from '../../entities/country/description-country';
+import SelectorCountry from '../../features/SelectorCountry/SelectorCountry';
 
 import './home.css';
 import Loader from '../../components/Loader/Loader';
-import ErrorFetch from '../../components/ErrorFetch/ErrorFetch';
+import ErrorFetch from '../../entities/ErrorFetch/ErrorFetch';
 import { IListCountries } from '../../store/country/typesIListCountries';
 import { useLazyQuery } from '@apollo/client';
 import { useCookies } from 'react-cookie';

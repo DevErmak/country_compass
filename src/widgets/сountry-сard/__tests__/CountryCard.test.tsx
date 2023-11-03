@@ -1,9 +1,22 @@
+import СountryСard from '../СountryСard';
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import FormLogin from '../FormLogin';
 
-it('renders correctly FormLogin', () => {
+it('renders correctly Country-card', () => {
   const { container } = renderComponentWithStore({
-    Component: FormLogin,
+    Component: СountryСard,
+    props: {
+      currentInfoCountry: {
+        nameCountry: '',
+        nameCapital: '',
+        currencies: '',
+        region: '',
+        languages: '',
+        population: '',
+        flags: '',
+        flagsAlt: '',
+        coatOfArms: '',
+      },
+    },
     preloadedState: {
       infoCountries: {
         listCountries: [],
@@ -11,12 +24,6 @@ it('renders correctly FormLogin', () => {
         isFullInfoCountry: false,
         isLoading: false,
         infoErrorResponse: '',
-      },
-      infoUser: {
-        userName: '',
-        listFavoriteCountries: [],
-        isAuthentication: false,
-        infoModal: { isActiveModal: false, formModal: 'login' },
       },
     },
   });

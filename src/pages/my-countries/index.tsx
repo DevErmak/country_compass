@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getInfoErrorResponse } from '../../store/country/countriesSelectors';
 import { Navigate, useNavigate } from 'react-router-dom';
-import CountryCard from '../../components/CountryCard/СountryСard';
+import CountryCard from '../../entities/country/description-country';
 
 import './home.css';
 import { getIsAuthentication, getListFavoriteCountries } from '../../store/user/userSelectors';

@@ -1,4 +1,4 @@
-import { renderComponentWithStore } from '../../../widgets/test-helpers/TestHelpers';
+import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
 import FormRegister from '../FormRegister';
 
 it('renders correctly FormRegister', () => {

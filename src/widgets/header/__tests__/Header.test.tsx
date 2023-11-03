@@ -1,9 +1,9 @@
+import Header from '../ui/header';
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import FormLogin from '../FormLogin';
 
-it('renders correctly FormLogin', () => {
+it('renders correctly Header', () => {
   const { container } = renderComponentWithStore({
-    Component: FormLogin,
+    Component: Header,
     preloadedState: {
       infoCountries: {
         listCountries: [],

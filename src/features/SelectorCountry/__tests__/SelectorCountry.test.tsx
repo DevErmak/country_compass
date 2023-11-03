@@ -1,9 +1,9 @@
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import FormLogin from '../FormLogin';
+import SelectorCountry from '../SelectorCountry';
 
-it('renders correctly FormLogin', () => {
+it('renders correctly selector-country', () => {
   const { container } = renderComponentWithStore({
-    Component: FormLogin,
+    Component: SelectorCountry,
     preloadedState: {
       infoCountries: {
         listCountries: [],
