@@ -1,93 +1,29 @@
-import { useNavigate } from 'react-router-dom';
-import './header.css';
-import { useDispatch } from 'react-redux';
-import { getFullInfoCountryClear } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
-import {
-  getFormModal,
-  getIsAuthentication,
-  getListFavoriteCountries,
-  getUserName,
-} from '../../store/user/userSelectors';
-import {
-  setModal,
-  setAuthentication,
-  clearAllFavoriteCountry,
-} from '../../store/user/infoUserSlice';
-import Modal from '../Modal/Modal';
-import FormLogin from '../Login/FormLogin';
-import FormRegister from '../Register/FormRegister';
-import { formModal } from '../../store/user/types';
-import { useCookies } from 'react-cookie';
+import AuthHeader from './ui/auth-header';
+import NoAuthHeader from './ui/no-auth-header';
+import { getIsAuthentication } from '../../entities/viewer/model/user/userSelectors';
+
+import './header.scss';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { setAuthentication } from '../../entities/viewer/model/user/infoUserSlice';
+import { useCookies } from 'react-cookie';
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const navigate = useNavigate();
-  const listFavorite = useSelector(getListFavoriteCountries);
-  const isLogin = useSelector(getIsAuthentication);
-  const dispatch = useDispatch();
-  const stateModal = useSelector(getFormModal);
-  const userName = useSelector(getUserName);
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (cookie.accessToken) {
+    console.log('---------------->qqwwqqwe');
+    if (Object.keys(cookie).length !== 0) {
+      console.log('---------------->qqw1123');
       dispatch(setAuthentication(true));
-    } else dispatch(setAuthentication(false));
-  }, [cookie.accessToken]);
+    }
+  }, [cookie]);
 
-  const ClickOnNameSite = () => {
-    dispatch(getFullInfoCountryClear());
-    navigate('/');
-  };
-
-  const ClickOnLogOut = () => {
-    dispatch(clearAllFavoriteCountry());
-    removeCookie('accessToken');
-    dispatch(setAuthentication(false));
-    dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
-  };
-
-  const ClickOnLogin = () => {
-    dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
-  };
-
-  const ClickOnRegister = () => {
-    dispatch(setModal({ isActiveModal: true, formModal: formModal.register }));
-  };
-
-  if (isLogin)
-    return (
-      <div className="container-header">
-        <div className="name-site" onClick={() => ClickOnNameSite()}>
-          Europe.know
-        </div>
-        <div className="spacer"></div>
-        <div className="logout" onClick={() => ClickOnLogOut()}>
-          Logout
-        </div>
-        <div className="my-countries" onClick={() => navigate('my-countries')}>
-          My countries
-        </div>
-      </div>
-    );
-  return (
-    <>
-      <div className="container-header">
-        <div className="name-site" onClick={() => ClickOnNameSite()}>
-          Europe.know
-        </div>
-        <div className="spacer"></div>
-        <div className="login" onClick={() => ClickOnLogin()}>
-          Login
-        </div>
-        <div className="register" onClick={() => ClickOnRegister()}>
-          Register
-        </div>
-      </div>
-      <Modal>{stateModal === formModal.login ? <FormLogin /> : <FormRegister />}</Modal>
-    </>
-  );
+  const isLogin = useSelector(getIsAuthentication);
+  if (isLogin) return <AuthHeader />;
+  return <NoAuthHeader />;
 }

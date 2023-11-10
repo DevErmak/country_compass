@@ -1,56 +1,56 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getListCountriesFetch } from '../../store/country/infoCountrySlice';
 import { useSelector } from 'react-redux';
+import SelectorCountry from '../../features/selector-country';
+import './home.scss';
 import {
-  getListCountry,
-  getIsLoading,
   getInfoErrorResponse,
-} from '../../store/country/countriesSelectors';
-import CountryCard from '../../entities/country/description-country';
-import SelectorCountry from '../../features/SelectorCountry/SelectorCountry';
-
-import './home.css';
-import Loader from '../../components/Loader/Loader';
-import ErrorFetch from '../../entities/ErrorFetch/ErrorFetch';
-import { IListCountries } from '../../store/country/typesIListCountries';
-import { useLazyQuery } from '@apollo/client';
-import { useCookies } from 'react-cookie';
-import { addFavoriteCountry } from '../../store/user/infoUserSlice';
-import { GET_FAVOURITECOUNTRIES } from '../../shared/api/graphqlV1';
+  getIsFullInfoCountry,
+  getIsLoading,
+  getListCountry,
+} from '../../entities/country/model/country/countriesSelectors';
+import { getListCountriesFetch } from '../../entities/country/model/country/infoCountrySlice';
+import Loader from '../../shared/ui/Loader';
+import ErrorGetDataCountries from '../../widgets/error-get-data-countries';
+import ListCountryCard from '../../widgets/list-сountry-сard';
+import { Navigate } from 'react-router-dom';
 
 type Props = {};
 
-export default function HomeContainer({}: Props) {
+export default function Home({}: Props) {
   const dispatch = useDispatch();
-  const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
+  // const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
-    context: {
-      headers: {
-        ...Headers,
-        authorization: `Bearer ${cookie.accessToken}`,
-      },
-    },
-    errorPolicy: 'all',
-  });
-  useEffect(() => {
-    if (data) {
-      if (data.getMe.FavoriteCountry) {
-        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-      }
-    }
-  }, [data]);
+  // const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
+  //   context: {
+  //     headers: {
+  //       ...Headers,
+  //       authorization: `Bearer ${cookie.accessToken}`,
+  //     },
+  //   },
+  //   errorPolicy: 'all',
+  // });
+  // useEffect(() => {
+  //   if (data) {
+  //     if (data.getMe.FavoriteCountry) {
+  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+  //     }
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
-    getFavoriteCountry();
+    // getFavoriteCountry();
   }, []);
 
   const isLoading = useSelector(getIsLoading);
   const listCountry = useSelector(getListCountry);
   const infoErrorResponse = useSelector(getInfoErrorResponse);
+  const isFullInfoCountry = useSelector(getIsFullInfoCountry);
 
+  // if (isFullInfoCountry) {
+  //   return <Navigate to="full-info-country" />;
+  // }
   if (infoErrorResponse.trim().length === 0) {
     if (isLoading) {
       return <Loader />;
@@ -60,29 +60,9 @@ export default function HomeContainer({}: Props) {
           <div className="search">
             <SelectorCountry />
           </div>
-          <div className="container-countries-cards">
-            {(listCountry as Array<IListCountries>).map((country: any) => {
-              let currentInfoCountry = {
-                nameCountry: country.name.official,
-                nameCapital: country.capital.join(', '),
-                currencies: Object.keys(country.currencies).join(', '),
-                region: country.region,
-                languages: Object.keys(country.languages).join(', '),
-                population: country.population
-                  .toString()
-                  .replace(/,/g, '')
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-                flags: country.flags.svg,
-                flagsAlt: country.flags.alt,
-                coatOfArms: country.coatOfArms.svg,
-              };
-              return (
-                <CountryCard key={country.name.official} currentInfoCountry={currentInfoCountry} />
-              );
-            })}
-          </div>
+          <ListCountryCard listCountry={listCountry} />
         </div>
       );
     }
-  } else return <ErrorFetch infoError={infoErrorResponse} />;
+  } else return <ErrorGetDataCountries infoError={infoErrorResponse} />;
 }

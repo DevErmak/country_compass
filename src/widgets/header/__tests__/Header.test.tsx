@@ -1,4 +1,4 @@
-import Header from '../ui/header';
+import Header from '../ui/no-auth-header';
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
 
 it('renders correctly Header', () => {

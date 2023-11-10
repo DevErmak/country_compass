@@ -1,18 +1,26 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import FullInfoCountry from './pages/FullInfoCountry';
-import MyCountries from './pages/MyCountries';
+// import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
+// import Home from './pages/Home';
+// import FullInfoCountry from './pages/FullInfoCountry';
+// import MyCountries from './pages/MyCountries';
 import { Provider } from 'react-redux';
-import { store } from './store/index';
-import DefaultLayout from './layout/DefaultLayout';
-import { ApolloClient, InMemoryCache, ApolloProvider, from, HttpLink } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+// import DefaultLayout from './layout/DefaultLayout';
+// import { ApolloClient, InMemoryCache, ApolloProvider, from, HttpLink } from '@apollo/client';
+// import { onError } from '@apollo/client/link/error';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { store } from './appStore';
+import { appRouter } from './appRouter';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { RouterProvider } from 'react-router-dom';
+
+import './index.scss';
 import { useCookies } from 'react-cookie';
+import { onError } from '@apollo/client/link/error';
+import { useDispatch } from 'react-redux';
+import { setAuthentication } from '../entities/viewer/model/user/infoUserSlice';
+import { useEffect } from 'react';
 
 function AppRouter() {
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
-
   const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       for (let err of graphQLErrors) {
@@ -119,7 +127,8 @@ function AppRouter() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <ToastContainer />
-        <BrowserRouter>
+        <RouterProvider router={appRouter()} />
+        {/* <BrowserRouter>
           <Routes>
             <Route path="/" element={<DefaultLayout />}>
               <Route index element={<Home />} />
@@ -127,7 +136,7 @@ function AppRouter() {
               <Route path="my-countries" element={<MyCountries />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </Provider>
     </ApolloProvider>
   );

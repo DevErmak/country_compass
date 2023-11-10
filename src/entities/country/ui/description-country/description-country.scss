@@ -1,0 +1,44 @@
+// .container-country-card {
+//   position: relative;
+//   width: 230px;
+//   height: 230px;
+//   flex-shrink: 0;
+//   border: none;
+//   background: #ffffff;
+//   border-radius: 10px;
+//   overflow: hidden;
+//   display: flex;
+//   flex-direction: column;
+//   cursor: pointer;
+// }
+// .container-country-card:hover .name-country-card {
+//   transition: color 0.5s;
+//   color: blue;
+// }
+
+.flag-img-card {
+  width: 230px;
+  height: 115px;
+  flex-shrink: 0;
+  background: lightgray 50% / cover no-repeat;
+}
+
+.name-country-card {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.name-capital-card {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.label-for-info-country-card {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.info-country-card {
+  margin: 13px 37px 22px 12px;
+}

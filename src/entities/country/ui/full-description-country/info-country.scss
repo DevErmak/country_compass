@@ -1,0 +1,71 @@
+// .star {
+//   position: absolute;
+//   top: 18px;
+//   right: 21px;
+//   width: 24px;
+//   height: 24px;
+// }
+
+// .star-favorites {
+//   position: absolute;
+//   top: 18px;
+//   right: 21px;
+//   width: 24px;
+//   height: 24px;
+// }
+
+// .container-info-country {
+//   color: #252525;
+//   position: relative;
+//   border: none;
+//   background: #ffffff;
+//   border-radius: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   width: 560px;
+//   height: 450px;
+//   flex-shrink: 0;
+// }
+
+.text-info-country {
+  margin-top: 18px;
+  margin-left: 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.label-for-info-country {
+  font-size: 12px;
+  font-weight: 400;
+}
+.name-country {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.name-capital {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.currencies {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.region {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.languages {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.population {
+  font-size: 15px;
+  font-weight: 600;
+}

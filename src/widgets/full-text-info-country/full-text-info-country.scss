@@ -1,0 +1,27 @@
+.container-info-country {
+  color: #252525;
+  position: relative;
+  border: none;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 560px;
+  height: 450px;
+  flex-shrink: 0;
+}
+.star-full-info {
+  position: absolute;
+  top: 18px;
+  right: 21px;
+  width: 24px;
+  height: 24px;
+}
+
+// .star-favorites {
+//   position: absolute;
+//   top: 18px;
+//   right: 21px;
+//   width: 24px;
+//   height: 24px;
+// }

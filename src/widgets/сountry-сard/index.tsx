@@ -1,9 +1,10 @@
-import './country-card.css';
+import './country-card.scss';
 import { useDispatch } from 'react-redux';
-import { getFullInfoCountryFetch } from '../../store/country/infoCountrySlice';
 
 import { useNavigate } from 'react-router-dom';
-import BtnSetFavorite from '../../features/BtnSetFavorite/BtnSetFavorite';
+import { getFullInfoCountryFetch } from '../../entities/country/model/country/infoCountrySlice';
+import BtnSetFavorite from '../../features/buttons/set-favorite';
+import DescriptionCountry from '../../entities/country/ui/description-country';
 
 type Props = {
   currentInfoCountry: {
@@ -18,13 +19,13 @@ type Props = {
     coatOfArms: string;
   };
 };
-
-export default function CountryCard({ currentInfoCountry }: Props) {
+const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClickCard = (nameCountry: string) => {
     dispatch(getFullInfoCountryFetch(nameCountry));
+    console.log('!!!!---------------->nameCountry', nameCountry);
     navigate('/full-info-country');
   };
 
@@ -33,19 +34,22 @@ export default function CountryCard({ currentInfoCountry }: Props) {
       className="container-country-card"
       onClick={() => handleClickCard(currentInfoCountry.nameCountry)}
     >
-      <img
-        className="flag-img-card"
-        src={currentInfoCountry.flags}
-        alt={currentInfoCountry.flagsAlt}
-      />
-      <div className="info-country-card">
-        <div className="name-card-country">{currentInfoCountry.nameCountry}</div>
-        <div className="name-card-capital">
-          <div className="label-for-info-country">Capital:</div>
-          {currentInfoCountry.nameCapital}
-        </div>
-      </div>
-      <BtnSetFavorite fullInfoCountry={currentInfoCountry} modCard="card" />
+      {/* //   <img
+    //     className="flag-img-card"
+    //     src={currentInfoCountry.flags}
+    //     alt={currentInfoCountry.flagsAlt}
+    //   />
+    //   <div className="info-country-card">
+    //     <div className="name-card-country">{currentInfoCountry.nameCountry}</div>
+    //     <div className="name-card-capital">
+    //       <div className="label-for-info-country">Capital:</div>
+    //       {currentInfoCountry.nameCapital}
+    //     </div>
+  //   </div> */}
+      <DescriptionCountry currentInfoCountry={currentInfoCountry} />
+      <BtnSetFavorite fullInfoCountry={currentInfoCountry} className="star-card" />
     </div>
   );
-}
+};
+
+export default CountryCard;
