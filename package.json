@@ -21,6 +21,7 @@
     "class-transformer": "^0.5.1",
     "graphql": "^16.8.1",
     "html-react-parser": "^4.2.2",
+    "lodash.isempty": "^4.4.0",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",

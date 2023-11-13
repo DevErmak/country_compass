@@ -14,33 +14,37 @@ import Loader from '../../shared/ui/Loader';
 import ErrorGetDataCountries from '../../widgets/error-get-data-countries';
 import ListCountryCard from '../../widgets/list-сountry-сard';
 import { Navigate } from 'react-router-dom';
+import { addFavoriteCountry } from '../../entities/viewer/model/user/infoUserSlice';
+import { useLazyQuery } from '@apollo/client';
+import { GET_FAVORITECOUNTRIES } from '../../shared/api/graphqlV1';
+import { useCookies } from 'react-cookie';
 
 type Props = {};
 
 export default function Home({}: Props) {
   const dispatch = useDispatch();
-  // const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
+  const [cookie] = useCookies(['accessToken']);
 
-  // const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
-  //   context: {
-  //     headers: {
-  //       ...Headers,
-  //       authorization: `Bearer ${cookie.accessToken}`,
-  //     },
-  //   },
-  //   errorPolicy: 'all',
-  // });
-  // useEffect(() => {
-  //   if (data) {
-  //     if (data.getMe.FavoriteCountry) {
-  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-  //     }
-  //   }
-  // }, [data]);
+  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVORITECOUNTRIES, {
+    context: {
+      headers: {
+        ...Headers,
+        authorization: `Bearer ${cookie.accessToken}`,
+      },
+    },
+    errorPolicy: 'all',
+  });
+  useEffect(() => {
+    if (data) {
+      if (data.getMe.FavoriteCountry) {
+        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+      }
+    }
+  }, [data]);
 
   useEffect(() => {
     dispatch(getListCountriesFetch());
-    // getFavoriteCountry();
+    getFavoriteCountry();
   }, []);
 
   const isLoading = useSelector(getIsLoading);

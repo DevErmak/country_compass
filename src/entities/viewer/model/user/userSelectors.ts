@@ -12,4 +12,4 @@ export const getListFavoriteCountries = (state: IStore) => state.infoUser.listFa
 
 export const getUserName = (state: IStore) => state.infoUser.userName;
 
-export const getBufferCountry = (state: IStore) => state.infoUser.сountryBuffer;
+export const getBufferCountry = (state: IStore) => state.infoUser.countryBuffer;

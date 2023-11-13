@@ -15,9 +15,9 @@ import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import {
-  DELETE_FAVOURITECOUNTRIES,
-  GET_FAVOURITECOUNTRIES,
-  SET_FAVOURITECOUNTRIES,
+  DELETE_FAVORITECOUNTRIES,
+  GET_FAVORITECOUNTRIES,
+  SET_FAVORITECOUNTRIES,
 } from '../../../shared/api/graphqlV1';
 import { useEffect } from 'react';
 import { addFavoriteCountry } from '../../../entities/viewer/model/user/infoUserSlice';
@@ -40,64 +40,49 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
   const dispatch = useDispatch();
   const listFavoriteCountries = useSelector(getListFavoriteCountries);
   const isLogin = useSelector(getIsAuthentication);
-  const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
-  const [
-    setFavoriteCountry,
-    {
-      data: dataSetFavoriteCountry,
-      loading: loadingSetFavoriteCountry,
-      error: errorSetFavoriteCountry,
-    },
-  ] = useMutation(SET_FAVOURITECOUNTRIES);
+  const [cookie] = useCookies(['accessToken']);
 
-  const [
-    deleteFavoriteCountry,
-    {
-      data: dataDeleteFavoriteCountry,
-      loading: loadingDeleteFavoriteCountry,
-      error: errorDeleteFavoriteCountry,
-    },
-  ] = useMutation(DELETE_FAVOURITECOUNTRIES);
+  const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
+  const [deleteFavoriteCountry] = useMutation(DELETE_FAVORITECOUNTRIES);
+  const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
 
-  const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES);
+  // useEffect(() => {
+  //   //console.log('---------------->szxc');
+  //   getFavoriteCountry({
+  //     context: {
+  //       headers: {
+  //         ...Headers,
+  //         authorization: `Bearer ${cookie.accessToken}`,
+  //       },
+  //     },
+  //   });
+  // }, [dataSetFavoriteCountry]);
 
-  useEffect(() => {
-    console.log('---------------->szxc');
-    getFavoriteCountry({
-      context: {
-        headers: {
-          ...Headers,
-          authorization: `Bearer ${cookie.accessToken}`,
-        },
-      },
-    });
-  }, [dataSetFavoriteCountry]);
+  // useEffect(() => {
+  //   //console.log('---------------->aaaa');
+  //   getFavoriteCountry({
+  //     context: {
+  //       headers: {
+  //         ...Headers,
+  //         authorization: `Bearer ${cookie.accessToken}`,
+  //       },
+  //     },
+  //   });
+  // }, [dataDeleteFavoriteCountry]);
 
-  useEffect(() => {
-    console.log('---------------->aaaa');
-    getFavoriteCountry({
-      context: {
-        headers: {
-          ...Headers,
-          authorization: `Bearer ${cookie.accessToken}`,
-        },
-      },
-    });
-  }, [dataDeleteFavoriteCountry]);
-
-  useEffect(() => {
-    console.log('---------------->ssaaaaa');
-    if (data) {
-      if (data.getMe.FavoriteCountry) {
-        dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-      }
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   //console.log('---------------->ssaaaaa');
+  //   if (data) {
+  //     if (data.getMe.FavoriteCountry) {
+  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
+  //     }
+  //   }
+  // }, [data]);
 
   if (isLogin) {
-    console.log('---------------->asd');
+    //console.log('---------------->asd');
     if (isFavoriteCountry(fullInfoCountry.nameCountry, listFavoriteCountries)) {
-      console.log('---------------->asdas');
+      //console.log('---------------->asdas');
 
       return (
         <BsFillStarFill
@@ -107,23 +92,34 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
               fullInfoCountry.nameCountry,
               e,
               cookie,
+              dispatch,
               deleteFavoriteCountry,
+              getFavoriteCountry,
             )
           }
         />
       );
     } else {
-      console.log('---------------->aas');
+      //console.log('---------------->aas');
 
       return (
         <BsStar
           className={className}
-          onClick={(e) => handleAddFavoriteCountry(fullInfoCountry, e, cookie, setFavoriteCountry)}
+          onClick={(e) =>
+            handleAddFavoriteCountry(
+              fullInfoCountry,
+              cookie,
+              setFavoriteCountry,
+              getFavoriteCountry,
+              dispatch,
+              e,
+            )
+          }
         />
       );
     }
   } else {
-    console.log('---------------->aq1');
+    //console.log('---------------->aq1');
     return (
       <BsStar
         className={className}

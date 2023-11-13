@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { setCountryBuffer, setModal } from '../../../../entities/viewer/model/user/infoUserSlice';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 

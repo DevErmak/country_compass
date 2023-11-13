@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-export const GET_FAVOURITECOUNTRIES = gql`
+export const GET_FAVORITECOUNTRIES = gql`
   query GetMe {
     getMe {
       FavoriteCountry {
@@ -17,7 +17,7 @@ export const GET_FAVOURITECOUNTRIES = gql`
   }
 `;
 
-export const SET_FAVOURITECOUNTRIES = gql`
+export const SET_FAVORITECOUNTRIES = gql`
   mutation CreateFavoriteCountry($createFavoriteCountry: CreateCountryInput!) {
     CreateFavoriteCountry(CreateFavoriteCountry: $createFavoriteCountry) {
       nameCountry
@@ -25,7 +25,7 @@ export const SET_FAVOURITECOUNTRIES = gql`
   }
 `;
 
-export const DELETE_FAVOURITECOUNTRIES = gql`
+export const DELETE_FAVORITECOUNTRIES = gql`
   mutation DeleteFavoriteCountry($nameCountry: String!) {
     DeleteFavoriteCountry(nameCountry: $nameCountry)
   }

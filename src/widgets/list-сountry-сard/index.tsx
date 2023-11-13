@@ -4,6 +4,7 @@ import CountryCard from '../сountry-сard';
 type Props = { listCountry: {}[] };
 
 const ListCountryCard: React.FC<any> = ({ listCountry }: Props) => {
+  console.log('---------------->listCountry', listCountry);
   if (listCountry && listCountry.length)
     if ('name' in listCountry[0]) {
       return (

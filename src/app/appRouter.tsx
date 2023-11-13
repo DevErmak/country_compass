@@ -29,7 +29,7 @@ type fullInfoCountryGuardProps = {
 
 function FullInfoCountryGuard({ children }: fullInfoCountryGuardProps) {
   const isFullInfoCountry = useSelector(getFormatFullInfoCountry);
-  console.log('---------------->isFullInfoCountry', isFullInfoCountry);
+  //console.log('---------------->isFullInfoCountry', isFullInfoCountry);
   if (!isFullInfoCountry) return <Navigate to="/" />;
 
   return children;

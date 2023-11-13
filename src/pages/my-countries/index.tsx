@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import './my-countries.scss';
 import { useLazyQuery } from '@apollo/client';
-import { GET_FAVOURITECOUNTRIES } from '../../shared/api/graphqlV1';
+import { GET_FAVORITECOUNTRIES } from '../../shared/api/graphqlV1';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
 import { getListFavoriteCountries } from '../../entities/viewer/model/user/userSelectors';
@@ -18,7 +18,7 @@ export default function MyCountries({}: Props) {
   // const navigate = useNavigate();
   // const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
 
-  // const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVOURITECOUNTRIES, {
+  // const [getFavoriteCountry, { loading, error, data }] = useLazyQuery(GET_FAVORITECOUNTRIES, {
   //   context: {
   //     headers: {
   //       ...Headers,
@@ -61,7 +61,7 @@ export default function MyCountries({}: Props) {
     );
   return (
     <div className="favorite-container">
-      <ListCountryCard listCountry={ListCountryCard} />;
+      <ListCountryCard listCountry={listFavoriteCountry} />
     </div>
   );
 }

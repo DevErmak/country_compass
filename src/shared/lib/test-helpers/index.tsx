@@ -132,7 +132,7 @@ export const renderComponentWithStore = ({
           theme: 'colored',
           transition: Zoom,
         });
-        console.log(`[Network error]: ${networkError}`);
+        //console.log(`[Network error]: ${networkError}`);
       }
     });
 

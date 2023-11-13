@@ -12,10 +12,10 @@ type Props = {
 };
 
 export default function Modal({ children }: Props) {
-  console.log('---------------->modal');
+  //console.log('---------------->modal');
   const dispatch = useDispatch();
   const isActiveModal = useSelector(getIsActiveModal);
-  console.log('---------------->isActiveModal', isActiveModal);
+  //console.log('---------------->isActiveModal', isActiveModal);
   const domElement = useRef<Element | DocumentFragment | null>(document.getElementById('portal'));
   if (domElement.current == null) {
     return null;
@@ -26,7 +26,6 @@ export default function Modal({ children }: Props) {
       onClick={() => {
         dispatch(setCountryBuffer({}));
         dispatch(setModal({ isActiveModal: false, formModal: formModal.login }));
-        dispatch(setCountryBuffer(''));
       }}
     >
       <div

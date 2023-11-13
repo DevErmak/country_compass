@@ -1,5 +1,5 @@
 // import { useQuery } from '@apollo/client';
-// import { GET_FAVOURITECOUNTRIES } from '../../../../shared/api/graphqlV1';
+// import { GET_FAVORITECOUNTRIES } from '../../../../shared/api/graphqlV1';
 // import { useCookies } from 'react-cookie';
 // import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
