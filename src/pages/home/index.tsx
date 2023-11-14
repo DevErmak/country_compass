@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import SelectorCountry from '../../features/selector-country';
 import './home.scss';
+import { Navigate } from 'react-router-dom';
+import { useLazyQuery } from '@apollo/client';
+import { useCookies } from 'react-cookie';
+import { GET_FAVORITECOUNTRIES } from '@/shared/api/graphqlV1';
+import { addFavoriteCountry } from '@/entities/viewer/model/user/infoUserSlice';
+import { getListCountriesFetch } from '@/entities/country/model/country/infoCountrySlice';
 import {
   getInfoErrorResponse,
   getIsFullInfoCountry,
   getIsLoading,
   getListCountry,
-} from '../../entities/country/model/country/countriesSelectors';
-import { getListCountriesFetch } from '../../entities/country/model/country/infoCountrySlice';
-import Loader from '../../shared/ui/Loader';
-import ErrorGetDataCountries from '../../widgets/error-get-data-countries';
-import ListCountryCard from '../../widgets/list-сountry-сard';
-import { Navigate } from 'react-router-dom';
-import { addFavoriteCountry } from '../../entities/viewer/model/user/infoUserSlice';
-import { useLazyQuery } from '@apollo/client';
-import { GET_FAVORITECOUNTRIES } from '../../shared/api/graphqlV1';
-import { useCookies } from 'react-cookie';
+} from '@/entities/country/model/country/countriesSelectors';
+import SelectorCountry from '@/features/selector-country';
+import ListCountryCard from '@/widgets/list-сountry-сard';
+import ErrorGetDataCountries from '@/widgets/error-get-data-countries';
+import Loader from '@/shared/ui/loader';
 
 type Props = {};
 

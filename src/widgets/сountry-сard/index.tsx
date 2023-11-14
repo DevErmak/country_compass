@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { getFullInfoCountryFetch } from '../../entities/country/model/country/infoCountrySlice';
-import BtnSetFavorite from '../../features/buttons/set-favorite';
-import DescriptionCountry from '../../entities/country/ui/description-country';
+import DescriptionCountry from '@/entities/country/ui/description-country';
+import BtnSetFavorite from '@/features/buttons/set-favorite';
 
 type Props = {
   currentInfoCountry: {

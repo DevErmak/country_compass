@@ -6,7 +6,7 @@ import { GET_FAVORITECOUNTRIES, LOGIN, SET_FAVORITECOUNTRIES } from '../../share
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useCookies } from 'react-cookie';
 import { LoginFields, formSchemaLogin } from './model/loginFormSchema';
-import Loader from '../../shared/ui/Loader';
+import Loader from '../../shared/ui/loader';
 import {
   addFavoriteCountry,
   setAuthentication,

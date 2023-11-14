@@ -3,9 +3,9 @@ import './modal.scss';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { setCountryBuffer, setModal } from '../../entities/viewer/model/user/infoUserSlice';
-import { formModal } from '../../entities/viewer/model/user/types';
-import { getIsActiveModal } from '../../entities/viewer/model/user/userSelectors';
+import { setCountryBuffer, setModal } from '../../../entities/viewer/model/user/infoUserSlice';
+import { formModal } from '../../../entities/viewer/model/user/types';
+import { getIsActiveModal } from '../../../entities/viewer/model/user/userSelectors';
 
 type Props = {
   children: React.ReactNode;

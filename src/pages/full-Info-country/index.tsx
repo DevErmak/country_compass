@@ -7,7 +7,7 @@ import {
 } from '../../entities/country/model/country/countriesSelectors';
 // import FullDescriptionCountry from '../../entities/country/ui/full-description-country';
 // import Flag from '../../entities/country/ui/full-img-info-country';
-import Loader from '../../shared/ui/Loader';
+import Loader from '../../shared/ui/loader';
 import FullTextInfoCountry from '../../widgets/full-text-info-country';
 import FullImgInfoCountry from '../../entities/country/ui/full-img-info-country';
 

@@ -17,7 +17,12 @@
     "jsx": "react-jsx",
     "typeRoots": ["custom.d.ts", "node_modules/@types"],
     "strictPropertyInitialization": false
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["./src/*"]
+    // }
   },
   "files": ["custom.d.ts"],
-  "include": ["src/", "custom.d.ts", "src/widgets/layout/.tsx"]
+  "include": ["src", "custom.d.ts", "src/widgets/layout/.tsx"],
+  "extends": "./tsconfig.path.json"
 }

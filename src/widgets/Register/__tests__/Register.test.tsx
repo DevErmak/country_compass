@@ -1,5 +1,5 @@
 import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import FormRegister from '../FormRegister';
+import FormRegister from '..';
 
 it('renders correctly FormRegister', () => {
   const { container } = renderComponentWithStore({

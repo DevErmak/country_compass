@@ -9,7 +9,7 @@ import { Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import { RegisterFields, formSchemaRegister } from './model/RegisterFormSchema';
-import Loader from '../../shared/ui/Loader';
+import Loader from '../../shared/ui/loader';
 import {
   addFavoriteCountry,
   setCountryBuffer,
