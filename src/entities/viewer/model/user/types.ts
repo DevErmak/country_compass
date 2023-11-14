@@ -24,6 +24,7 @@ export interface IUserSlice {
     flagsAlt: string;
     coatOfArms: string;
   };
+  isActiveMenu: boolean;
 }
 
 export enum formModal {

@@ -24,6 +24,15 @@ export default function Header({}: Props) {
   }, [cookie]);
 
   const isLogin = useSelector(getIsAuthentication);
-  if (isLogin) return <AuthHeader />;
-  return <NoAuthHeader />;
+  if (isLogin)
+    return (
+      <div className="container-header">
+        <AuthHeader />;
+      </div>
+    );
+  return (
+    <div className="container-header">
+      <NoAuthHeader />;
+    </div>
+  );
 }

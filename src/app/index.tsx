@@ -1,11 +1,4 @@
-// import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
-// import Home from './pages/Home';
-// import FullInfoCountry from './pages/FullInfoCountry';
-// import MyCountries from './pages/MyCountries';
 import { Provider } from 'react-redux';
-// import DefaultLayout from './layout/DefaultLayout';
-// import { ApolloClient, InMemoryCache, ApolloProvider, from, HttpLink } from '@apollo/client';
-// import { onError } from '@apollo/client/link/error';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import { store } from './appStore';
 import { appRouter } from './appRouter';
@@ -15,9 +8,6 @@ import { RouterProvider } from 'react-router-dom';
 import './index.scss';
 import { useCookies } from 'react-cookie';
 import { onError } from '@apollo/client/link/error';
-import { useDispatch } from 'react-redux';
-import { setAuthentication } from '../entities/viewer/model/user/infoUserSlice';
-import { useEffect } from 'react';
 
 function AppRouter() {
   const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);

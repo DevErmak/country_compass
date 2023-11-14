@@ -1,9 +1,9 @@
 import React from 'react';
-import { ClickOnGoHome } from './model/click-on-home';
-import Button from '../../../shared/ui/button';
+import { clickOnGoHome } from './model/click-on-home';
 import './go-home.scss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Button from '@/shared/ui/button';
 
 type Props = {};
 
@@ -13,7 +13,7 @@ const BtnGoHome: React.FC<any> = ({}: Props) => {
 
   return (
     <Button
-      onClick={() => ClickOnGoHome(dispatch, navigate)}
+      onClick={() => clickOnGoHome(dispatch, navigate)}
       title={'Europe.know'}
       className={'name-site'}
     />

@@ -9,6 +9,7 @@ export const infoUserSlice = createSlice({
     isAuthentication: false,
     infoModal: { isActiveModal: false, formModal: 'login' },
     countryBuffer: undefined,
+    isActiveMenu: false,
   } as IUserSlice,
   reducers: {
     addFavoriteCountry: (state, { payload }) => {
@@ -50,6 +51,10 @@ export const infoUserSlice = createSlice({
       ...state,
       countryBuffer: payload,
     }),
+    setActiveMenu: (state, { payload }) => ({
+      ...state,
+      isActiveMenu: payload,
+    }),
   },
 });
 
@@ -63,4 +68,5 @@ export const {
   removeFavoriteCountry,
   clearAllFavoriteCountry,
   setCountryBuffer,
+  setActiveMenu,
 } = infoUserSlice.actions;
