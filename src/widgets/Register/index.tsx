@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './form-register.css';
+import './form-register.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLazyQuery, useMutation } from '@apollo/client';
@@ -66,7 +66,6 @@ export default function FormRegister({}: Props) {
 
   const [registerUser] = useMutation(REGISTER);
 
-  const fullInfoCountryBuffer = useSelector(getBufferCountry);
   const [cookie, setCookie] = useCookies(['accessToken']);
   // const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
   // const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
@@ -135,7 +134,7 @@ export default function FormRegister({}: Props) {
         <div>
           <label
             htmlFor="username"
-            className={errors.login ? 'label-login not-valid' : 'label-login'}
+            className={errors.login ? 'label-login-register not-valid' : 'label-login-register'}
           >
             Login:
           </label>
@@ -149,7 +148,9 @@ export default function FormRegister({}: Props) {
         <div>
           <label
             htmlFor="password"
-            className={errors.password ? 'label-password not-valid' : 'label-password'}
+            className={
+              errors.password ? 'label-password-register not-valid' : 'label-password-register'
+            }
           >
             Password:
           </label>

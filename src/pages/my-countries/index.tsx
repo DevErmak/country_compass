@@ -12,8 +12,7 @@ import EmptyFavoriteCountry from '../../widgets/empty-favorite-country';
 import ListCountryCard from '../../widgets/list-сountry-сard';
 
 type Props = {};
-
-export default function MyCountries({}: Props) {
+const MyCountries: React.FC<any> = ({}: Props) => {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const [cookie, setCookie, removeCookie] = useCookies(['accessToken']);
@@ -64,4 +63,6 @@ export default function MyCountries({}: Props) {
       <ListCountryCard listCountry={listFavoriteCountry} />
     </div>
   );
-}
+};
+
+export default MyCountries;

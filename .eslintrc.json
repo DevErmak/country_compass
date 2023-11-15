@@ -31,12 +31,11 @@
     ],
     "@typescript-eslint/no-explicit-any": ["off"],
     "allowObjectPatternsAsParameters": ["off"],
-    "no-empty-pattern": "off"
+    "no-empty-pattern": ["off"],
+    "no-unused-vars": ["off"],
+    "@typescript-eslint/no-unused-vars": ["off"]
   },
   "settings": {
-    // "node": {
-    //   "moduleDirectory": ["node_modules", "src"]
-    // },
     "import/resolver": {
       "typescript": {
         "project": "tsconfig.json"

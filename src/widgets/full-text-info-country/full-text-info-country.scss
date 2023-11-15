@@ -17,11 +17,9 @@
   width: 24px;
   height: 24px;
 }
-
-// .star-favorites {
-//   position: absolute;
-//   top: 18px;
-//   right: 21px;
-//   width: 24px;
-//   height: 24px;
-// }
+@media (max-width: 375px) {
+  .container-info-country {
+    height: 350px;
+    width: 300px;
+  }
+}

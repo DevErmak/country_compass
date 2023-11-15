@@ -3,6 +3,10 @@
 }
 @media (max-width: 375px) {
   .burger {
-    display: block;
+    display: flex;
+    // justify-content: flex-end;
+    justify-self: end;
+    cursor: pointer;
+    width: max-content;
   }
 }

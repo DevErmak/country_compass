@@ -127,7 +127,8 @@ const FormLogin: React.FC<any> = ({}: Props) => {
       setActiveAnimate(false);
       setTimeout(() => setActiveAnimate(true), 600);
     }
-    if (!isEmptyLodash(dataToken.login.token)) {
+    console.log('---------------->dataToken', dataToken);
+    if (!isEmptyLodash(dataToken.login)) {
       setCookie('accessToken', dataToken.login.token);
       dispatch(setModal({ isActiveModal: false, formModal: formModal.login }));
     } else {

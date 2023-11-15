@@ -3,3 +3,10 @@
   grid-template-columns: 230px 230px 230px;
   gap: 50px;
 }
+@media (max-width: 375px) {
+  .container-countries-cards {
+    display: grid;
+    grid-template-columns: 230px;
+    gap: 50px;
+  }
+}

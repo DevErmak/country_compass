@@ -9,7 +9,14 @@ type Props = {};
 const BtnRegister: React.FC<any> = ({}: Props) => {
   const dispatch = useDispatch();
   return (
-    <Button onClick={() => ClickOnRegister(dispatch)} title={'Register'} className={'register'} />
+    <Button
+      onClick={(e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        ClickOnRegister(dispatch);
+      }}
+      title={'Register'}
+      className={'register'}
+    />
   );
 };
 

@@ -23,7 +23,7 @@
   font-weight: 600;
 }
 
-.label-login {
+.label-login-register {
   width: 35px;
   height: 17.5px;
   font-size: 12px;
@@ -32,14 +32,14 @@
   transition: 0.5s all;
 }
 
-.label-login.not-valid {
+.label-login-register.not-valid {
   width: 300px;
   height: auto;
   color: red;
   transition: 0.5s all;
 }
 
-.label-password {
+.label-password-register {
   width: 59px;
   height: 17.5px;
   font-size: 12px;
@@ -48,7 +48,7 @@
   transition: 0.5s all;
 }
 
-.label-password.not-valid {
+.label-password-register.not-valid {
   width: 300px;
   height: auto;
   color: red;
@@ -112,7 +112,7 @@
   transition: 0.5s all;
 }
 
-.input-confirm-password-register.not-valid {
+.input-confirm-password.not-valid {
   border: 1px solid #ff0000;
   transition: 0.5s all;
 }
@@ -164,4 +164,55 @@
   top: 62%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 375px) {
+  .error-login-reg {
+    font-size: smaller;
+  }
+  .error-password-reg {
+    font-size: smaller;
+    top: 40%;
+  }
+  .error-confirm-password {
+    top: 65%;
+    font-size: smaller;
+  }
+  .input-login-register {
+    width: 150px;
+  }
+  .input-login-register.not-valid {
+    width: 150px;
+  }
+
+  .input-password-register {
+    width: 150px;
+  }
+  .input-password-register.not-valid {
+    width: 150px;
+  }
+
+  .input-confirm-password-register {
+    width: 150px;
+  }
+  .input-confirm-password-register.not-valid {
+    width: 150px;
+  }
+  .error-login-reg {
+    top: 15%;
+  }
+  .label-login-register.not-valid {
+    width: 150px;
+    margin-top: 30%;
+  }
+  .label-password-register.not-valid {
+    width: 150px;
+    margin-top: 60%;
+  }
+  .label-confirm-password.not-valid {
+    margin-top: 40%;
+    width: 150px;
+  }
+  // .label-login.not-valid {
+  //   width: 150px;
+  // }
 }

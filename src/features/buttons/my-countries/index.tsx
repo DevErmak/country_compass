@@ -10,7 +10,10 @@ const BtnMyCountries: React.FC<any> = ({}: Props) => {
 
   return (
     <Button
-      onClick={() => navigate('my-countries')}
+      onClick={(e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        navigate('my-countries');
+      }}
       title={'My countries'}
       className={'my-countries'}
     />

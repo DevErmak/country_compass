@@ -44,3 +44,8 @@
   font-weight: 600;
   line-height: normal;
 }
+@media (max-width: 375px) {
+  .container-img-full-info-country {
+    width: 300px;
+  }
+}

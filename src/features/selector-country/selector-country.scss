@@ -4,6 +4,8 @@
   top: 60px;
   background-color: #eeeeee;
   padding-top: 20px;
+  max-width: 798px;
+  width: 100%;
 }
 
 .label-search {
@@ -19,7 +21,8 @@
   border: none !important;
   box-shadow: none !important;
   border-radius: 10px !important;
-  width: 798px !important;
+  width: 100% !important;
+  max-width: 798px !important;
   height: 46px !important;
   /* margin-left: 113px !important; */
 }
@@ -30,7 +33,8 @@
   border: none !important;
   box-shadow: none !important;
   color: #000000 !important;
-  width: 798px !important;
+  width: 100% !important;
+  max-width: 798px !important;
   height: 46px !important;
   top: 38px !important;
   /* margin-left: 113px !important; */

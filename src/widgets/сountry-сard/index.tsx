@@ -23,8 +23,8 @@ const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClickCard = (nameCountry: string) => {
-    dispatch(getFullInfoCountryFetch(nameCountry));
+  const handleClickCard = async (nameCountry: string) => {
+    await dispatch(getFullInfoCountryFetch(nameCountry));
     //console.log('!!!!---------------->nameCountry', nameCountry);
     navigate('/full-info-country');
   };

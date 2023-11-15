@@ -13,7 +13,10 @@ const BtnLogOut: React.FC<any> = ({}: Props) => {
 
   return (
     <Button
-      onClick={() => clickOnLogout(dispatch, removeCookie)}
+      onClick={(e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        clickOnLogout(dispatch, removeCookie);
+      }}
       title={'Logout'}
       className={'logout'}
     />

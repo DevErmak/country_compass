@@ -20,8 +20,7 @@ import ErrorGetDataCountries from '@/widgets/error-get-data-countries';
 import Loader from '@/shared/ui/loader';
 
 type Props = {};
-
-export default function Home({}: Props) {
+const Home: React.FC<any> = ({}: Props) => {
   const dispatch = useDispatch();
   const [cookie] = useCookies(['accessToken']);
 
@@ -69,4 +68,6 @@ export default function Home({}: Props) {
       );
     }
   } else return <ErrorGetDataCountries infoError={infoErrorResponse} />;
-}
+};
+
+export default Home;

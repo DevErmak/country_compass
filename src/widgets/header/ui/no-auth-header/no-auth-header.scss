@@ -3,3 +3,25 @@
   gap: 20px;
   justify-content: flex-end;
 }
+@media (max-width: 375px) {
+  .container-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    position: fixed;
+    right: -100%;
+    top: 50%;
+    transform: translate(-0%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    width: 50%;
+    height: 20%;
+    align-items: center;
+    transition: right 0.5s;
+  }
+
+  .container-menu.active-menu {
+    right: -0%;
+  }
+}

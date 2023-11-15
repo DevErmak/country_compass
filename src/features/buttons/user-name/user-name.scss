@@ -1,4 +1,9 @@
 .user-name {
-  cursor: pointer;
-  width: max-content;
+}
+@media (max-width: 375px) {
+  .user-name {
+    width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

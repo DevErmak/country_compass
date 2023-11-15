@@ -12,8 +12,7 @@ import FullTextInfoCountry from '../../widgets/full-text-info-country';
 import FullImgInfoCountry from '../../entities/country/ui/full-img-info-country';
 
 type Props = {};
-
-export default function FullInfoCountry({}: Props) {
+const FullInfoCountry: React.FC<any> = ({}: Props) => {
   // const isFullInfoCountry = useSelector(getIsFullInfoCountry);
   // const fullInfoCountry = useSelector(getFullInfoCountry);
   const isLoading = useSelector(getIsLoading);
@@ -44,8 +43,8 @@ export default function FullInfoCountry({}: Props) {
       <div className="full-info-country">
         {/* <FullDescriptionCountry fullInfoCountry={currentInfoCountry} />
           <Flag
-            flags={fullInfoCountry[0].flags.svg}
-            flagsAlt={fullInfoCountry[0].flags.alt}
+          flags={fullInfoCountry[0].flags.svg}
+          flagsAlt={fullInfoCountry[0].flags.alt}
             coatOfArms={fullInfoCountry[0].coatOfArms.svg}
           /> */}
 
@@ -54,7 +53,6 @@ export default function FullInfoCountry({}: Props) {
       </div>
     );
   }
-}
+};
 
-// }
-// }
+export default FullInfoCountry;

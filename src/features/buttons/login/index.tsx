@@ -9,7 +9,16 @@ type Props = {};
 const BtnLogin: React.FC<any> = ({}: Props) => {
   const dispatch = useDispatch();
 
-  return <Button onClick={() => ClickOnLogin(dispatch)} title={'Login'} className={'login'} />;
+  return (
+    <Button
+      onClick={(e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        ClickOnLogin(dispatch);
+      }}
+      title={'Login'}
+      className={'login'}
+    />
+  );
 };
 
 export default BtnLogin;

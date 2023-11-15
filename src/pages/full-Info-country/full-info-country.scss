@@ -5,3 +5,9 @@
   justify-content: center;
   margin: 100px;
 }
+@media (max-width: 375px) {
+  .full-info-country {
+    grid-template-columns: 400px;
+    justify-items: center;
+  }
+}

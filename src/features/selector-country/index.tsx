@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import AsyncSelect from 'react-select/async';
 import { useDispatch } from 'react-redux';
-import './selector-country.css';
+import './selector-country.scss';
 import { useNavigate } from 'react-router-dom';
 import { getOptionsCountry } from '../../entities/country/model/country/countriesSelectors';
 import { IOptionCountry } from '../../entities/country/model/country/types';

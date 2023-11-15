@@ -27,12 +27,12 @@ export default function Header({}: Props) {
   if (isLogin)
     return (
       <div className="container-header">
-        <AuthHeader />;
+        <AuthHeader />
       </div>
     );
   return (
     <div className="container-header">
-      <NoAuthHeader />;
+      <NoAuthHeader />
     </div>
   );
 }
