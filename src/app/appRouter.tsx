@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { Navigate, createBrowserRouter } from 'react-router-dom';
+import { ReactElement, useEffect } from 'react';
+import { Navigate, createBrowserRouter, useNavigate } from 'react-router-dom';
 import Home from '../pages/home';
 import FullInfoCountry from '../pages/full-Info-country';
 import MyCountries from '../pages/my-countries';
@@ -17,9 +17,8 @@ type AuthGuardProps = {
 
 function AuthGuard({ children }: AuthGuardProps) {
   const isAuthorized = useSelector(getIsAuthentication);
-
-  if (!isAuthorized) return <Navigate to="/" />;
-
+  const navigate = useNavigate();
+  if (!isAuthorized) navigate('/');
   return children;
 }
 
@@ -29,9 +28,8 @@ type fullInfoCountryGuardProps = {
 
 function FullInfoCountryGuard({ children }: fullInfoCountryGuardProps) {
   const isFullInfoCountry = useSelector(getFormatFullInfoCountry);
-  //console.log('---------------->isFullInfoCountry', isFullInfoCountry);
-  if (!isFullInfoCountry) return <Navigate to="/" />;
-
+  const navigate = useNavigate();
+  if (!isFullInfoCountry) navigate('/');
   return children;
 }
 
