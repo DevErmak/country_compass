@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './home.scss';
-import { Navigate } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useCookies } from 'react-cookie';
 import { GET_FAVORITECOUNTRIES } from '@/shared/api/graphqlV1';
