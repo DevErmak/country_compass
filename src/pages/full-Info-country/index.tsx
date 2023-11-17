@@ -10,13 +10,22 @@ import {
 import Loader from '../../shared/ui/loader';
 import FullTextInfoCountry from '../../widgets/full-text-info-country';
 import FullImgInfoCountry from '../../entities/country/ui/full-img-info-country';
+import { useLocation, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getFullInfoCountryFetch } from '@/entities/country/model/country/infoCountrySlice';
+import { useEffect } from 'react';
 
 type Props = {};
 const FullInfoCountry: React.FC<any> = ({}: Props) => {
-  // const isFullInfoCountry = useSelector(getIsFullInfoCountry);
-  // const fullInfoCountry = useSelector(getFullInfoCountry);
+  let { nameCountry } = useParams();
+  const dispatch = useDispatch();
+  console.log('---------------->nameCountry', nameCountry);
+  useEffect(() => {
+    dispatch(getFullInfoCountryFetch(nameCountry));
+  }, []);
+
   const isLoading = useSelector(getIsLoading);
-  // if (isLoading && !isFullInfoCountry) {
+
   if (isLoading) {
     return <Loader />;
   } else {

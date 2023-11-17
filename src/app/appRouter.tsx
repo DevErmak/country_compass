@@ -10,6 +10,8 @@ import {
   getFormatFullInfoCountry,
   getIsFullInfoCountry,
 } from '../entities/country/model/country/countriesSelectors';
+import { useDispatch } from 'react-redux';
+import { getFullInfoCountryFetch } from '@/entities/country/model/country/infoCountrySlice';
 
 type AuthGuardProps = {
   children: ReactElement;
@@ -29,7 +31,19 @@ type fullInfoCountryGuardProps = {
 function FullInfoCountryGuard({ children }: fullInfoCountryGuardProps) {
   const isFullInfoCountry = useSelector(getFormatFullInfoCountry);
   const navigate = useNavigate();
-  if (!isFullInfoCountry) navigate('/');
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log('1111---------------->!isFullInfoCountry', !isFullInfoCountry);
+  //   console.log('1111---------------->isFullInfoCountry', isFullInfoCountry);
+  //   if (!isFullInfoCountry) {
+  //     navigate('/');
+  //   }
+  // }, []);
+  // dispatch(getFullInfoCountryFetch(nameCountry));
+
+  if (!isFullInfoCountry) {
+    navigate('/');
+  }
   return children;
 }
 
@@ -44,13 +58,21 @@ export const appRouter = () =>
           element: <Home />,
         },
         {
-          path: 'full-info-country',
+          path: 'detailed-info/:nameCountry',
           element: (
-            <FullInfoCountryGuard>
-              <FullInfoCountry />
-            </FullInfoCountryGuard>
+            // <FullInfoCountryGuard>
+            <FullInfoCountry />
+            // </FullInfoCountryGuard>
           ),
         },
+        // {
+        //   path: 'detailed-info?country=nameCountry',
+        //   element: (
+        //     // <FullInfoCountryGuard>
+        //     <FullInfoCountry />
+        //     // </FullInfoCountryGuard>
+        //   ),
+        // },
         {
           path: 'my-countries',
           element: (
