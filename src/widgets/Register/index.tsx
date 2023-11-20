@@ -101,7 +101,8 @@ export default function FormRegister({}: Props) {
         },
       },
     });
-    if (dataToken && !isEmptyLodash(dataToken)) {
+    if (dataToken && !isEmptyLodash(dataToken.registerUser)) {
+      console.log('---------------->dataToken', dataToken);
       console.log('---------------->token', dataToken.registerUser.token);
       setCookie('accessToken', dataToken.registerUser.token);
       dispatch(setCountryBuffer({}));

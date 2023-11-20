@@ -84,50 +84,56 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
 
   if (isLogin) {
     console.log('---------------->asd', fullInfoCountry);
-    if (isFavoriteCountry(fullInfoCountry.nameCountry, listFavoriteCountries)) {
+    if (isFavoriteCountry(fullInfoCountry?.nameCountry, listFavoriteCountries)) {
       //console.log('---------------->asdas');
 
       return (
-        <BsFillStarFill
-          className={className}
-          onClick={(e) =>
-            handleRemoveFavoriteCountry(
-              fullInfoCountry.nameCountry,
-              e,
-              cookie,
-              dispatch,
-              deleteFavoriteCountry,
-              getFavoriteCountry,
-            )
-          }
-        />
+        <div className="favorite">
+          <BsFillStarFill
+            className={className}
+            onClick={(e) =>
+              handleRemoveFavoriteCountry(
+                fullInfoCountry.nameCountry,
+                e,
+                cookie,
+                dispatch,
+                deleteFavoriteCountry,
+                getFavoriteCountry,
+              )
+            }
+          />
+        </div>
       );
     } else {
       //console.log('---------------->aas');
 
       return (
-        <BsStar
-          className={className}
-          onClick={(e) =>
-            handleAddFavoriteCountry(
-              fullInfoCountry,
-              cookie,
-              setFavoriteCountry,
-              getFavoriteCountry,
-              dispatch,
-              e,
-            )
-          }
-        />
+        <div className="no-favorite">
+          <BsStar
+            className={className}
+            onClick={(e) =>
+              handleAddFavoriteCountry(
+                fullInfoCountry,
+                cookie,
+                setFavoriteCountry,
+                getFavoriteCountry,
+                dispatch,
+                e,
+              )
+            }
+          />
+        </div>
       );
     }
   } else {
     //console.log('---------------->aq1');
     return (
-      <BsStar
-        className={className}
-        onClick={(e) => handleAddInBufferCountry(fullInfoCountry, e, dispatch)}
-      />
+      <div className="no-favorite">
+        <BsStar
+          className={className}
+          onClick={(e) => handleAddInBufferCountry(fullInfoCountry, e, dispatch)}
+        />
+      </div>
     );
   }
 };

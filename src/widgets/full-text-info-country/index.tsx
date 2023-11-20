@@ -17,9 +17,9 @@ const FullTextInfoCountry: React.FC<any> = ({}: Props) => {
   // console.log('rrr');
   const dispatch = useDispatch();
 
-  let { nameCountry } = useParams();
+  // let { nameCountry } = useParams();
 
-  console.log('qinfulltext nameCountry', nameCountry);
+  // console.log('qinfulltext nameCountry', nameCountry);
 
   // useEffect(() => {
   //   console.log('111---------------->nameCountry', nameCountry);

@@ -20,12 +20,20 @@ type Props = {};
 const FullInfoCountry: React.FC<any> = ({}: Props) => {
   let { nameCountry } = useParams();
   const dispatch = useDispatch();
-  // console.log('---------------->nameCountry', nameCountry);
-  useLayoutEffect(() => {
+  // const currentInfoCountry = useSelector(getFormatFullInfoCountry);
+
+  useEffect(() => {
     // console.log('111---------------->nameCountry', nameCountry);
     console.log('sss s', nameCountry);
     dispatch(getFullInfoCountryFetch(nameCountry));
-  }, [nameCountry]);
+  }, []);
+
+  // console.log('---------------->nameCountry', nameCountry);
+  // useLayoutEffect(() => {
+  //   // console.log('111---------------->nameCountry', nameCountry);
+  //   console.log('sss s', nameCountry);
+  //   dispatch(getFullInfoCountryFetch(nameCountry));
+  // }, [nameCountry]);
   // console.log('sss', useSelector(getFormatFullInfoCountry));
   const isLoading = useSelector(getIsLoading);
 
