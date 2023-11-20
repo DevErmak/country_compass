@@ -1,4 +1,4 @@
-import { IStore } from '../../../../app/appStore';
+import { IStore } from '@/app/appStore';
 
 export const getState = (state: IStore) => state;
 
@@ -7,6 +7,7 @@ export const getListCountry = (state: IStore) => state.infoCountries.listCountri
 export const getFullInfoCountry = (state: IStore) => state.infoCountries.fullInfoCountry;
 
 export const getFormatFullInfoCountry = (state: IStore) => {
+  console.log('qwe', state.infoCountries.fullInfoCountry);
   if (
     state.infoCountries.fullInfoCountry !== undefined &&
     state.infoCountries.fullInfoCountry.length !== 0

@@ -34,7 +34,8 @@
     "no-empty-pattern": ["off"],
     "no-unused-vars": ["off"],
     "@typescript-eslint/no-unused-vars": ["off"],
-    "prefer-const": ["off"]
+    "prefer-const": ["off"],
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
   },
   "settings": {
     "import/resolver": {

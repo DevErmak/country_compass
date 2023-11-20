@@ -24,6 +24,7 @@ const ListCountryCard: React.FC<any> = ({ listCountry }: Props) => {
               flagsAlt: country.flags.alt,
               coatOfArms: country.coatOfArms.svg,
             };
+            console.log('!!!currentInfoCountry', currentInfoCountry);
             return <CountryCard key={i} currentInfoCountry={currentInfoCountry} />;
           })}
         </div>
@@ -32,6 +33,7 @@ const ListCountryCard: React.FC<any> = ({ listCountry }: Props) => {
       return (
         <div className="container-countries-cards">
           {listCountry.map((infoCountry: any, i: any) => {
+            console.log('!!!qwe infoCountry', infoCountry);
             return <CountryCard key={i} currentInfoCountry={infoCountry} />;
           })}
         </div>

@@ -19,12 +19,12 @@ import { formModal } from '../../entities/viewer/model/user/types';
 import { useSelector } from 'react-redux';
 import { getBufferCountry } from '../../entities/viewer/model/user/userSelectors';
 import { Zoom, toast } from 'react-toastify';
-import { handleAddFavoriteCountry } from '../../features/buttons/set-favorite/model/add-favorite-country';
+import isEmptyLodash from 'lodash.isempty';
 
 type Props = {};
 
 const FormLogin: React.FC<any> = ({}: Props) => {
-  const isEmptyLodash = require('lodash.isempty');
+  // const isEmptyLodash = require('lodash.isempty');
   const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
   const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
   const [loginUser] = useLazyQuery(LOGIN);

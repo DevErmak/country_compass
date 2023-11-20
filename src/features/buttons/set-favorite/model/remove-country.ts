@@ -50,5 +50,5 @@ export const handleRemoveFavoriteCountry = async (
       theme: 'colored',
       transition: Zoom,
     });
-  else updateFavoriteCountry(cookie, dispatch, getFavoriteCountry);
+  else await updateFavoriteCountry(cookie, dispatch, getFavoriteCountry);
 };

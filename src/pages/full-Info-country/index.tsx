@@ -2,28 +2,31 @@ import { useSelector } from 'react-redux';
 import './full-info-country.scss';
 // import { Navigate } from 'react-router-dom';
 import {
+  getFormatFullInfoCountry,
   getFullInfoCountry,
   getIsLoading,
 } from '../../entities/country/model/country/countriesSelectors';
 // import FullDescriptionCountry from '../../entities/country/ui/full-description-country';
 // import Flag from '../../entities/country/ui/full-img-info-country';
-import Loader from '../../shared/ui/loader';
-import FullTextInfoCountry from '../../widgets/full-text-info-country';
-import FullImgInfoCountry from '../../entities/country/ui/full-img-info-country';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getFullInfoCountryFetch } from '@/entities/country/model/country/infoCountrySlice';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import FullTextInfoCountry from '@/widgets/full-text-info-country';
+import FullImgInfoCountry from '@/entities/country/ui/full-img-info-country';
+import Loader from '@/shared/ui/loader';
 
 type Props = {};
 const FullInfoCountry: React.FC<any> = ({}: Props) => {
   let { nameCountry } = useParams();
   const dispatch = useDispatch();
-  console.log('---------------->nameCountry', nameCountry);
-  useEffect(() => {
+  // console.log('---------------->nameCountry', nameCountry);
+  useLayoutEffect(() => {
+    // console.log('111---------------->nameCountry', nameCountry);
+    console.log('sss s', nameCountry);
     dispatch(getFullInfoCountryFetch(nameCountry));
-  }, []);
-
+  }, [nameCountry]);
+  // console.log('sss', useSelector(getFormatFullInfoCountry));
   const isLoading = useSelector(getIsLoading);
 
   if (isLoading) {

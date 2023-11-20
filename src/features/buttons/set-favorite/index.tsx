@@ -21,6 +21,7 @@ import {
 } from '../../../shared/api/graphqlV1';
 import { useEffect } from 'react';
 import { addFavoriteCountry } from '../../../entities/viewer/model/user/infoUserSlice';
+import { getFormatFullInfoCountry } from '@/entities/country/model/country/countriesSelectors';
 
 type Props = {
   fullInfoCountry: {
@@ -41,6 +42,8 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
   const listFavoriteCountries = useSelector(getListFavoriteCountries);
   const isLogin = useSelector(getIsAuthentication);
   const [cookie] = useCookies(['accessToken']);
+
+  // if (!fullInfoCountry) const fullInfoCountry = useSelector(getFormatFullInfoCountry);
 
   const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
   const [deleteFavoriteCountry] = useMutation(DELETE_FAVORITECOUNTRIES);
@@ -80,7 +83,7 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
   // }, [data]);
 
   if (isLogin) {
-    //console.log('---------------->asd');
+    console.log('---------------->asd', fullInfoCountry);
     if (isFavoriteCountry(fullInfoCountry.nameCountry, listFavoriteCountries)) {
       //console.log('---------------->asdas');
 

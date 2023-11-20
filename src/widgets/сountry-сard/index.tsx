@@ -22,8 +22,9 @@ type Props = {
 const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log('incountrycard currentInfoCountry', currentInfoCountry);
 
-  const handleClickCard = (nameCountry: string) => {
+  const handleClickCard = (nameCountry: string, e: React.SyntheticEvent) => {
     //console.log('!!!!---------------->nameCountry', nameCountry);
     navigate(`/detailed-info/${nameCountry}`);
   };
@@ -31,7 +32,7 @@ const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
   return (
     <div
       className="container-country-card"
-      onClick={() => handleClickCard(currentInfoCountry.nameCountry)}
+      onClick={(e) => handleClickCard(currentInfoCountry.nameCountry, e)}
     >
       {/* //   <img
     //     className="flag-img-card"

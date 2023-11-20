@@ -32,9 +32,9 @@ export const handleAddFavoriteCountry = async (
   ) => any,
   getFavoriteCountry: LazyQueryExecFunction<any, OperationVariables>,
   dispatch: Dispatch<AnyAction>,
-  e?: React.SyntheticEvent,
+  e: React.SyntheticEvent,
 ) => {
-  if (e) e.stopPropagation();
+  e.stopPropagation();
   const { error } = await setFavoriteCountry({
     context: {
       headers: {
@@ -70,6 +70,6 @@ export const handleAddFavoriteCountry = async (
       transition: Zoom,
     });
   else {
-    updateFavoriteCountry(cookie, dispatch, getFavoriteCountry);
+    await updateFavoriteCountry(cookie, dispatch, getFavoriteCountry);
   }
 };

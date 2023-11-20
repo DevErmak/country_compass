@@ -37,8 +37,9 @@ export default function SelectorCountry({}: Props) {
     });
   };
   const getFullInfoCountry = (value: IOptionCountry | null) => {
-    dispatch(getFullInfoCountryFetch(value?.value));
-    navigate('/full-info-country');
+    // dispatch(getFullInfoCountryFetch(value?.value));
+    console.log('qqq', value);
+    navigate(`/detailed-info/${value?.value}`);
   };
 
   return (
