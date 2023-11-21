@@ -1,9 +1,9 @@
-import Header from '../ui/no-auth-header';
-import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
+import { renderComponentWithStore } from '@/shared/lib/test-helpers';
+import MyCountries from '..';
 
-it('renders correctly Header', () => {
+it('renders correctly home', () => {
   const { container } = renderComponentWithStore({
-    Component: Header,
+    Component: MyCountries,
     preloadedState: {
       infoCountries: {
         listCountries: [],

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly home 1`] = `
+<div>
+  <div
+    class="favorite-container"
+  >
+    <div
+      class="empty-favorite-container"
+    >
+      <div
+        class="info-about-empty-favorite"
+      >
+        <div>
+          The list of favorite countries is empty
+        </div>
+        <div
+          class="choose-country"
+        >
+          Choose a country
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="portal"
+  />
+</div>
+`;

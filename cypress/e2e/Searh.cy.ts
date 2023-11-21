@@ -6,43 +6,33 @@ describe('Searh', () => {
       .type('rus');
     if (cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').contains('Loading'))
       cy.wait(1000);
-    if (
-      cy
-        .get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]')
-        .not(':contains("No options")')
-    )
-      cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').each(($div) => {
-        cy.wrap($div)
-          .find('*')
-          .each(($child) => {
-            cy.wrap($child)
-              .invoke('text')
-              .then((text) => {
-                if (text.includes('rus')) {
-                  expect(text).to.include('rus');
-                }
-              });
-          });
-      });
+    cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').each(($div) => {
+      cy.wrap($div)
+        .find('*')
+        .each(($child) => {
+          cy.wrap($child)
+            .invoke('text')
+            .then((text) => {
+              if (text.includes('rus')) {
+                expect(text).to.include('rus');
+              }
+            });
+        });
+    });
     cy.get('div[class="custom-select__value-container css-1fdsijx-ValueContainer"]')
       .click()
       .type('russian');
     if (cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').contains('Loading'))
       cy.wait(1000);
-    if (
-      cy
-        .get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]')
-        .not(':contains("No options")')
-    )
-      cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').each(($div) => {
-        cy.wrap($div)
-          .find('*')
-          .each(($child) => {
-            cy.wrap($child).then((item) => {
-              item.click();
-            });
+    cy.get('div[class="custom-select__menu-list css-1n6sfyn-MenuList"]').each(($div) => {
+      cy.wrap($div)
+        .find('*')
+        .each(($child) => {
+          cy.wrap($child).then((item) => {
+            item.click();
           });
-      });
+        });
+    });
     cy.url().should('include', '/detailed-info');
     cy.get('div[class="container-info-country"]');
   });

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly Flag 1`] = `
+exports[`renders correctly home 1`] = `
 <div>
   <div
-    class="container-flag"
+    class="container-img-full-info-country"
   >
     <div
       class="flag"
@@ -11,9 +11,7 @@ exports[`renders correctly Flag 1`] = `
       Flag
     </div>
     <img
-      alt=""
       class="flag-img"
-      src=""
     />
     <div
       class="coat-of-arms"
@@ -23,7 +21,6 @@ exports[`renders correctly Flag 1`] = `
     <img
       alt=""
       class="coat-of-arms-img"
-      src=""
     />
   </div>
   <div

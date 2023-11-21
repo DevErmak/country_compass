@@ -1,6 +1,6 @@
-import { renderComponentWithStore } from '../../../lib/test-helpers';
-import FormLogin from '../../../../widgets/Login';
+import { renderComponentWithStore } from '@/shared/lib/test-helpers';
 import Modal from '..';
+import FormLogin from '@/widgets/Login';
 
 it('renders correctly Modal', () => {
   const { container } = renderComponentWithStore({

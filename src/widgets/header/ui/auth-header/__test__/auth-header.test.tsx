@@ -1,22 +1,13 @@
 import { renderComponentWithStore } from '@/shared/lib/test-helpers';
-import CountryCard from '..';
+import AuthHeader from '..';
 
-it('renders correctly Country-card', () => {
+jest.mock('jwt-decode', () => ({
+  jwtDecode: () => 'some-name',
+}));
+
+it('renders correctly AuthHeader', () => {
   const { container } = renderComponentWithStore({
-    Component: CountryCard,
-    props: {
-      currentInfoCountry: {
-        nameCountry: '',
-        nameCapital: '',
-        currencies: '',
-        region: '',
-        languages: '',
-        population: '',
-        flags: '',
-        flagsAlt: '',
-        coatOfArms: '',
-      },
-    },
+    Component: AuthHeader,
     preloadedState: {
       infoCountries: {
         listCountries: [],
@@ -24,6 +15,12 @@ it('renders correctly Country-card', () => {
         isFullInfoCountry: false,
         isLoading: false,
         infoErrorResponse: '',
+      },
+      infoUser: {
+        userName: '',
+        listFavoriteCountries: [],
+        isAuthentication: false,
+        infoModal: { isActiveModal: false, formModal: 'login' },
       },
     },
   });

@@ -56,7 +56,6 @@ export default function SelectorCountry({}: Props) {
             DropdownIndicator: () => null,
           }}
           onChange={getFullInfoCountry}
-          menuIsOpen={true}
         />
       </div>
     </div>

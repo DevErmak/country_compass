@@ -1,10 +1,10 @@
-import { renderComponentWithStore } from '../../../shared/lib/test-helpers';
-import InfoCountry from '..';
+import { renderComponentWithStore } from '@/shared/lib/test-helpers';
+import FullDescriptionCountry from '..';
 
 describe('InfoCountry', () => {
   it('renders correctly InfoCountry', () => {
     const { container } = renderComponentWithStore({
-      Component: InfoCountry,
+      Component: FullDescriptionCountry,
       props: {
         fullInfoCountry: {
           nameCountry: '',

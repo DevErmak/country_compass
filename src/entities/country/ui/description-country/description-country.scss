@@ -27,6 +27,14 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 24px;
+  display: -webkit-box;
+  max-width: 185px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .name-capital-card {

@@ -18,7 +18,7 @@ exports[`renders correctly FormRegister 1`] = `
       />
       <div>
         <label
-          class="label-login"
+          class="label-login-register"
           for="username"
         >
           Login:
@@ -34,7 +34,7 @@ exports[`renders correctly FormRegister 1`] = `
       />
       <div>
         <label
-          class="label-password"
+          class="label-password-register"
           for="password"
         >
           Password:

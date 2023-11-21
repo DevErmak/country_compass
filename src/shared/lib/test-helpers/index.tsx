@@ -15,6 +15,7 @@ import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, from } from '@ap
 import { Zoom, toast } from 'react-toastify';
 import { onError } from '@apollo/client/link/error';
 import { useCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 export const saga = createSagaMiddleware();
 
 const rootReducer = combineReducers({
