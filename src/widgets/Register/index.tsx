@@ -30,29 +30,6 @@ export default function FormRegister({}: Props) {
     setFocus('login');
   }, []);
 
-  // const formSchemaRegister = z
-  //   .object({
-  //     login: z
-  //       .string()
-  //       .trim()
-  //       .min(1, { message: 'Field is required' })
-  //       .email('Email is not correct'),
-  //     password: z
-  //       .string()
-  //       .min(6, { message: 'The password must be long' })
-  //       .regex(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*).+$'), {
-  //         message:
-  //           'the password must contain at least 6 characters and have at least one capital letter and number',
-  //       }),
-  //     confirmPassword: z.string().min(6, { message: 'The password must be long' }),
-  //   })
-  //   .refine((schema) => (schema.password === schema.confirmPassword ? true : false), {
-  //     message: 'passwords do not match',
-  //     path: ['confirmPassword'],
-  //   });
-
-  // type RegisterFields = z.infer<typeof formSchemaRegister>;
-
   const {
     register,
     handleSubmit,
@@ -67,30 +44,6 @@ export default function FormRegister({}: Props) {
   const [registerUser] = useMutation(REGISTER);
 
   const [cookie, setCookie] = useCookies(['accessToken']);
-  // const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
-  // const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
-
-  // useEffect(() => {
-  //   if (data !== undefined) {
-  //     if (data.registerUser !== null) {
-  //       if (data.registerUser.__typename === 'AccessToken') {
-  //         //console.log('gkj---------------->', data.login.token);
-  //         setCookie('accessToken', data.registerUser.token);
-  //       } else
-  //         toast.error('you were unable to register', {
-  //           position: 'bottom-left',
-  //           autoClose: 1500,
-  //           hideProgressBar: true,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: 'colored',
-  //           transition: Zoom,
-  //         });
-  //     }
-  //   }
-  // }, [data]);
 
   const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
     const { data: dataToken } = await registerUser({
@@ -102,28 +55,10 @@ export default function FormRegister({}: Props) {
       },
     });
     if (dataToken && !isEmptyLodash(dataToken.registerUser)) {
-      console.log('---------------->dataToken', dataToken);
-      console.log('---------------->token', dataToken.registerUser.token);
       setCookie('accessToken', dataToken.registerUser.token);
       dispatch(setCountryBuffer({}));
       dispatch(setModal({ isActiveModal: false, formModal: formModal.login }));
     }
-
-    // if (error)
-    //   toast.error('you were unable to register', {
-    //     position: 'bottom-left',
-    //     autoClose: 1500,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: 'colored',
-    //     transition: Zoom,
-    //   });
-    // else if (token && !isEmptyLodash(token)) {
-    //   setCookie('accessToken', token.registerUser.token);
-    // }
 
     reset();
   };

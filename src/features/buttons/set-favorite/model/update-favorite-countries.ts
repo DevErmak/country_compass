@@ -33,10 +33,4 @@ export const updateFavoriteCountry = async (
       transition: Zoom,
     });
   else if (data) dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-  //   useEffect(() => {
-  //     if (data) {
-  //       if (data.getMe.FavoriteCountry) {
-  //       }
-  //     }
-  //   }, [data]);
 };

@@ -1,6 +1,5 @@
-// import './country-card.css';
-import InfoContainer from '../../shared/ui/info-container';
-import Button from '../../shared/ui/button';
+import Button from '@/shared/ui/button';
+import InfoContainer from '@/shared/ui/info-container';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {};

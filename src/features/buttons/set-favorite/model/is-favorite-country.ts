@@ -1,9 +1,3 @@
-// import { useQuery } from '@apollo/client';
-// import { GET_FAVORITECOUNTRIES } from '../../../../shared/api/graphqlV1';
-// import { useCookies } from 'react-cookie';
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addFavoriteCountry } from '../../../../entities/viewer/model/user/infoUserSlice';
 import { useSelector } from 'react-redux';
 import { getListFavoriteCountries } from '../../../../entities/viewer/model/user/userSelectors';
 

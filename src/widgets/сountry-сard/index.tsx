@@ -22,10 +22,7 @@ type Props = {
 const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log('incountrycard currentInfoCountry', currentInfoCountry);
-
   const handleClickCard = (nameCountry: string, e: React.SyntheticEvent) => {
-    //console.log('!!!!---------------->nameCountry', nameCountry);
     navigate(`/detailed-info/${nameCountry}`);
   };
 
@@ -34,18 +31,6 @@ const CountryCard: React.FC<any> = ({ currentInfoCountry }: Props) => {
       className="container-country-card"
       onClick={(e) => handleClickCard(currentInfoCountry.nameCountry, e)}
     >
-      {/* //   <img
-    //     className="flag-img-card"
-    //     src={currentInfoCountry.flags}
-    //     alt={currentInfoCountry.flagsAlt}
-    //   />
-    //   <div className="info-country-card">
-    //     <div className="name-card-country">{currentInfoCountry.nameCountry}</div>
-    //     <div className="name-card-capital">
-    //       <div className="label-for-info-country">Capital:</div>
-    //       {currentInfoCountry.nameCapital}
-    //     </div>
-  //   </div> */}
       <DescriptionCountry currentInfoCountry={currentInfoCountry} />
       <BtnSetFavorite fullInfoCountry={currentInfoCountry} className="star-card" />
     </div>

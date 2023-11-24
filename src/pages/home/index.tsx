@@ -50,23 +50,17 @@ const Home: React.FC<any> = ({}: Props) => {
   const infoErrorResponse = useSelector(getInfoErrorResponse);
   const isFullInfoCountry = useSelector(getIsFullInfoCountry);
 
-  // if (isFullInfoCountry) {
-  //   return <Navigate to="full-info-country" />;
-  // }
-  if (infoErrorResponse.trim().length === 0) {
-    if (isLoading) {
-      return <Loader />;
-    } else {
-      return (
-        <div className="home-container">
-          <div className="search">
-            <SelectorCountry />
-          </div>
-          <ListCountryCard listCountry={listCountry} />
-        </div>
-      );
-    }
-  } else return <ErrorGetDataCountries infoError={infoErrorResponse} />;
+  if (infoErrorResponse.trim().length !== 0)
+    return <ErrorGetDataCountries infoError={infoErrorResponse} />;
+  if (isLoading) return <Loader />;
+  return (
+    <div className="home-container">
+      <div className="search">
+        <SelectorCountry />
+      </div>
+      <ListCountryCard listCountry={listCountry} />
+    </div>
+  );
 };
 
 export default Home;

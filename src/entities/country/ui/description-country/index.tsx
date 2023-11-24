@@ -18,14 +18,6 @@ type Props = {
 };
 
 const DescriptionCountry: React.FC<any> = ({ currentInfoCountry }: Props) => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  // const handleClickCard = (nameCountry: string) => {
-  //   dispatch(getFullInfoCountryFetch(nameCountry));
-  //   navigate('/full-info-country');
-  // };
-
   return (
     <>
       <img

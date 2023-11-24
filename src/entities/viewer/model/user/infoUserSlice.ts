@@ -41,7 +41,6 @@ export const infoUserSlice = createSlice({
       isAuthentication: payload,
     }),
     setModal: (state, { payload }) => {
-      //console.log('---------------->asdqwe');
       return {
         ...state,
         infoModal: { isActiveModal: payload.isActiveModal, formModal: payload.formModal },

@@ -31,15 +31,6 @@ type fullInfoCountryGuardProps = {
 function FullInfoCountryGuard({ children }: fullInfoCountryGuardProps) {
   const isFullInfoCountry = useSelector(getFormatFullInfoCountry);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   console.log('1111---------------->!isFullInfoCountry', !isFullInfoCountry);
-  //   console.log('1111---------------->isFullInfoCountry', isFullInfoCountry);
-  //   if (!isFullInfoCountry) {
-  //     navigate('/');
-  //   }
-  // }, []);
-  // dispatch(getFullInfoCountryFetch(nameCountry));
 
   if (!isFullInfoCountry) {
     navigate('/');
@@ -59,20 +50,8 @@ export const appRouter = () =>
         },
         {
           path: 'detailed-info/:nameCountry',
-          element: (
-            // <FullInfoCountryGuard>
-            <FullInfoCountry />
-            // </FullInfoCountryGuard>
-          ),
+          element: <FullInfoCountry />,
         },
-        // {
-        //   path: 'detailed-info?country=nameCountry',
-        //   element: (
-        //     // <FullInfoCountryGuard>
-        //     <FullInfoCountry />
-        //     // </FullInfoCountryGuard>
-        //   ),
-        // },
         {
           path: 'my-countries',
           element: (

@@ -12,10 +12,8 @@ type Props = {
 };
 
 export default function Modal({ children }: Props) {
-  //console.log('---------------->modal');
   const dispatch = useDispatch();
   const isActiveModal = useSelector(getIsActiveModal);
-  //console.log('---------------->isActiveModal', isActiveModal);
   const domElement = useRef<Element | DocumentFragment | null>(document.getElementById('portal'));
   if (domElement.current == null) {
     return null;

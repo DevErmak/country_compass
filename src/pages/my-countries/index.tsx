@@ -9,7 +9,7 @@ type Props = {};
 const MyCountries: React.FC<any> = ({}: Props) => {
   const listFavoriteCountry = useSelector(getListFavoriteCountries);
 
-  if (Object.keys(listFavoriteCountry).length === 0)
+  if (listFavoriteCountry.length === 0)
     return (
       <div className="favorite-container">
         <EmptyFavoriteCountry />

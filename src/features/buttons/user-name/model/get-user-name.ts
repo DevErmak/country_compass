@@ -1,7 +1,8 @@
 import { jwtDecode } from 'jwt-decode';
+interface MyToken {
+  username: string;
+}
 export const getUserName = (cookie: { accessToken?: any }) => {
-  const userName = jwtDecode(cookie.accessToken);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  const userName = jwtDecode<MyToken>(cookie.accessToken);
   return userName.username;
 };

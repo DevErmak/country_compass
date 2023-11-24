@@ -14,25 +14,12 @@ import Loader from '@/shared/ui/loader';
 
 type Props = {};
 const FullTextInfoCountry: React.FC<any> = ({}: Props) => {
-  // console.log('rrr');
   const dispatch = useDispatch();
 
-  // let { nameCountry } = useParams();
-
-  // console.log('qinfulltext nameCountry', nameCountry);
-
-  // useEffect(() => {
-  //   console.log('111---------------->nameCountry', nameCountry);
-  //   console.log('sss s', nameCountry);
-  //   dispatch(getFullInfoCountryFetch(nameCountry));
-  // }, []);
-
   const currentInfoCountry = useSelector(getFormatFullInfoCountry);
-  console.log('ggg currentInfoCountry', currentInfoCountry);
   const isLoading = useSelector(getIsLoading);
 
   if (isLoading) {
-    console.log('ert111');
     return <Loader />;
   } else
     return (

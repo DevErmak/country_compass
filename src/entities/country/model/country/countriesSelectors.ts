@@ -1,42 +1,53 @@
 import { IStore } from '@/app/appStore';
+import { IFullInfoCountry } from './typesIFullInfoCountry';
+import { IListCountries } from './typesIListCountries';
 
-export const getState = (state: IStore) => state;
+export const getState = (state: IStore): IStore => state;
 
-export const getListCountry = (state: IStore) => state.infoCountries.listCountries;
+export const getListCountry = (state: IStore): IListCountries[] =>
+  state.infoCountries.listCountries;
 
-export const getFullInfoCountry = (state: IStore) => state.infoCountries.fullInfoCountry;
+export const getFullInfoCountry = (state: IStore): IFullInfoCountry[] | undefined =>
+  state.infoCountries.fullInfoCountry;
 
-export const getFormatFullInfoCountry = (state: IStore) => {
-  console.log('qwe', state.infoCountries.fullInfoCountry);
-  if (
-    state.infoCountries.fullInfoCountry !== undefined &&
-    state.infoCountries.fullInfoCountry.length !== 0
-  )
+export const getFormatFullInfoCountry = ({
+  infoCountries: {
+    fullInfoCountry: [fullInfoCountry],
+  },
+}: IFullInfoCountry) => {
+  if (fullInfoCountry)
     return {
-      nameCountry: state.infoCountries.fullInfoCountry[0].name.official,
-      nameCapital: state.infoCountries.fullInfoCountry[0].capital.join(', '),
-      currencies: Object.keys(state.infoCountries.fullInfoCountry[0].currencies).join(', '),
-      region: state.infoCountries.fullInfoCountry[0].region,
-      languages: Object.keys(state.infoCountries.fullInfoCountry[0].languages).join(', '),
-      population: state.infoCountries.fullInfoCountry[0].population
+      nameCountry: fullInfoCountry.name.official,
+      nameCapital: fullInfoCountry.capital.join(', '),
+      currencies: Object.keys(fullInfoCountry.currencies).join(', '),
+      region: fullInfoCountry.region,
+      languages: Object.keys(fullInfoCountry.languages).join(', '),
+      population: fullInfoCountry.population
         .toString()
         .replace(/,/g, '')
         .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-      flags: state.infoCountries.fullInfoCountry[0].flags.svg,
-      flagsAlt: state.infoCountries.fullInfoCountry[0].flags.alt || '',
-      coatOfArms: state.infoCountries.fullInfoCountry[0].coatOfArms.svg,
+      flags: fullInfoCountry.flags.svg,
+      flagsAlt: fullInfoCountry.flags.alt || '',
+      coatOfArms: fullInfoCountry.coatOfArms.svg,
     };
 };
 
-export const getIsFullInfoCountry = (state: IStore) => state.infoCountries.isFullInfoCountry;
+export const getIsFullInfoCountry = (state: IStore): boolean =>
+  state.infoCountries.isFullInfoCountry;
 
-export const getIsLoading = (state: IStore) => state.infoCountries.isLoading;
+export const getIsLoading = (state: IStore): boolean => state.infoCountries.isLoading;
 
-export const getOptionsCountry = (state: IStore) => {
+export const getOptionsCountry = (
+  state: IStore,
+): {
+  value: string;
+  label: string;
+}[] => {
   return state.infoCountries.listCountries.map((item) => ({
     value: item.name.official,
     label: item.name.official,
   }));
 };
 
-export const getInfoErrorResponse = (state: IStore) => state.infoCountries.infoErrorResponse;
+export const getInfoErrorResponse = (state: IStore): string =>
+  state.infoCountries.infoErrorResponse;

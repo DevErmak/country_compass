@@ -42,51 +42,12 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
   const listFavoriteCountries = useSelector(getListFavoriteCountries);
   const isLogin = useSelector(getIsAuthentication);
   const [cookie] = useCookies(['accessToken']);
-
-  // if (!fullInfoCountry) const fullInfoCountry = useSelector(getFormatFullInfoCountry);
-
   const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
   const [deleteFavoriteCountry] = useMutation(DELETE_FAVORITECOUNTRIES);
   const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
 
-  // useEffect(() => {
-  //   //console.log('---------------->szxc');
-  //   getFavoriteCountry({
-  //     context: {
-  //       headers: {
-  //         ...Headers,
-  //         authorization: `Bearer ${cookie.accessToken}`,
-  //       },
-  //     },
-  //   });
-  // }, [dataSetFavoriteCountry]);
-
-  // useEffect(() => {
-  //   //console.log('---------------->aaaa');
-  //   getFavoriteCountry({
-  //     context: {
-  //       headers: {
-  //         ...Headers,
-  //         authorization: `Bearer ${cookie.accessToken}`,
-  //       },
-  //     },
-  //   });
-  // }, [dataDeleteFavoriteCountry]);
-
-  // useEffect(() => {
-  //   //console.log('---------------->ssaaaaa');
-  //   if (data) {
-  //     if (data.getMe.FavoriteCountry) {
-  //       dispatch(addFavoriteCountry(data.getMe.FavoriteCountry));
-  //     }
-  //   }
-  // }, [data]);
-
   if (isLogin) {
-    console.log('---------------->asd', fullInfoCountry);
     if (isFavoriteCountry(fullInfoCountry?.nameCountry, listFavoriteCountries)) {
-      //console.log('---------------->asdas');
-
       return (
         <div className="favorite">
           <BsFillStarFill
@@ -105,8 +66,6 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
         </div>
       );
     } else {
-      //console.log('---------------->aas');
-
       return (
         <div className="no-favorite">
           <BsStar
@@ -126,7 +85,6 @@ const BtnSetFavorite: React.FC<any> = ({ fullInfoCountry, className }: Props) =>
       );
     }
   } else {
-    //console.log('---------------->aq1');
     return (
       <div className="no-favorite">
         <BsStar

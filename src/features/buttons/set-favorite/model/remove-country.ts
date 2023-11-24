@@ -23,7 +23,6 @@ export const handleRemoveFavoriteCountry = async (
   ) => any,
   getFavoriteCountry: LazyQueryExecFunction<any, OperationVariables>,
 ) => {
-  // const [deleteFavoriteCountry, { data, loading, error }] = useMutation(DELETE_FAVORITECOUNTRIES);
   e.stopPropagation();
 
   const { error } = await deleteFavoriteCountry({

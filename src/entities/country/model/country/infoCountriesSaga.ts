@@ -41,8 +41,11 @@ function* workFullInfoCountryFetch({ payload }: { type: string; payload: string 
       }
     }),
   );
-  if (infoError.trim().length === 0) yield put(getFullInfoCountrySuccess(result));
-  else yield put(getFullInfoCountryFailure(infoError));
+  if (infoError.trim().length === 0) {
+    yield put(getFullInfoCountrySuccess(result));
+  } else {
+    yield put(getFullInfoCountryFailure(infoError));
+  }
 }
 
 function* infoCountriesSaga() {

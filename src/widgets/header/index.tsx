@@ -16,9 +16,7 @@ export default function Header({}: Props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    //console.log('---------------->qqwwqqwe');
     if (Object.keys(cookie).length !== 0) {
-      //console.log('---------------->qqw1123');
       dispatch(setAuthentication(true));
     }
   }, [cookie]);

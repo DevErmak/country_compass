@@ -24,13 +24,11 @@ import isEmptyLodash from 'lodash.isempty';
 type Props = {};
 
 const FormLogin: React.FC<any> = ({}: Props) => {
-  // const isEmptyLodash = require('lodash.isempty');
   const [setFavoriteCountry] = useMutation(SET_FAVORITECOUNTRIES);
   const [getFavoriteCountry] = useLazyQuery(GET_FAVORITECOUNTRIES);
   const [loginUser] = useLazyQuery(LOGIN);
   const fullInfoCountryBuffer = useSelector(getBufferCountry);
   const [cookie, setCookie] = useCookies(['accessToken']);
-  console.log('---------------->fullInfoCountryBuffer1', fullInfoCountryBuffer);
 
   const [isActiveAnimate, setActiveAnimate] = useState(true);
   const dispatch = useDispatch();
@@ -40,7 +38,6 @@ const FormLogin: React.FC<any> = ({}: Props) => {
 
   useEffect(() => {
     async function addBufferCountryInFavorite() {
-      console.log('---------------->cookie.accessToken', cookie.accessToken);
       if (fullInfoCountryBuffer && !isEmptyLodash(fullInfoCountryBuffer)) {
         await setFavoriteCountry({
           context: {
@@ -63,8 +60,6 @@ const FormLogin: React.FC<any> = ({}: Props) => {
             },
           },
         });
-        // const { data: listFavoriteCountries } = await getFavoriteCountry({
-        console.log('!!!!!!!---------------->cookie.accessToken', cookie.accessToken);
         const { data: listFavoriteCountries } = await getFavoriteCountry({
           context: {
             headers: {
@@ -73,34 +68,12 @@ const FormLogin: React.FC<any> = ({}: Props) => {
             },
           },
         });
-        console.log(
-          '---------------->listFavoriteCountries',
-          listFavoriteCountries.getMe.FavoriteCountry,
-        );
         dispatch(addFavoriteCountry(listFavoriteCountries.getMe.FavoriteCountry));
         dispatch(setCountryBuffer({}));
       }
     }
     addBufferCountryInFavorite();
   }, [cookie]);
-
-  // const [loginUser, { loading, error, data: dataToken }] = useLazyQuery(LOGIN);
-
-  // useEffect(() => {
-  //   setActiveAnimate(false);
-  //   setTimeout(() => setActiveAnimate(true), 600);
-  // }, [error]);
-  // useEffect(() => {
-  //   //console.log('!!!!---------------->dataToken', dataToken);
-  //   if (dataToken !== undefined) {
-  //     if (dataToken.login !== null) {
-  //       if (dataToken.login.__typename === 'AccessToken') {
-  //         //console.log('kyky---------------->', dataToken.login.token);
-  //         setCookie('accessToken', dataToken.login.token);
-  //       }
-  //     }
-  //   }
-  // }, [dataToken?.login]);
 
   const {
     register,
@@ -115,7 +88,6 @@ const FormLogin: React.FC<any> = ({}: Props) => {
   });
 
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
-    //console.log('---------------->qqqqqq');
     const { data: dataToken, error } = await loginUser({
       variables: {
         login: data.login,
@@ -123,24 +95,19 @@ const FormLogin: React.FC<any> = ({}: Props) => {
       },
     });
     if (error) {
-      //console.log('---------------->error', error);
       setActiveAnimate(false);
       setTimeout(() => setActiveAnimate(true), 600);
     }
-    console.log('---------------->dataToken', dataToken);
     if (!isEmptyLodash(dataToken.login)) {
       setCookie('accessToken', dataToken.login.token);
       dispatch(setModal({ isActiveModal: false, formModal: formModal.login }));
     } else {
-      //console.log('---------------->zzzsqweaa');
       setActiveAnimate(false);
       setTimeout(() => setActiveAnimate(true), 600);
     }
 
     reset();
   };
-  // if (loading) return <Loader />;
-  // else
   return (
     <div className="container-sign-in">
       <div className="sign-in">Sign in</div>

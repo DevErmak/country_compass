@@ -16,5 +16,4 @@ export const clickOnLogout = (
   removeCookie('accessToken');
   dispatch(setAuthentication(false));
   dispatch(setModal({ isActiveModal: true, formModal: formModal.login }));
-  //console.log('---------------->qqwe');
 };
