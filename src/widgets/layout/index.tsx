@@ -8,8 +8,7 @@ import { formModal } from '@/entities/viewer/model/user/types';
 import Modal from '@/shared/ui/modal';
 
 type Props = {};
-
-export default function DefaultLayout({}: Props) {
+const DefaultLayout: React.FC<any> = ({}: Props) => {
   const stateModal = useSelector(getFormModal);
 
   return (
@@ -19,4 +18,6 @@ export default function DefaultLayout({}: Props) {
       <Modal>{stateModal === formModal.login ? <FormLogin /> : <FormRegister />}</Modal>;
     </>
   );
-}
+};
+
+export default DefaultLayout;
